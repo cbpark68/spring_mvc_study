@@ -69,6 +69,15 @@ public class EgovSampleController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 
+	@RequestMapping("/test1.do")
+	public String test1() {
+		return "sample/test1";
+	}
+	
+	@RequestMapping("/cal.do")
+	public String cal() {
+		return "sample/cal";
+	}
 	/**
 	 * 글 목록을 조회한다. (pageing)
 	 * @param searchVO - 조회할 정보가 담긴 SampleDefaultVO
