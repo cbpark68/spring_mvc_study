@@ -10,3 +10,4 @@ local.properites
 .settings/
 .loadpath
 .recommenders
+*/target/*
