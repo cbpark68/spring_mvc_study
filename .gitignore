@@ -10,5 +10,4 @@ local.properites
 .settings/
 .loadpath
 .recommenders
-test1/target/
-test2/target/
+/target/
