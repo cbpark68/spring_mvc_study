@@ -1,7 +1,6 @@
 package egovframework.example.sample.service;
 
 public class DeptVO {
-	
 	private String deptno;
 	private String dname;
 	private String loc;
@@ -24,5 +23,4 @@ public class DeptVO {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
-
 }
