@@ -12,4 +12,23 @@
 		insert into mvc_codes (code,gid,name) values (cbpark68.mvc_codes_seq.nextval,#gid#,#name#)
 	</insert>
 
+	<select id="codeDAO.selectCodeList" resultClass="egovMap">
+		select code,decode(gid,'1','업무','취미') gid,name from mvc_codes order by gid	
+	</select>
+	
+	<select id="codeDAO.selectCodesCount" resultClass="java.lang.Integer">
+		select count(*) cnt from mvc_codes
+	</select>
+	
+	<delete id="codeDAO.deleteCodes">
+		delete from mvc_codes where code = #code#	
+	</delete>
+	
+	<select id="codeDAO.selectCodesDetail" resultClass="codeVO">
+		select code,gid,name from mvc_codes where code = #code#	
+	</select>
+	
+	<update id="codeDAO.updateCodes">
+		update mvc_codes set gid = #gid#, name = #name# where code = #code#	
+	</update>
 </sqlMap>
