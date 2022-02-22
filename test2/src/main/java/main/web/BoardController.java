@@ -35,8 +35,40 @@ public class BoardController {
 	
 	@RequestMapping("/boardList.do")
 	public String boardList(BoardVO vo,ModelMap model) throws Exception{
+		int unit = 5;
+		int total = boardService.selectBoardTotal(vo);
+		int tpage = (int)Math.ceil((double)total/unit);
+		int viewPage = vo.getViewPage();
+		if(viewPage > tpage || viewPage < 0) {
+			viewPage = 1;
+		}
+		int startRow = (viewPage-1)*unit+1;
+		int endRow = startRow +(unit-1);
+		int startSeq = total - (viewPage - 1)*unit;
+		vo.setStartRow(startRow);
+		vo.setEndRow(endRow);
 		List<?> list = boardService.selectBoard(vo);
+		model.addAttribute("rowNumber",startSeq);
+		model.addAttribute("total",total);
+		model.addAttribute("tpage",tpage);
 		model.addAttribute("result",list);
 		return "board/boardList";
+	}
+	
+	@RequestMapping("/boardDetail.do")
+	public String boardDetail(BoardVO vo, ModelMap model) throws Exception{
+		boardService.updateBoardHits(vo.getUnq());
+		BoardVO rtnVo = boardService.selectBoardDetail(vo.getUnq());
+		String content = rtnVo.getContent();
+		rtnVo.setContent(content.replace("\n", "<br>"));
+		model.addAttribute("result",rtnVo);
+		return "board/boardDetail";
+	}
+	
+	@RequestMapping("/boardModify.do")
+	public String boardModify(BoardVO vo, ModelMap model) throws Exception{
+		BoardVO rtnVo = boardService.selectBoardDetail(vo.getUnq());
+		model.addAttribute("result",rtnVo);
+		return "board/boardModify";
 	}
 }
