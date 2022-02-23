@@ -71,4 +71,36 @@ public class BoardController {
 		model.addAttribute("result",rtnVo);
 		return "board/boardModify";
 	}
+	
+	@RequestMapping("/boardModifySave.do")
+	@ResponseBody
+	public String boardModifySave(BoardVO vo, ModelMap model) throws Exception{
+		int result = 0;
+		int chk = boardService.selectBoardPass(vo);
+		if(chk == 1) {
+			result = boardService.updateBoard(vo);
+		}else {
+			result = -1;
+		}
+		return result+"";
+	}
+	
+	@RequestMapping("/passWrite.do")
+	public String passWrite(int unq,ModelMap model) {
+			model.addAttribute("unq",unq);
+		return "board/passWrite";
+	}
+	
+	@RequestMapping("/boardDelete.do")
+	@ResponseBody
+	public String boardDelete(BoardVO vo) throws Exception{
+		int result = 0;
+		int chk = boardService.selectBoardPass(vo);
+		if(chk == 1) {
+			result = boardService.deleteBoard(vo);
+		}else if(chk == 0) {
+			result = -1;
+		}
+		return result+"";
+	}
 }

@@ -43,4 +43,21 @@
 	<update id = "boardDAO.updateBoardHits">
 		update mvc_board set hits = hits + 1 where unq = #unq#	
 	</update>
+
+	<update id="boardDAO.updateBoard">
+		update mvc_board 
+		set title = #title#,
+			name = #name#,
+			content = #content#
+		where unq = #unq#	
+	</update>
+	
+	<select id="boardDAO.selectBoardPass" resultClass="java.lang.Integer">
+		select count(*) from mvc_board where unq = #unq# and pass = #pass#
+	</select>
+	
+	<delete id="boardDAO.deleteBoard">
+		delete from mvc_board where unq = #unq# and pass = #pass#	
+	</delete>
 </sqlMap>
+

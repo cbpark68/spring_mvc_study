@@ -32,11 +32,6 @@ th,td{
 }
 </style>
 <script>
- $(function(){
-	$("#title").val("제목입력");
-	$("#pass").val("비번입력");
-	$("#name").val("작성자입력");
-});
 
  function fn_submit(){
 	if($.trim($("#title").val())==""){
@@ -59,10 +54,12 @@ th,td{
  		data:formData,
  		url:"boardModifySave.do",
  		dataType:"text",
- 		success:function(data){
- 			if(data == "ok"){
+ 		success:function(result){
+ 			if(result == "1"){
  				alert("저장완료");
  				location = "boardList.do";
+ 			}else if(result == "-1"){
+ 				alert("비번이 일치하지 않습니다.");
  			}else{
  				alert("저장실패");
  			}
