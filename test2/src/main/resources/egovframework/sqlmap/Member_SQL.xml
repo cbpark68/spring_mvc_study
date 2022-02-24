@@ -34,5 +34,11 @@
 	<select id="memberDAO.selectMemberIdCheck" resultClass="java.lang.Integer">
 		select count(*) from mvc_member where userid = #userid#	
 	</select>
+	
+	<select id="memberDAO.selectPostList" resultClass="egovMap">
+		select '['||a1||'] '||a2||' '||a3||' '||a4||' '||a5||' '||a6||' '||a7||' '||a8 as adrs
+		from mvc_post
+		where a4 like '%'||#dong#||'%' or a5 like '%'||#dong#||'%'
+	</select>
 </sqlMap>
 

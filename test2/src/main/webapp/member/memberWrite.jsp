@@ -17,6 +17,14 @@
 			changeYear : true
 		});
 
+		$("#btn_zipcode").click(function() {
+			var w = 500;
+			var h = 100;
+			var url = "post1.do";
+			window.open(url,'zipcode','width='+w+',height='+h);
+			
+		});
+
 		$("#btn_idcheck").click(function() {
 			var userid = $.trim($("#userid").val());
 			if(userid == ""){
@@ -134,7 +142,7 @@ caption {
 			<th width="25%"><a href="loginWrite.do">로그인</a></th>
 		</tr>
 	</table>
-	<form id="frm">
+	<form id="frm" name="frm">
 		<table>
 			<caption>회원가입폼</caption>
 			<tr>
@@ -169,8 +177,10 @@ caption {
 			<tr>
 				<th><label for="zipcode">주소</label></th>
 				<td><input type="text" name="zipcode" id="zipcode">
-					<button type="button">우편번호</button> <br /> <input type="text"
-					name="address" id="address"></td>
+					<button type="button" id="btn_zipcode">우편번호</button>
+					<br />
+					<input type="text" name="address" id="address">
+				</td>
 			</tr>
 		</table>
 	</form>

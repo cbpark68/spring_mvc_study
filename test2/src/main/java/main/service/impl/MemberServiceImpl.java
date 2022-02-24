@@ -1,5 +1,7 @@
 package main.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +24,11 @@ public class MemberServiceImpl extends EgovAbstractServiceImpl implements Member
 	@Override
 	public int selectMemberIdCheck(String userid) throws Exception {
 		return memberDAO.selectMemberIdCheck(userid);
+	}
+
+	@Override
+	public List<?> selectPostList(String dong) throws Exception {
+		return memberDAO.selectPostList(dong);
 	}
 
 }

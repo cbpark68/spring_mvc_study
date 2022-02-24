@@ -1,5 +1,7 @@
 package main.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,29 @@ public class MemberController {
 		if(result == null) {
 			msg = "ok";
 		}
-	
 		return msg;
+	}
+	
+	@RequestMapping("/idcheck.do")
+	@ResponseBody
+	public String idcheck(String userid) throws Exception{
+		String message = "";
+		int cnt = memberService.selectMemberIdCheck(userid);
+		if(cnt == 0) {
+			message = "ok";
+		}
+		return message;
+	}
+	
+	@RequestMapping("/post1.do")
+	public String post1() {
+		return "member/post1";
+	}
+	
+	@RequestMapping("/post2.do")
+	public String post2(String dong,ModelMap model) throws Exception{
+		List<?> list = memberService.selectPostList(dong);
+		model.addAttribute("result",list);
+		return "member/post2";
 	}
 }
