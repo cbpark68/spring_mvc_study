@@ -17,6 +17,31 @@
 			changeYear : true
 		});
 
+		$("#btn_idcheck").click(function() {
+			var userid = $.trim($("#userid").val());
+			if(userid == ""){
+				alert("아이디를 입력해주세요.");
+				$("#userid").focus();
+				return false;
+			}
+			$.ajax({
+				type : "POST",
+				data : "userid="+userid,
+				url : "idcheck.do",
+				dataType : "text",
+				success : function(data) {
+					if (data == "ok") {
+						alert("사용가능한 아이디입니다.");
+					} else {
+						alert("사용할 수 없는 아이디입니다.");
+					}
+				},
+				error : function() {
+					alert("오류발생");
+				}
+			});
+		});
+
 		$("#btn_submit").click(function() {
 			var userid = $("#userid").val();
 			var pass = $("#pass").val();
@@ -116,7 +141,7 @@ caption {
 				<th><label for="userid">아이디</label></th>
 				<td><input type="text" name="userid" id="userid"
 					placeholder="아이디입력">
-					<button type="button">중복체크</button></td>
+					<button type="button" id="btn_idcheck">중복체크</button></td>
 			</tr>
 			<tr>
 				<th><label for="pass">비밀번호</label></th>
@@ -133,7 +158,7 @@ caption {
 			</tr>
 			<tr>
 				<th><label for="birth">생년월일</label></th>
-				<td><input type="text" name="birth" id="birth" readonly>
+				<td><input type="text" name="birth" id="birth" >
 				</td>
 			</tr>
 			<tr>

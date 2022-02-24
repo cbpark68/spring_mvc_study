@@ -27,8 +27,12 @@
 			#gender#,
 			#zipcode#,
 			#address#,
-			#reg
+			#reg#
 		)
 	</insert>
+	
+	<select id="memberDAO.selectMemberIdCheck" resultClass="java.lang.Integer">
+		select count(*) from mvc_member where userid = #userid#	
+	</select>
 </sqlMap>
 
