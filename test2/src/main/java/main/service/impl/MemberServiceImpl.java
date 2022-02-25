@@ -31,4 +31,9 @@ public class MemberServiceImpl extends EgovAbstractServiceImpl implements Member
 		return memberDAO.selectPostList(dong);
 	}
 
+	@Override
+	public int selectMemberCount(MemberVO vo) throws Exception {
+		return memberDAO.selectMemberCount(vo);
+	}
+
 }

@@ -134,14 +134,7 @@ caption {
 }
 </style>
 <body>
-	<table>
-		<tr>
-			<th width="25%">홈</th>
-			<th width="25%"><a href="boardList.do">게시판</a></th>
-			<th width="25%"><a href="memberWrite.do">회원가입</a></th>
-			<th width="25%"><a href="loginWrite.do">로그인</a></th>
-		</tr>
-	</table>
+<%@ include file="../include/topmenu.jsp" %>
 	<form id="frm" name="frm">
 		<table>
 			<caption>회원가입폼</caption>

@@ -40,5 +40,9 @@
 		from mvc_post
 		where a4 like '%'||#dong#||'%' or a5 like '%'||#dong#||'%'
 	</select>
+	
+	<select id="memberDAO.selectMemberCount" resultClass="java.lang.Integer">
+		select count(*) from mvc_member where userid = #userid# and pass = #pass#	
+	</select>
 </sqlMap>
 
