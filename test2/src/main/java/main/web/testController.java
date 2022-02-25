@@ -10,5 +10,10 @@ public class testController {
 	public String deptWrite2() {
 		return "test/deptWrite";
 	}
+	
+	@RequestMapping("/jstest.do")
+	public String jstest() {
+		return "test/jstest";
+	}
 
 }
