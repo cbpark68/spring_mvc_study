@@ -175,6 +175,9 @@ caption {
 					<input type="text" name="address" id="address">
 				</td>
 			</tr>
+			<tr>
+				<td colspan="2">Test Count = ${cnt}</td>
+			</tr>
 		</table>
 	</form>
 </body>

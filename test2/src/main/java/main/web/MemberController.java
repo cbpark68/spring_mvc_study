@@ -12,15 +12,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import main.service.MemberService;
 import main.service.MemberVO;
+import main.service.MysqlService;
 
 @Controller
 public class MemberController {
 	
 	@Resource(name="memberService")
 	private MemberService memberService;
+	
+	@Resource(name="mysqlService")
+	private MysqlService mysqService;
 
 	@RequestMapping("/memberWrite.do")
-	public String memberWrite() {
+	public String memberWrite(ModelMap model) throws Exception{
+		int cnt = mysqService.selectTestCnt();
+		model.addAttribute("cnt",cnt);
 		return "member/memberWrite";
 	}
 	
