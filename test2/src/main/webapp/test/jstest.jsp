@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>jstest</title>
 </head>
 <script>
 	/* 	document.write("시작합니다.<br/>");
@@ -65,70 +65,142 @@
 	 alert("홀수");
 	 }
 	 */
-	 function fn_action(){
-		 
-		if(document.frm.userid.value == ""){
-			alert("아이디를 입력하세요.");
-			return false;
-		}
-		
-		if(document.frm.pass.value == ""){
-			alert("비번을 입력하세요.");
-			return false;
-		}
-		var len = document.frm.userid.value.length;
-		if(len < 4 || len > 12){
-			alert("아이디의 길이를 조정하세요.");
-			return false;
-		}
-		var len_gender = document.frm.gender.length;
-		var gubun = 0;
-		for(var i=0;i<len_gender;i++){
-			if(document.frm.gender[i].checked == true){
-				gubun = 1;	
-			}
-		}
-		if(gubun == 0){
-			alert("성별을 선택해주세요.");
-			return false;
-		}
-		var gubun = 0;
-		var len_subject = document.frm.subject.length;
-		for(var i=0;i<len_subject;i++){
-			if(document.frm.subject[i].checked == true){
-				gubun = 1;
-			}
-		}
-		if(gubun == 0){
-			alert("과목을 선택해주세요.");
-			return false;
-		}
-		if(document.frm.year.value == "" ||
-			document.frm.month.value == "" ||
-			document.frm.day.value == ""){
-			alert("생년월일을 입력하세요.");
-			return false;
-		}
-		document.frm.submit(); 
+	/* 	 function fn_action(){
+	
+	 if(document.frm.userid.value == ""){
+	 alert("아이디를 입력하세요.");
+	 return false;
 	 }
+	
+	 if(document.frm.pass.value == ""){
+	 alert("비번을 입력하세요.");
+	 return false;
+	 }
+	 var len = document.frm.userid.value.length;
+	 if(len < 4 || len > 12){
+	 alert("아이디의 길이를 조정하세요.");
+	 return false;
+	 }
+	 var len_gender = document.frm.gender.length;
+	 var gubun = 0;
+	 for(var i=0;i<len_gender;i++){
+	 if(document.frm.gender[i].checked == true){
+	 gubun = 1;	
+	 }
+	 }
+	 if(gubun == 0){
+	 alert("성별을 선택해주세요.");
+	 return false;
+	 }
+	 var gubun = 0;
+	 var len_subject = document.frm.subject.length;
+	 for(var i=0;i<len_subject;i++){
+	 if(document.frm.subject[i].checked == true){
+	 gubun = 1;
+	 }
+	 }
+	 if(gubun == 0){
+	 alert("과목을 선택해주세요.");
+	 return false;
+	 }
+	 if(document.frm.year.value == "" ||
+	 document.frm.month.value == "" ||
+	 document.frm.day.value == ""){
+	 alert("생년월일을 입력하세요.");
+	 return false;
+	 }
+	 document.frm.submit(); 
+	 }
+	 */
+	function fn_submit() {
+
+		if (document.frm.title.value == "") {
+			alert("제목을 입력하세요.");
+			document.frm.title.focus();
+			return false;
+		}
+		if (document.frm.pass.value == "") {
+			alert("비밀번호를 입력하세요.");
+			document.frm.pass.focus();
+			return false;
+		}
+		if (document.frm.content.value == "") {
+			alert("내용을 입력하세요.");
+			document.frm.content.focus();
+			return false;
+		}
+		document.frm.submit();
+	}
+	function fn_vote() {
+		var g = 0;
+		for (var i = 0; i < 4; i++) {
+			if (document.frm.ans[i].checked == true) {
+				g = 1;
+			}
+		}
+		/* 		if(document.frm.ans[0].checked == true	||
+		 document.frm.ans[1].checked == true	||
+		 document.frm.ans[2].checked == true	||
+		 document.frm.ans[3].checked == true){
+		 g = 1;	
+		 }
+		 */if (g == 0) {
+			alert("투표를 하세요.");
+			return false;
+		}
+		document.frm.submit();
+	}
+	function fn_agree(){
+		if(document.frm.chk[0].checked == false ||
+			document.frm.chk[1].checked == false)	{
+			alert("약관에 동의해 주세요!")	;
+			return false;
+		}
+		location="member_write.jsp";
+	}
+	function fn_chkall(){
+		if(document.frm.chkall.checked == true) {
+			document.frm.chk[0].checked = true;
+			document.frm.chk[1].checked = true;
+		}else{
+			document.frm.chk[0].checked = false;
+			document.frm.chk[1].checked = false;
+		}
+	}
 </script>
 <style>
 body {
 	font-size: 12px;
+	color: #555555;
 }
 
 table {
-	width: 500px;
+	width: 600px;
 	border-collapse: collapse;
 }
 
 th, td {
-	obrder: 1px solid #dfdfdf;
+	obrder: 1px solid #cccccc;
 	padding: 5px;
+}
+
+input {
+	width: 200px;
+}
+
+textarea {
+	width: 98%;
+	height: 100px;
+}
+
+.button_div {
+	width: 600px;
+	text-align: center;
+	margin-top: 10px;
 }
 </style>
 <body>
-	<form name="frm" method="post" action="save.do">
+	<!-- 	<form name="frm" method="post" action="save.do">
 		<table border="0">
 			<colgroup>
 				<col width="30%" />
@@ -191,6 +263,66 @@ th, td {
 				</th>
 			</tr>
 		</table>
+	</form>
+ -->
+	<form name="frm" method="post" action="">
+		<table>
+			<colgroup>
+				<col width="30%" />
+				<col width="*" />
+			</colgroup>
+			<tr>
+				<th>제목</th>
+				<td><input type="text" name="title" /></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" name="pass" /></td>
+			</tr>
+			<tr>
+				<th>글쓴이</th>
+				<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><input type="email" name="email" /></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea name="content"></textarea>
+			</tr>
+		</table>
+		<div class="button_div">
+			<button type="button" onclick="fn_submit();">저장</button>
+			<button type="reset">취소</button>
+		</div>
+		<div>
+			다음중 제일 좋아하는 것은?<br /> <input type="radio" name="ans" value="1" />소주<br />
+			<input type="radio" name="ans" value="2" />사이다<br /> <input
+				type="radio" name="ans" value="3" />양주<br /> <input type="radio"
+				name="ans" value="4" />맥주<br />
+			<button type="button" onclick="fn_vote();">투표하기</button>
+		</div>
+		<div>
+			<div>
+				약관에 동의해 주세요<br />
+				약관에 동의해 주세요<br />
+				약관에 동의해 주세요<br />
+				약관에 동의해 주세요<br />
+				약관에 동의해 주세요<br />
+			</div>
+			<input type="checkbox" name="chk" value="1" />동의<br/>
+			<div>
+				약관에 동의해 주세요<br />
+				약관에 동의해 주세요<br />
+				약관에 동의해 주세요<br />
+				약관에 동의해 주세요<br />
+				약관에 동의해 주세요<br />
+			</div>
+			<input type="checkbox" name="chk" value="2" />동의<br/>
+			<input type="checkbox" name="chkall" onclick="fn_chkall();"/>모두동의<br/>
+			<button type="button" onclick="fn_agree()">다음</button>
+		</div>
 	</form>
 </body>
 </html>
