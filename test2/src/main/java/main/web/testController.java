@@ -16,4 +16,9 @@ public class testController {
 		return "test/jstest";
 	}
 
+	@RequestMapping("/csstest.do")
+	public String csstest() {
+		return "test/csstest";
+	}
+
 }

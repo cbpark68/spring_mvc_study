@@ -1,0 +1,23 @@
+body{
+	font-size:20px;
+	color:#555555;
+	font-family:돋움;
+	font-style:italic;
+	font-weight:bold;
+}
+td{
+	font-size:12px;
+	color:blue;
+	line-height:0.8;
+}
+.java{
+color:pink;
+font-size:30px;
+}
+.script{
+color:blue;
+font-size:50px;
+}
+#aa{
+color:ff00ff;
+}
