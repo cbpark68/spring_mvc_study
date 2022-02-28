@@ -7,7 +7,7 @@
 		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
 	
 	<select id="mysqlDAO.selectTestCnt" resultClass="java.lang.Integer">
-		select count(*) cnt from mvc_board
+		select count(*) cnt from tb_test
 	</select>
 </sqlMap>
 
