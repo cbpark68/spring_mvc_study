@@ -20,13 +20,8 @@ public class MemberController {
 	@Resource(name="memberService")
 	private MemberService memberService;
 	
-	@Resource(name="mysqlService")
-	private MysqlService mysqService;
-
 	@RequestMapping("/memberWrite.do")
-	public String memberWrite(ModelMap model) throws Exception{
-		int cnt = mysqService.selectTestCnt();
-		model.addAttribute("cnt",cnt);
+	public String memberWrite() throws Exception{
 		return "member/memberWrite";
 	}
 	
