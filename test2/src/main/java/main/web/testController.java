@@ -12,15 +12,15 @@ import main.service.MysqlService;
 
 @Controller
 public class testController {
-	
-	@Resource(name="mysqlService")
+
+	@Resource(name = "mysqlService")
 	private MysqlService mysqlService;
 
 	@RequestMapping("/deptWrite2.do")
 	public String deptWrite2() {
 		return "test/deptWrite";
 	}
-	
+
 	@RequestMapping("/jstest.do")
 	public String jstest() {
 		return "test/jstest";
@@ -30,15 +30,41 @@ public class testController {
 	public String csstest() {
 		return "test/csstest";
 	}
-	
+
 	@RequestMapping("/mysqlTest.do")
-	public String mysqlTest(ModelMap model) throws Exception{
+	public String mysqlTest(ModelMap model) throws Exception {
 		int cnt = mysqlService.selectTestCnt();
-		model.addAttribute("testcnt",cnt);
+		model.addAttribute("testcnt", cnt);
 		List<?> list = mysqlService.selectBoardList();
-		model.addAttribute("boardlist",list);
+		model.addAttribute("boardlist", list);
 		return "test/mysqltest";
 	}
-	
 
+	@RequestMapping("/jsptest1.do")
+	public String jsptest1() throws Exception {
+		return "test/jsptest1";
+	}
+
+	@RequestMapping("/jsptest2.do")
+	public String jsptst2(String id, String pass, String nm, String pg, String eng, String kor, String mth,
+			ModelMap model) throws Exception {
+		int pageNo = 0;
+		int startNo = 0;
+		int lastNo = 0;
+		if (pg != null) {
+			pageNo = Integer.parseInt(pg);
+			startNo = (pageNo - 1) * 10 + 1;
+			lastNo = startNo + 9;
+		}
+		model.addAttribute("kor", kor);
+		model.addAttribute("eng", eng);
+		model.addAttribute("mth", mth);
+		model.addAttribute("pg", pg);
+		model.addAttribute("startNo", startNo);
+		model.addAttribute("lastNo", lastNo);
+		model.addAttribute("id", id);
+		model.addAttribute("pass", pass);
+		model.addAttribute("name", nm);
+		return "test/jsptest2";
+	}
 }
