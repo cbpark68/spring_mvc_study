@@ -5,9 +5,16 @@
 
 	<typeAlias alias="egovMap"
 		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
 	
 	<select id="mysqlDAO.selectTestCnt" resultClass="java.lang.Integer">
-		select count(*) cnt from tb_test
+		select count(*) cnt from mvc_board
+	</select>
+	
+	<select id="mysqlDAO.selectBoardList" resultClass="egovMap">
+		select unq,title,name,pass,content,hits,rdate from mvc_board	
 	</select>
 </sqlMap>
 

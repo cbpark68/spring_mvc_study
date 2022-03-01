@@ -1,5 +1,7 @@
 package main.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,10 @@ public class testController {
 	public String mysqlTest(ModelMap model) throws Exception{
 		int cnt = mysqlService.selectTestCnt();
 		model.addAttribute("testcnt",cnt);
+		List<?> list = mysqlService.selectBoardList();
+		model.addAttribute("boardlist",list);
 		return "test/mysqltest";
 	}
+	
 
 }

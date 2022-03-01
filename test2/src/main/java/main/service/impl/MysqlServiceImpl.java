@@ -1,5 +1,7 @@
 package main.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,11 @@ public class MysqlServiceImpl extends EgovAbstractServiceImpl implements MysqlSe
 	@Override
 	public int selectTestCnt() throws Exception {
 		return mysqlDAO.selectTestCnt();
+	}
+
+	@Override
+	public List<?> selectBoardList() throws Exception {
+		return mysqlDAO.selectBoardList();
 	}
 
 }

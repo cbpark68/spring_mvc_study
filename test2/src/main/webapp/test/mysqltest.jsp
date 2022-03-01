@@ -13,5 +13,17 @@
 <body>
 <h1>Mysql Test</h1>
 <p>test cnt : ${testcnt}</p>
+<p>list</p>
+<table>
+<tr>
+<th>순번</th><th>제목</th>
+</tr>
+<c:forEach var="list" items="${boardlist}">
+<tr>
+	<td>${list.unq}</td>
+	<td>${list.title}</td>
+</tr>
+</c:forEach>
+</table>
 </body>
 </html>
