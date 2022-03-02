@@ -16,5 +16,9 @@ math : ${mth}
 page : ${pg} startno : ${startNo}  lastno : ${lastNo}
 <br/>
 id : ${id} pass : ${pass}  name : ${name}
+<br/>
+회원정보 : ${username} ${year} ${gender} ${phone} ${addr} ${subject} ${content}
+<br/>
+
 </body>
 </html>

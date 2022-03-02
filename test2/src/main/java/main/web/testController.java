@@ -67,4 +67,25 @@ public class testController {
 		model.addAttribute("name", nm);
 		return "test/jsptest2";
 	}
+
+	@RequestMapping("/jsptest3.do")
+	public String jsptest3(String username, String year, String phone, String addr, String content, String subject, String gender,
+			ModelMap model) throws Exception {
+		model.addAttribute("username", username);
+		model.addAttribute("year", year);
+		model.addAttribute("gender", gender);
+		model.addAttribute("phone", phone);
+		model.addAttribute("addr", addr);
+		model.addAttribute("subject", subject);
+		model.addAttribute("content", content);
+		System.out.println("고객정보 " + username + year + phone + addr + subject);
+		return "test/jsptest2";
+	}
+	
+	@RequestMapping("/jspcal1.do")
+	public String jspcal1(String year,String month,ModelMap model) throws Exception {
+		model.addAttribute("pyear",year);
+		model.addAttribute("pmonth",month);
+		return "test/jspcal1";
+	}
 }

@@ -177,5 +177,36 @@ th, td {
 	비번 : <input type="password" name="pass"/><br/>		
 	<button type="submit">회원전송</button>	
 	</form>
+	<br/>
+	<form name="frm2" method="post" action="jsptest3.do">
+	이름 : <input type="text" name="username"/><br/>
+	생년 : 
+	<select name="year">
+		<%
+		String sel = "";
+		for(int y1=1940;y1<(y);y1++){
+			if(y1 == 2000){sel="selected";}else{sel="";}
+			out.print("<option value='"+y1+"' "+sel+">"+y1+"년</option>");	
+		}
+		%>
+	</select>
+	<br/>
+	성별 :
+	<input type="radio" name="gender" value="M">남성
+	<input type="radio" name="gender" value="F">여성
+	<br/>
+	연락처 : <input type="text" name="phone"/><br/>
+	주소 : <input type="text" name="addr" value="주소를 넣어주세요."/><br/>	
+	과목 : 
+	<input type="checkbox" name="subject" value="java">JAVA
+	<input type="checkbox" name="subject" value="html">HTML
+	<input type="checkbox" name="subject" value="mysql">MYSQL
+	<br/>
+	하고싶은 말:<br/>
+	<textarea name="content">하고싶은 말</textarea>
+	<br/>
+	<button type="submit">회원전송</button>
+	</form>
+	
 </body>
 </html>
