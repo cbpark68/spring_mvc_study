@@ -60,18 +60,18 @@ caption {
 			<c:forEach var="d" begin="1" end="${lastday}" step="1">
 				<c:set var="cnt" value="${cnt+1}" />
 				<c:set var="cnt2" value="${cnt2+1}" />
-				<td>${d}</td>
+				<c:set var="color" value="#555555"/>
+				<c:if test="${cnt2 == 7}"> <c:set var="color" value="blue"/> </c:if>
+				<c:if test="${cnt2 == 1}"> <c:set var="color" value="red"/> </c:if>
+				<td style="color:${color}">${d}</td>
 				<c:if test="${cnt % 7  == 0}">
 					<c:set var="cnt2" value="0" />
-		</tr>
-		</td>
-		</c:if>
-		</c:forEach>
-		<c:if test="${cnt2 > 0 }">
-			<c:forEach var="j" begin="1" end="${7 - cnt2}" step="1">
-				<td></td>
+					</tr><tr>
+				</c:if>
 			</c:forEach>
-		</c:if>
+			<c:if test="${cnt2 > 0 }">
+				<c:forEach var="j" begin="1" end="${7 - cnt2}" step="1"> <td></td> </c:forEach>
+			</c:if>
 		</tr>
 	</table>
 </body>
