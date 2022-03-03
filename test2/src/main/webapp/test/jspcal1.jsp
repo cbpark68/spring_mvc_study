@@ -32,14 +32,31 @@ caption {
 }
 </style>
 <form name="frm" method="post" action="jspcal1.do">
-
-	<input type="text" name="year" size="3">년 <input type="text"
-		name="month" size="3">월
-	<button type="submit">조회</button>
+	<select name="year">
+		<c:set var="sely" value=""/>
+		<c:set var="selm" value=""/>
+		<c:forEach var="i" begin="${sysy - 10}" end="${sysy +  5}" step="1">
+			<c:if test="${y == i}"><c:set var="sely" value="selected"/></c:if>
+			<c:if test="${y != i}"><c:set var="sely" value=""/></c:if>
+			<option value="${i}" ${sely}>${i}년</option>	
+		</c:forEach>
+	</select>
+	<select name="month">
+		<c:forEach var="i"	begin="1" end="12" step="1">
+			<c:if test="${m+1 == i}"><c:set var="selm" value="selected"/></c:if>
+			<c:if test="${m+1 != i}"><c:set var="selm" value=""/></c:if>
+			<option value="${i}" ${selm}>${i}월</option>
+		</c:forEach>
+	</select>
+ 	<button type="submit">조회</button>
 </form>
 <body>
 	<table>
-		<caption>${y}년${m+1}월</caption>
+		<caption>
+		<button type="button" onclick="location='jspcal1.do?year=${by}&month=${bm}'">이전</button>
+		${y}년${m+1}월
+		<button type="button" onclick="location='jspcal1.do?year=${ny}&month=${nm}'">다음</button>
+		</caption>
 		<tr>
 			<th>일</th>
 			<th>월</th>

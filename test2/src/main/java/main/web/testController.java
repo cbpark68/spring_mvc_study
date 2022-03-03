@@ -70,8 +70,8 @@ public class testController {
 	}
 
 	@RequestMapping("/jsptest3.do")
-	public String jsptest3(String username, String year, String phone, String addr, String content, String subject, String gender,
-			ModelMap model) throws Exception {
+	public String jsptest3(String username, String year, String phone, String addr, String content, String subject,
+			String gender, ModelMap model) throws Exception {
 		model.addAttribute("username", username);
 		model.addAttribute("year", year);
 		model.addAttribute("gender", gender);
@@ -82,26 +82,41 @@ public class testController {
 		System.out.println("고객정보 " + username + year + phone + addr + subject);
 		return "test/jsptest2";
 	}
-	
+
 	@RequestMapping("/jspcal1.do")
-	public String jspcal1(String year,String month,ModelMap model) throws Exception {
+	public String jspcal1(String year, String month, ModelMap model) throws Exception {
+		int y, m, sysy;
 		Calendar cal = Calendar.getInstance();
-		int y,m;
-		if(year == null || month == null) {
+		sysy = cal.get(Calendar.YEAR);
+		if (year == null || month == null) {
 			y = cal.get(Calendar.YEAR);
-			m = cal.get(Calendar.MONTH)+1;
-		}else {
+			m = cal.get(Calendar.MONTH);
+		} else {
 			y = Integer.parseInt(year);
-			m = Integer.parseInt(month)-1;
+			m = Integer.parseInt(month) - 1;
 		}
 		cal.set(y, m, 1);
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 		int lastday = cal.getActualMaximum(Calendar.DATE);
-		System.out.println("year:"+y+" month: "+m+" dayOfWeek:"+dayOfWeek+" lastday:"+lastday);
-		model.addAttribute("y",y);
-		model.addAttribute("m",m);
-		model.addAttribute("dayOfWeek",dayOfWeek);
-		model.addAttribute("lastday",lastday);
+		model.addAttribute("y", y);
+		model.addAttribute("m", m);
+		if (m == 0) {
+			model.addAttribute("by", y - 1);
+			model.addAttribute("bm", 12);
+		}else {
+			model.addAttribute("by", y);
+			model.addAttribute("bm", m);
+		}
+		if(m == 11) {
+			model.addAttribute("ny", y + 1);
+			model.addAttribute("nm", 1);
+		}else {
+			model.addAttribute("ny", y);
+			model.addAttribute("nm", m+2);
+		}
+		model.addAttribute("dayOfWeek", dayOfWeek);
+		model.addAttribute("lastday", lastday);
+		model.addAttribute("sysy", sysy);
 		return "test/jspcal1";
 	}
 }
