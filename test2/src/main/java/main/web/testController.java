@@ -1,5 +1,6 @@
 package main.web;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -84,8 +85,23 @@ public class testController {
 	
 	@RequestMapping("/jspcal1.do")
 	public String jspcal1(String year,String month,ModelMap model) throws Exception {
-		model.addAttribute("pyear",year);
-		model.addAttribute("pmonth",month);
+		Calendar cal = Calendar.getInstance();
+		int y,m;
+		if(year == null || month == null) {
+			y = cal.get(Calendar.YEAR);
+			m = cal.get(Calendar.MONTH)+1;
+		}else {
+			y = Integer.parseInt(year);
+			m = Integer.parseInt(month)-1;
+		}
+		cal.set(y, m, 1);
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+		int lastday = cal.getActualMaximum(Calendar.DATE);
+		System.out.println("year:"+y+" month: "+m+" dayOfWeek:"+dayOfWeek+" lastday:"+lastday);
+		model.addAttribute("y",y);
+		model.addAttribute("m",m);
+		model.addAttribute("dayOfWeek",dayOfWeek);
+		model.addAttribute("lastday",lastday);
 		return "test/jspcal1";
 	}
 }

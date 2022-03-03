@@ -3,9 +3,6 @@
 <%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%
-	Calendar cal = Calendar.getInstance();
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,19 +38,8 @@ caption {
 	<button type="submit">조회</button>
 </form>
 <body>
-<%
-int y = cal.get(Calendar.YEAR);
-int m = cal.get(Calendar.MONTH);
-y = 2020;
-m = 10;
-cal.set(y, m, 1);
-int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-int lastday = cal.getActualMaximum(Calendar.DATE);
-%>
 	<table>
-		<caption><%=y%>년
-			<%=m+1%>월
-		</caption>
+ 		<caption>${y}년 ${m}월</caption>
 		<tr>
 			<th>일</th>
 			<th>월</th>
@@ -64,25 +50,19 @@ int lastday = cal.getActualMaximum(Calendar.DATE);
 			<th>토</th>
 		</tr>
 		<tr>
-			<%
-				int cnt = 0;
-				for (int s=1;s<dayOfWeek;s++){
-					out.print("<td></td>");
-					cnt++;
-				}
-				for (int d = 1; d <= lastday; d++) {
-					cnt++;
-			%>
-			<td><%=d%></td>
-			<%
-				if (cnt%7 == 0) {
-					out.print("</tr><tr>");
-				}
-			}
-			%>
+			<c:set var="cnt" value="0"/>
+			<c:forEach var="i" begin="1" end="${dayOfWeek-1}" step="1">
+				<td></td>	
+				<c:set var="cnt" value="${cnt+1}" />
+			</c:forEach>
+			<c:forEach var="d" begin="1" end="${lastday}" step="1">
+				<c:set var="cnt" value="${cnt+1}" />
+				<td>${d}</td>	
+				<c:if test="${cnt % 7  == 0}">
+					</tr></td>
+				</c:if>
+			</c:forEach>
 		</tr>
-
-
 	</table>
 </body>
 </html>
