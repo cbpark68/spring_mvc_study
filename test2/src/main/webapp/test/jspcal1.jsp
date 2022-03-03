@@ -33,13 +33,13 @@ caption {
 </style>
 <form name="frm" method="post" action="jspcal1.do">
 
-	<input type="text" name="year" size="3">년
-	<input type="text" name="month" size="3">월
+	<input type="text" name="year" size="3">년 <input type="text"
+		name="month" size="3">월
 	<button type="submit">조회</button>
 </form>
 <body>
 	<table>
- 		<caption>${y}년 ${m}월</caption>
+		<caption>${y}년${m+1}월</caption>
 		<tr>
 			<th>일</th>
 			<th>월</th>
@@ -50,18 +50,28 @@ caption {
 			<th>토</th>
 		</tr>
 		<tr>
-			<c:set var="cnt" value="0"/>
+			<c:set var="cnt" value="0" />
+			<c:set var="cnt2" value="0" />
 			<c:forEach var="i" begin="1" end="${dayOfWeek-1}" step="1">
-				<td></td>	
+				<td></td>
 				<c:set var="cnt" value="${cnt+1}" />
+				<c:set var="cnt2" value="${cnt2+1}" />
 			</c:forEach>
 			<c:forEach var="d" begin="1" end="${lastday}" step="1">
 				<c:set var="cnt" value="${cnt+1}" />
-				<td>${d}</td>	
+				<c:set var="cnt2" value="${cnt2+1}" />
+				<td>${d}</td>
 				<c:if test="${cnt % 7  == 0}">
-					</tr></td>
-				</c:if>
+					<c:set var="cnt2" value="0" />
+		</tr>
+		</td>
+		</c:if>
+		</c:forEach>
+		<c:if test="${cnt2 > 0 }">
+			<c:forEach var="j" begin="1" end="${7 - cnt2}" step="1">
+				<td></td>
 			</c:forEach>
+		</c:if>
 		</tr>
 	</table>
 </body>
