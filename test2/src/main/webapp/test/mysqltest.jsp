@@ -24,6 +24,14 @@
 	<td>${list.title}</td>
 </tr>
 </c:forEach>
+<tr><td>부서</td></tr>
+<c:forEach var="deptList" items="${deptList}">
+<tr>
+	<td>${deptList.deptno}</td>
+	<td>${deptList.dname}</td>
+	<td>${deptList.loc}</td>
+</tr>
+</c:forEach>
 </table>
 </body>
 </html>

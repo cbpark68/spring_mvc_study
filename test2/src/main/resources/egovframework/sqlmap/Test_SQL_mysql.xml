@@ -6,15 +6,20 @@
 	<typeAlias alias="egovMap"
 		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
 
-	<typeAlias alias="egovMap"
-		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
-	
 	<select id="mysqlDAO.selectTestCnt" resultClass="java.lang.Integer">
-		select count(*) cnt from mvc_board
+		select count(*) cnt from board
 	</select>
 	
 	<select id="mysqlDAO.selectBoardList" resultClass="egovMap">
-		select unq,title,name,pass,content,hits,rdate from mvc_board	
+		select unq,title,name,pass,content,hits,rdate from board	
+	</select>
+	
+	<insert id="mysqlDAO.insertDept">
+		insert into dept (deptno,dname,loc) values (#deptno#,#dname#,#loc#)	
+	</insert>
+	
+	<select id="mysqlDAO.selectDeptList" resultClass="egovMap">
+		select deptno,dname,loc from dept 	
 	</select>
 </sqlMap>
 

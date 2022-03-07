@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import egovframework.example.sample.service.DeptVO;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import main.service.MysqlService;
 
@@ -23,6 +24,16 @@ public class MysqlServiceImpl extends EgovAbstractServiceImpl implements MysqlSe
 	@Override
 	public List<?> selectBoardList() throws Exception {
 		return mysqlDAO.selectBoardList();
+	}
+
+	@Override
+	public String insertDept(DeptVO vo) throws Exception {
+		return mysqlDAO.insertDept(vo);
+	}
+
+	@Override
+	public List<?> selectDeptList() throws Exception {
+		return mysqlDAO.selectDeptList();
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import egovframework.example.sample.service.DeptVO;
 import main.service.MysqlService;
 
 @Controller
@@ -38,9 +39,20 @@ public class testController {
 		model.addAttribute("testcnt", cnt);
 		List<?> list = mysqlService.selectBoardList();
 		model.addAttribute("boardlist", list);
+		List<?> listDept = mysqlService.selectDeptList();
+		model.addAttribute("deptList",listDept);
 		return "test/mysqltest";
 	}
 
+	@RequestMapping("/mysqlInsert.do")
+	public String mysqlInsert() throws Exception{
+		DeptVO vo = new DeptVO();
+		vo.setDeptno("40");
+		vo.setDname("야구부");
+		vo.setLoc("강원도");
+		mysqlService.insertDept(vo);
+		return "test/mysqltest";
+	}
 	@RequestMapping("/jsptest1.do")
 	public String jsptest1() throws Exception {
 		return "test/jsptest1";
