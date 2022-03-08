@@ -36,9 +36,9 @@ public class JspController {
 	
 	@RequestMapping("/jspDeptWriteSave.do")
 	public String jspDeptWriteSave(JspDeptVO pvo,ModelMap model) throws Exception{
-		int cnt = jspDeptService.jspDeptCount(pvo);
+		String gbn = pvo.getCurdgbn();
 		String result = "";
-		if(cnt == 0) {
+		if(gbn.contentEquals("insert")) {
 			result = jspDeptService.jspDeptInsert(pvo);
 		}else {
 			result = ""+jspDeptService.jspDeptUpdate(pvo);

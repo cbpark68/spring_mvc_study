@@ -20,17 +20,19 @@ function fn_delete(deptno){
 <body>
 	<form name="frm" method="post" action="jspDeptWriteSave.do">
 		<c:if test="${deptinfo.deptno != 0}">
-			<c:set var="deptno" value="${deptinfo.deptno}"/>
-			<c:set var="rogbn" value="readonly"/>
+			<c:set var="deptno" value="${deptinfo.deptno}" />
+			<c:set var="rogbn" value="readonly" />
+			<input type="hidden" name="crudgbn" value="update" />
 		</c:if>
 		<c:if test="${deptinfo.deptno == 0}">
-			<c:set var="deptno" value=""/>
-			<c:set var="rogbn" value=""/>
+			<c:set var="deptno" value="" />
+			<c:set var="rogbn" value="" />
+			<input type="hidden" name="crudgbn" value="insert" />
 		</c:if>
 		<table border="1" width="400">
 			<tr>
 				<th>부서코드</th>
-				<td><input type="text" name="deptno" value="${deptno}" ${rogbn} } /></td>
+				<td><input type="text" name="deptno" value="${deptno}" ${rogbn} /></td>
 			</tr>
 			<tr>
 				<th>부서명</th>
@@ -40,13 +42,11 @@ function fn_delete(deptno){
 				<th>위치</th>
 				<td><input type="text" name="loc" value="${deptinfo.loc}" /></td>
 			</tr>
-			<tr>
-				<td colspan="2">
-				<button type="submit">저장</button>
-				<button type="button" onclick="fn_delete(${deptno})">삭제</button>
-				</td>
-			</tr>
 		</table>
+		<p>
+			<button type="submit">저장</button>
+			<button type="button" onclick="fn_delete(${deptno})">삭제</button>
+		</p>
 	</form>
 </body>
 </html>

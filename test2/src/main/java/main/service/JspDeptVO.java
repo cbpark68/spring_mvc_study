@@ -4,6 +4,23 @@ public class JspDeptVO {
 	private int deptno;
 	private String dname;
 	private String loc;
+	private String crudgbn;
+
+	public String getCrudgbn() {
+		return crudgbn;
+	}
+
+	public void setCrudgbn(String crudgbn) {
+		this.crudgbn = crudgbn;
+	}
+
+	public String getCurdgbn() {
+		return crudgbn;
+	}
+
+	public void setCurdgbn(String crudgbn) {
+		this.crudgbn = crudgbn;
+	}
 
 	public int getDeptno() {
 		return deptno;
@@ -31,7 +48,8 @@ public class JspDeptVO {
 
 	@Override
 	public String toString() {
-		return "JspDeptVO [deptno=" + deptno + ", dname=" + dname + ", loc=" + loc + "]";
+		return "JspDeptVO [deptno=" + deptno + ", dname=" + dname + ", loc=" + loc + ", crudgbn=" + crudgbn + "]";
 	}
+
 
 }
