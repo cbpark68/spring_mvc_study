@@ -4,4 +4,5 @@
 
 <sqlMapConfig>
 	<sqlMap resource="egovframework/sqlmap/Test_SQL_mysql.xml"/>
+	<sqlMap resource="egovframework/sqlmap/Jsp_SQL_mysql.xml"/>
 </sqlMapConfig>
