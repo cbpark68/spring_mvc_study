@@ -17,6 +17,17 @@
         		<arg0 key="title.sample.regUser" />
 			</field>
         </form>
+        <form name="jspEmpVO">
+        	<field property="empno" depends="required,integer">
+        		<arg0 key="jsp.emp.empno" />
+			</field>
+        	<field property="ename" depends="required">
+        		<arg0 key="jsp.emp.ename" />
+			</field>
+			<field property="job" depends="required">
+        		<arg0 key="jsp.emp.job" />
+            </field>
+        </form>
     </formset>
 
 </form-validation>

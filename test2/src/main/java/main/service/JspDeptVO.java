@@ -1,6 +1,7 @@
 package main.service;
 
 public class JspDeptVO {
+
 	private int deptno;
 	private String dname;
 	private String loc;
