@@ -35,5 +35,13 @@
 		insert into emp (empno,ename,job,sal,hiredate,deptno)	
 		values (#empno#,#ename#,#job#,#sal#,#hiredate#,#deptno#)	
 	</insert>
+	
+	<select id="jspEmpIdCheck" resultClass="java.lang.Integer">
+		select count(*) from emp where empno = #empno#	
+	</select>
+	
+	<select id="jspEmpDeptnoCheck" resultClass="java.lang.Integer">
+		select count(*) from dept where deptno = #deptno#	
+	</select>
 </sqlMap>
 

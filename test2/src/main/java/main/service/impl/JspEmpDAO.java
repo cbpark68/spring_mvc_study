@@ -12,4 +12,12 @@ public class JspEmpDAO extends EgovAbstractDAOMysql{
 		return (String) insert("jspEmpInsert", pvo);
 	}
 
+	public int jspEmpIdCheck(JspEmpVO pvo) {
+		return (int) select("jspEmpIdCheck", pvo);
+	}
+
+	public int jspEmpDeptnoCheck(JspEmpVO pvo) {
+		return (int) select("jspEmpDeptnoCheck", pvo);
+	}
+
 }

@@ -81,7 +81,7 @@ function fn_delete(empno){
 			</tr>
 			<tr>
 				<th>부서</th>
-				<td><input type="text" name="deptno" value="${deptno}"  /></td>
+				<td><input type="text" name="deptno" value="${deptno}" />  <form:errors path="deptno"/></td>
 			</tr>
 		</table>
 		<div style="width:100%; text-align:center; margin-top:10px">

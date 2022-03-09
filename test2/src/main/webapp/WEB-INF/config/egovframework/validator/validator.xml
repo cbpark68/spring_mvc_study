@@ -27,6 +27,9 @@
 			<field property="job" depends="required">
         		<arg0 key="jsp.emp.job" />
             </field>
+			<field property="deptno" depends="required">
+        		<arg0 key="jsp.emp.deptno" />
+            </field>
         </form>
     </formset>
 

@@ -19,4 +19,14 @@ public class JspEmpServiceImpl extends EgovAbstractServiceImpl implements JspEmp
 		return jspEmpDAO.jspEmpInsert(pvo);
 	}
 
+	@Override
+	public int jspEmpIdCheck(JspEmpVO pvo) throws Exception {
+		return jspEmpDAO.jspEmpIdCheck(pvo);
+	}
+
+	@Override
+	public int jspEmpDeptnoCheck(JspEmpVO pvo) throws Exception {
+		return jspEmpDAO.jspEmpDeptnoCheck(pvo);
+	}
+
 }

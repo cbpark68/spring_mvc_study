@@ -5,7 +5,7 @@ public class JspEmpVO {
 	private String ename;
 	private int sal;
 	private String job;
-	private int deptno;
+	private String deptno;
 	private String hiredate;
 
 	public String getEmpno() {
@@ -41,11 +41,11 @@ public class JspEmpVO {
 		this.job = job;
 	}
 
-	public int getDeptno() {
+	public String getDeptno() {
 		return deptno;
 	}
 
-	public void setDeptno(int deptno) {
+	public void setDeptno(String deptno) {
 		this.deptno = deptno;
 	}
 
