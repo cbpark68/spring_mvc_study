@@ -24,6 +24,12 @@
         	<field property="ename" depends="required">
         		<arg0 key="jsp.emp.ename" />
 			</field>
+			<field property="hiredate" depends="required">
+        		<arg0 key="jsp.emp.hiredate" />
+            </field>
+			<field property="sal" depends="required,integer">
+        		<arg0 key="jsp.emp.sal" />
+            </field>
 			<field property="job" depends="required">
         		<arg0 key="jsp.emp.job" />
             </field>

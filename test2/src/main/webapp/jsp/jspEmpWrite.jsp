@@ -43,25 +43,16 @@ function fn_delete(empno){
 <body>
 
 	<form:form name="jspEmpVO" method="post" action="jspEmpWriteSave.do" commandName="jspEmpVO">
-		<c:if test="${jspEmpVO.empno != null}">
-			<c:set var="empno" value="${jspEmpVO.empno}" />
-			<c:set var="sal" value="${jspEmpVO.sal}" />
-			<c:set var="deptno" value="${jspEmpVO.deptno}" />
+		<c:set var="rogbn" value="" />
+		<c:if test="${jspEmpVO.crudgbn == 'update'}">
 			<c:set var="rogbn" value="readonly" />
-			<input type="hidden" name="crudgbn" value="update" />
 		</c:if>
-		<c:if test="${jspEmpVO.empno == null}">
-			<c:set var="empno" value="" />
-			<c:set var="sal" value="" />
-			<c:set var="deptno" value="" />
-			<c:set var="rogbn" value="" />
-			<input type="hidden" name="crudgbn" value="insert" />
-		</c:if>
+		<input type="hidden" name="crudgbn" value="${jspEmpVO.crudgbn}" />
 		<table align="center">
 			<caption style="font-size:20px;font-decoration:bold;">사원정보</caption>
 			<tr>
 				<th width="20%">사원번호</th>
-				<td width="80%"><input type="text" name="empno" value="${empno}" ${rogbn} /><form:errors path="empno"/></td>
+				<td width="80%"><input type="text" name="empno" value="${jspEmpVO.empno}" ${rogbn} /><form:errors path="empno"/></td>
 			</tr>
 			<tr>
 				<th>사원이름</th>
@@ -73,15 +64,15 @@ function fn_delete(empno){
 			</tr>
 			<tr>
 				<th>급여</th>
-				<td><input type="text" name="sal" value="${sal}"  /></td>
+				<td><input type="text" name="sal" value="${jspEmpVO.sal}"  /><form:errors path="sal"/></td>
 			</tr>
 			<tr>
 				<th>입사일</th>
-				<td><input type="text" name="hiredate" value="${jspEmpVO.hiredate}"  /></td>
+				<td><input type="text" name="hiredate" value="${jspEmpVO.hiredate}"  /><form:errors path="hiredate"/></td>
 			</tr>
 			<tr>
 				<th>부서</th>
-				<td><input type="text" name="deptno" value="${deptno}" />  <form:errors path="deptno"/></td>
+				<td><input type="text" name="deptno" value="${jspEmpVO.deptno}" />  <form:errors path="deptno"/></td>
 			</tr>
 		</table>
 		<div style="width:100%; text-align:center; margin-top:10px">

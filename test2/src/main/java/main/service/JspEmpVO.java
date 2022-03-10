@@ -7,9 +7,18 @@ public class JspEmpVO {
 	private String job;
 	private String deptno;
 	private String hiredate;
+	private String crudgbn;
 
 	public String getEmpno() {
 		return empno;
+	}
+
+	public String getCrudgbn() {
+		return crudgbn;
+	}
+
+	public void setCrudgbn(String crudgbn) {
+		this.crudgbn = crudgbn;
 	}
 
 	public void setEmpno(String empno) {
@@ -60,7 +69,7 @@ public class JspEmpVO {
 	@Override
 	public String toString() {
 		return "JspEmpVO [empno=" + empno + ", ename=" + ename + ", sal=" + sal + ", job=" + job + ", deptno=" + deptno
-				+ ", hiredate=" + hiredate + "]";
+				+ ", hiredate=" + hiredate + ", crudgbn=" + crudgbn + "]";
 	}
 
 
