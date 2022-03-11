@@ -42,37 +42,34 @@ function fn_delete(empno){
 </script>
 <body>
 
-	<form:form name="jspEmpVO" method="post" action="jspEmpWriteSave.do" commandName="jspEmpVO">
+	<form:form method="post" action="jspEmpWriteSave.do" commandName="jspEmpVO">
 		<c:set var="rogbn" value="" />
-		<c:if test="${jspEmpVO.crudgbn == 'update'}">
-			<c:set var="rogbn" value="readonly" />
-		</c:if>
-		<input type="hidden" name="crudgbn" value="${jspEmpVO.crudgbn}" />
+		<form:hidden path="crudgbn" value="${jspEmpVO.crudgbn}" />
 		<table align="center">
-			<caption style="font-size:20px;font-decoration:bold;">사원정보</caption>
+			<caption style="font-size:20px;font-decoration:bold;"><spring:message code="jsp.emp" /></caption>
 			<tr>
-				<th width="20%">사원번호</th>
-				<td width="80%"><input type="text" name="empno" value="${jspEmpVO.empno}" ${rogbn} /><form:errors path="empno"/></td>
+				<th width="20%"><label for="empno"><spring:message code="jsp.emp.empno" /></label></th>
+				<td width="80%"><form:input path="empno" value="${jspEmpVO.empno}" /><form:errors path="empno"/></td>
 			</tr>
 			<tr>
-				<th>사원이름</th>
-				<td><input type="text" name="ename" value="${jspEmpVO.ename}"  /><form:errors path="ename"/></td>
+				<th><label for="ename"><spring:message code="jsp.emp.ename" /></label></th>
+				<td><form:input path="ename" value="${jspEmpVO.ename}"  /><form:errors path="ename"/></td>
 			</tr>
 			<tr>
-				<th>업무</th>
-				<td><input type="text" name="job" value="${jspEmpVO.job}"  /><form:errors path="job"/></td>
+				<th><label for="job"><spring:message code="jsp.emp.job" /></label></th>
+				<td><form:input path="job" value="${jspEmpVO.job}"  /><form:errors path="job"/></td>
 			</tr>
 			<tr>
-				<th>급여</th>
-				<td><input type="text" name="sal" value="${jspEmpVO.sal}"  /><form:errors path="sal"/></td>
+				<th><label for="sal"><spring:message code="jsp.emp.sal" /></label></th>
+				<td><form:input path="sal" value="${jspEmpVO.sal}"  /><form:errors path="sal"/></td>
 			</tr>
 			<tr>
-				<th>입사일</th>
-				<td><input type="text" name="hiredate" value="${jspEmpVO.hiredate}"  /><form:errors path="hiredate"/></td>
+				<th><label for="hiredate"><spring:message code="jsp.emp.hiredate" /></label></th>
+				<td><form:input path="hiredate" value="${jspEmpVO.hiredate}"  /><form:errors path="hiredate"/></td>
 			</tr>
 			<tr>
-				<th>부서</th>
-				<td><input type="text" name="deptno" value="${jspEmpVO.deptno}" />  <form:errors path="deptno"/></td>
+				<th><label for="deptno"><spring:message code="jsp.emp.deptno" /></label></th>
+				<td><form:input path="deptno" value="${jspEmpVO.deptno}" />  <form:errors path="deptno"/></td>
 			</tr>
 		</table>
 		<div style="width:100%; text-align:center; margin-top:10px">
