@@ -18,11 +18,26 @@
 			</field>
 		</form>
 		<form name="jspEmpVO">
-			<field property="empno" depends="required,integer">
+			<field property="empno" depends="required,integer,intRange">
 				<arg0 key="jsp.emp.empno" />
+				<arg1 key="1000" />
+				<arg2 key="9999" />
+				<var>
+					<var-name>min</var-name>
+					<var-value>1000</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>9999</var-value>
+				</var>
 			</field>
-			<field property="ename" depends="required">
+			<field property="ename" depends="required,maxlength">
 				<arg0 key="jsp.emp.ename" />
+				<arg1 key="20" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
 			</field>
 			<field property="hiredate" depends="required">
 				<arg0 key="jsp.emp.hiredate" />
@@ -40,8 +55,13 @@
 					<var-value>99999</var-value>
 				</var>
 			</field>
-			<field property="job" depends="required">
+			<field property="job" depends="required,maxlength">
 				<arg0 key="jsp.emp.job" />
+				<arg1 key="10" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
 			</field>
 			<field property="deptno" depends="required">
 				<arg0 key="jsp.emp.deptno" />
