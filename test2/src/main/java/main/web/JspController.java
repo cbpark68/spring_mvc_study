@@ -85,14 +85,12 @@ public class JspController {
 		String result = "";
 		int cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
 		int cnt2 = jspEmpService.jspEmpDeptnoCheck(jspEmpVO);
-		int sal = jspEmpVO.getSal();
 		String hdate = jspEmpVO.getHiredate();
 		beanValidator.validate(jspEmpVO, bindingResult);
 		if (cnt > 0) errors.rejectValue("empno", "duplicate", "이미 등록된 사원번호입니다.");
 		if (cnt2 == 0) errors.rejectValue("deptno", "required", "등록되지 않은 부서번호입니다.");
-		if (sal < 100) errors.rejectValue("sal", "required", "급여는 100만원 이상입니다.");
 		if (! formatCheck(hdate)) errors.rejectValue("hiredate", "required", "날짜형식이 맞지 않습니다.");
-		if (bindingResult.hasErrors() || cnt > 0 || cnt2 == 0 || sal < 100 || ! formatCheck(hdate)) {
+		if (bindingResult.hasErrors() || cnt > 0 || cnt2 == 0 || ! formatCheck(hdate)) {
 			model.addAttribute("jspEmpVO", jspEmpVO);
 			return "jsp/jspEmpWrite";
 		}
