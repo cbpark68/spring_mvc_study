@@ -11,28 +11,8 @@
 <meta charset="UTF-8">
 <title>empWrite</title>
 </head>
+<link type="text/css" rel="stylesheet" href="<c:url value='/css/test2.css'/>"/>
 <validator:javascript formName="jspEmpVO" staticJavascript="false" xhtml="true" cdata="false"/>
-<style>
-body{
-	font-size:12px;
-	color:#555555;
-}
-a{
-	text-decoration:none;
-}
-table{
-	width:500px;
-	border-collapse:collapse;
-}
-th,td{
-	border:1px solid #cccccc;
-	text-align:center;
-	padding:5px;
-}
-td{
-	text-align:left;
-}
-</style>
 <script>
 function fn_delete(empno){
 	if(confirm("삭제하시겠습니까?")){
@@ -46,7 +26,7 @@ function fn_delete(empno){
 		<c:set var="rogbn" value="" />
 		<form:hidden path="crudgbn" value="${jspEmpVO.crudgbn}" />
 		<table align="center">
-			<caption style="font-size:20px;font-decoration:bold;"><spring:message code="jsp.emp" /></caption>
+			<caption style="font-size:20px;font-wdith:bold;"><spring:message code="jsp.emp" /></caption>
 			<tr>
 				<th width="20%"><label for="empno"><spring:message code="jsp.emp.empno" /></label></th>
 				<td width="80%"><form:input path="empno" value="${jspEmpVO.empno}" /><form:errors path="empno"/></td>

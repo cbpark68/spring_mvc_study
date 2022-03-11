@@ -43,5 +43,20 @@
 	<select id="jspEmpDeptnoCheck" resultClass="java.lang.Integer">
 		select count(*) from dept where deptno = #deptno#	
 	</select>
+	
+	<select id="jspEmpList" resultClass="egovMap">
+		select a.empno,a.ename,a.job,a.sal,a.hiredate,b.dname deptno
+		from emp a 
+		left join dept b on b.deptno = a.deptno
+		order by a.empno desc
+	</select>
+	
+	<select id="jspEmpCount" resultClass="java.lang.Integer">
+		select count(*) cnt from emp 
+	</select>
+	
+	<select id="jspEmpGetEmpno" resultClass="java.lang.Integer">
+		select ifnull(max(empno),1000)+1 empno from emp
+	</select>
 </sqlMap>
 

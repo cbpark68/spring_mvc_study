@@ -98,6 +98,15 @@ public class JspController {
 		return "redirect:jspEmpList.do";
 	}
 
+	@RequestMapping("/jspEmpList.do")
+	public String jspEmpList(JspEmpVO pvo,ModelMap model) throws Exception{
+		List<?> list = jspEmpService.jspEmpList(pvo);
+		int cnt = jspEmpService.jspEmpCount();
+		model.addAttribute("result",list);
+		model.addAttribute("totcnt",cnt);
+		return "jsp/jspEmpList";
+	}
+
 	public static boolean formatCheck(String date) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

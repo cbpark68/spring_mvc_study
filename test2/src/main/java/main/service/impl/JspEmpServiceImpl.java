@@ -1,5 +1,7 @@
 package main.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +29,21 @@ public class JspEmpServiceImpl extends EgovAbstractServiceImpl implements JspEmp
 	@Override
 	public int jspEmpDeptnoCheck(JspEmpVO pvo) throws Exception {
 		return jspEmpDAO.jspEmpDeptnoCheck(pvo);
+	}
+
+	@Override
+	public List<?> jspEmpList(JspEmpVO pvo) throws Exception {
+		return jspEmpDAO.jspEmpList(pvo);
+	}
+
+	@Override
+	public int jspEmpCount() throws Exception {
+		return jspEmpDAO.jspEmpCount();
+	}
+
+	@Override
+	public int jspEmpGetEmpno() throws Exception {
+		return jspEmpDAO.jspEmpGetEmpno();
 	}
 
 }

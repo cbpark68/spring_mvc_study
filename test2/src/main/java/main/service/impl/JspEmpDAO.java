@@ -1,5 +1,7 @@
 package main.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import egovframework.example.sample.service.impl.EgovAbstractDAOMysql;
@@ -18,6 +20,18 @@ public class JspEmpDAO extends EgovAbstractDAOMysql{
 
 	public int jspEmpDeptnoCheck(JspEmpVO pvo) {
 		return (int) select("jspEmpDeptnoCheck", pvo);
+	}
+
+	public List<?> jspEmpList(JspEmpVO pvo) {
+		return list("jspEmpList", pvo);
+	}
+
+	public int jspEmpCount() {
+		return (int) select("jspEmpCount");
+	}
+
+	public int jspEmpGetEmpno() {
+		return (int) select("jspEmpGetEmpno");
 	}
 
 }
