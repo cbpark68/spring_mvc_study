@@ -14,8 +14,10 @@
 </head>
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/test2.css'/>"/>
 <body>
-
-	<table align="center">
+<div align="center">
+<div align="left" style="width:500px;">
+	<div align="right"><button type="button" onclick="location='jspEmpWrite.do'">등록</button></div>
+	<table>
 		<caption><spring:message code="jsp.emp" /></caption>
 		<colgroup>
 			<col width="10%" />
@@ -42,9 +44,9 @@
 		</tr>
 		<c:set var="listno" value="${listno - 1}"/>
 		</c:forEach>
-		<tr>
-			<td colspan="5">총인원 : ${totcnt}</td>	
-		</tr>
 	</table>
+	총인원 : ${totcnt}
+</div>
+</div>
 </body>
 </html>

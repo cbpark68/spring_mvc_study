@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script>
   $( function() {
-    $( "#hiredate" ).datepicker({ dateFormat: 'yyyy-mm-dd', changeMonth: true, changeYear: true });
+    $( "#hiredate" ).datepicker({ dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true });
   } );
   </script>
 </head>
