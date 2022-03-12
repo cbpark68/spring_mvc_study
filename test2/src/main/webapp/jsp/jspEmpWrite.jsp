@@ -29,27 +29,34 @@ function fn_delete(empno){
 			<caption style="font-size:20px;font-wdith:bold;"><spring:message code="jsp.emp" /></caption>
 			<tr>
 				<th width="20%"><label for="empno"><spring:message code="jsp.emp.empno" /></label></th>
-				<td width="80%"><form:input path="empno" value="${jspEmpVO.empno}" /><form:errors path="empno"/></td>
+				<td width="80%" class="input_td"><form:input path="empno" value="${jspEmpVO.empno}" /><form:errors path="empno"/></td>
 			</tr>
 			<tr>
 				<th><label for="ename"><spring:message code="jsp.emp.ename" /></label></th>
-				<td><form:input path="ename" value="${jspEmpVO.ename}"  /><form:errors path="ename"/></td>
+				<td class="input_td"><form:input path="ename" value="${jspEmpVO.ename}"  /><form:errors path="ename"/></td>
 			</tr>
 			<tr>
 				<th><label for="job"><spring:message code="jsp.emp.job" /></label></th>
-				<td><form:input path="job" value="${jspEmpVO.job}"  /><form:errors path="job"/></td>
+				<td class="input_td"><form:input path="job" value="${jspEmpVO.job}"  /><form:errors path="job"/></td>
 			</tr>
 			<tr>
 				<th><label for="sal"><spring:message code="jsp.emp.sal" /></label></th>
-				<td><form:input path="sal" value="${jspEmpVO.sal}"  /><form:errors path="sal"/></td>
+				<td class="input_td"><form:input path="sal" value="${jspEmpVO.sal}"  /><form:errors path="sal"/></td>
 			</tr>
 			<tr>
 				<th><label for="hiredate"><spring:message code="jsp.emp.hiredate" /></label></th>
-				<td><form:input path="hiredate" value="${jspEmpVO.hiredate}"  /><form:errors path="hiredate"/></td>
+				<td class="input_td"><form:input path="hiredate" value="${jspEmpVO.hiredate}"  /><form:errors path="hiredate"/></td>
 			</tr>
 			<tr>
 				<th><label for="deptno"><spring:message code="jsp.emp.deptno" /></label></th>
-				<td><form:input path="deptno" value="${jspEmpVO.deptno}" />  <form:errors path="deptno"/></td>
+				<td class="input_td">
+					<form:select path="deptno">
+						<c:forEach items="${deptList}" var="deptList">
+							<form:option value="${deptList.deptno}">${deptList.dname}</form:option>
+						</c:forEach>
+					</form:select>
+					<form:errors path="deptno"/>
+				</td>
 			</tr>
 		</table>
 		<div style="width:100%; text-align:center; margin-top:10px">

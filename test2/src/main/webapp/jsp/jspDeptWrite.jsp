@@ -29,7 +29,7 @@ function fn_delete(deptno){
 			<c:set var="rogbn" value="" />
 			<input type="hidden" name="crudgbn" value="insert" />
 		</c:if>
-		<table border="1" width="400">
+		<table width="400">
 			<tr>
 				<th>부서코드</th>
 				<td><input type="text" name="deptno" value="${deptno}" ${rogbn} /></td>

@@ -2,6 +2,8 @@ package main.web;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -72,17 +74,22 @@ public class JspController {
 		int cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
 		if(crudgbn == null || crudgbn.contentEquals("insert") || cnt == 0) {
 			jspEmpVO.setCrudgbn("insert");
+			int empno = jspEmpService.jspEmpGetEmpno();
+			jspEmpVO.setEmpno(""+empno);
 		}else {
 			jspEmpVO.setCrudgbn("update");
 		}
+		List<?> deptList = jspDeptService.jspDeptList();
 		model.addAttribute("jspEmpVO",jspEmpVO);
+		model.addAttribute("deptList",deptList);
 		return "jsp/jspEmpWrite";
 	}
 
 	@RequestMapping("/jspEmpWriteSave.do")
 	public String jspEmpWriteSave(JspEmpVO jspEmpVO, BindingResult bindingResult, ModelMap model, Errors errors)
 			throws Exception {
-		String result = "";
+		List<?> deptList = jspDeptService.jspDeptList();
+		model.addAttribute("deptList",deptList);
 		int cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
 		int cnt2 = jspEmpService.jspEmpDeptnoCheck(jspEmpVO);
 		String hdate = jspEmpVO.getHiredate();
@@ -94,7 +101,7 @@ public class JspController {
 			model.addAttribute("jspEmpVO", jspEmpVO);
 			return "jsp/jspEmpWrite";
 		}
-		result = jspEmpService.jspEmpInsert(jspEmpVO);
+		String result = jspEmpService.jspEmpInsert(jspEmpVO);
 		return "redirect:jspEmpList.do";
 	}
 
