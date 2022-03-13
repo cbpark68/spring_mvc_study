@@ -12,4 +12,5 @@ public interface JspEmpService {
 	public int jspEmpGetEmpno() throws Exception;
 	public JspEmpVO jspEmpInfo(JspEmpVO jspEmpVO);
 	public int jspEmpUpdate(JspEmpVO jspEmpVO);
+	public int jspEmpDelete(JspEmpVO jspEmpVO);
 }

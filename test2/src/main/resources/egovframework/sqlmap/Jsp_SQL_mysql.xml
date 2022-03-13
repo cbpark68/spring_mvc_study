@@ -72,5 +72,9 @@
 		deptno = #deptno#	
 		where empno = #empno#
 	</update>
+	
+	<delete id="jspEmpDelete">
+		delete from emp where empno = #empno#	
+	</delete>
 </sqlMap>
 

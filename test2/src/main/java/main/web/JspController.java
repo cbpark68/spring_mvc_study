@@ -128,6 +128,16 @@ public class JspController {
 		return "jsp/jspEmpList";
 	}
 
+	@RequestMapping("/jspEmpDelete.do")
+	public String jspEmpDelete(JspEmpVO jspEmpVO, Errors errors) throws Exception{
+		int	cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
+		if (cnt == 0) {
+			errors.rejectValue("empno", "required", "등록되지 않은 사원번호입니다.");
+			return "jsp/jspEmpWrite";
+		}
+		cnt = jspEmpService.jspEmpDelete(jspEmpVO);
+		return "redirect:jspEmpList.do";
+	}
 	public static boolean formatCheck(String date) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

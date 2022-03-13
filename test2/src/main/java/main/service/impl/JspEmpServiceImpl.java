@@ -56,4 +56,9 @@ public class JspEmpServiceImpl extends EgovAbstractServiceImpl implements JspEmp
 		return jspEmpDAO.jspEmpUpdate(jspEmpVO);
 	}
 
+	@Override
+	public int jspEmpDelete(JspEmpVO jspEmpVO) {
+		return jspEmpDAO.jspEmpDelete(jspEmpVO);
+	}
+
 }

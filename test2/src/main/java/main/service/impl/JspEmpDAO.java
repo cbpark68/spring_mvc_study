@@ -42,4 +42,8 @@ public class JspEmpDAO extends EgovAbstractDAOMysql{
 		return update("jspEmpUpdate", jspEmpVO);
 	}
 
+	public int jspEmpDelete(JspEmpVO jspEmpVO) {
+		return delete("jspEmpDelete", jspEmpVO);
+	}
+
 }

@@ -93,10 +93,10 @@ function fn_delete(empno){
 			</tr>
 		</table>
 		<div style="width: 100%; text-align: center; margin-top: 10px">
-			<button type="submit">저장</button>
-			<button type="button" onclick="fn_delete(${empno})">삭제</button>
-			<button type="reset">취소</button>
 			<button type="button" onclick="location='jspEmpList.do'">목록</button>
+			<button type="submit">저장</button>
+			<button type="button" onclick="fn_delete(${jspEmpVO.empno})">삭제</button>
+			<button type="reset">취소</button>
 		</div>
 	</form:form>
 </body>
