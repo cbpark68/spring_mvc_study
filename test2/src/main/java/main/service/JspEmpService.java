@@ -10,4 +10,6 @@ public interface JspEmpService {
 	public List<?> jspEmpList(JspEmpVO pvo) throws Exception;
 	public int jspEmpCount() throws Exception;
 	public int jspEmpGetEmpno() throws Exception;
+	public JspEmpVO jspEmpInfo(JspEmpVO jspEmpVO);
+	public int jspEmpUpdate(JspEmpVO jspEmpVO);
 }

@@ -58,5 +58,19 @@
 	<select id="jspEmpGetEmpno" resultClass="java.lang.Integer">
 		select ifnull(max(empno),1000)+1 empno from emp
 	</select>
+	
+	<select id="jspEmpInfo" resultClass="jspEmpVO">
+		select empno,ename,job,sal,hiredate,deptno from emp where empno = #empno#	
+	</select>
+	
+	<update id="jspEmpUpdate">
+		update emp set
+		ename = #ename#,
+		job = #job#,
+		sal = #sal#,
+		hiredate = #hiredate#,
+		deptno = #deptno#	
+		where empno = #empno#
+	</update>
 </sqlMap>
 

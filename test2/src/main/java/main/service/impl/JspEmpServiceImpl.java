@@ -46,4 +46,14 @@ public class JspEmpServiceImpl extends EgovAbstractServiceImpl implements JspEmp
 		return jspEmpDAO.jspEmpGetEmpno();
 	}
 
+	@Override
+	public JspEmpVO jspEmpInfo(JspEmpVO jspEmpVO) {
+		return jspEmpDAO.jspEmpInfo(jspEmpVO);
+	}
+
+	@Override
+	public int jspEmpUpdate(JspEmpVO jspEmpVO) {
+		return jspEmpDAO.jspEmpUpdate(jspEmpVO);
+	}
+
 }

@@ -77,6 +77,7 @@ public class JspController {
 			int empno = jspEmpService.jspEmpGetEmpno();
 			jspEmpVO.setEmpno(""+empno);
 		}else {
+			jspEmpVO = jspEmpService.jspEmpInfo(jspEmpVO);
 			jspEmpVO.setCrudgbn("update");
 		}
 		List<?> deptList = jspDeptService.jspDeptList();
@@ -90,18 +91,31 @@ public class JspController {
 			throws Exception {
 		List<?> deptList = jspDeptService.jspDeptList();
 		model.addAttribute("deptList",deptList);
-		int cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
+		int	cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
+		String crudgbn = jspEmpVO.getCrudgbn();
+		if (crudgbn.contentEquals("insert")) {
+			if (cnt > 0) errors.rejectValue("empno", "duplicate", "이미 등록된 사원번호입니다.");
+		}else {
+			if (cnt == 0) errors.rejectValue("empno", "required", "등록되지 않은 사원번호입니다.");
+		}
 		int cnt2 = jspEmpService.jspEmpDeptnoCheck(jspEmpVO);
 		String hdate = jspEmpVO.getHiredate();
 		beanValidator.validate(jspEmpVO, bindingResult);
-		if (cnt > 0) errors.rejectValue("empno", "duplicate", "이미 등록된 사원번호입니다.");
 		if (cnt2 == 0) errors.rejectValue("deptno", "required", "등록되지 않은 부서번호입니다.");
 		if (! formatCheck(hdate)) errors.rejectValue("hiredate", "required", "날짜형식이 맞지 않습니다.");
-		if (bindingResult.hasErrors() || cnt > 0 || cnt2 == 0 || ! formatCheck(hdate)) {
+		if (bindingResult.hasErrors() ||
+				(crudgbn.contentEquals("insert") && cnt > 0 ) ||
+				(crudgbn.contentEquals("update") && cnt == 0) ||
+				cnt2 == 0 ||
+				! formatCheck(hdate)) {
 			model.addAttribute("jspEmpVO", jspEmpVO);
 			return "jsp/jspEmpWrite";
 		}
-		String result = jspEmpService.jspEmpInsert(jspEmpVO);
+		if(crudgbn.contentEquals("insert")) {
+			String result1 = jspEmpService.jspEmpInsert(jspEmpVO);
+		}else {
+			int result2 = jspEmpService.jspEmpUpdate(jspEmpVO);
+		}
 		return "redirect:jspEmpList.do";
 	}
 

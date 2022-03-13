@@ -34,4 +34,12 @@ public class JspEmpDAO extends EgovAbstractDAOMysql{
 		return (int) select("jspEmpGetEmpno");
 	}
 
+	public JspEmpVO jspEmpInfo(JspEmpVO jspEmpVO) {
+		return (JspEmpVO) select("jspEmpInfo",jspEmpVO);
+	}
+
+	public int jspEmpUpdate(JspEmpVO jspEmpVO) {
+		return update("jspEmpUpdate", jspEmpVO);
+	}
+
 }

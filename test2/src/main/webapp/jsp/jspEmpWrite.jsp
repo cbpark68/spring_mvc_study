@@ -34,21 +34,27 @@ function fn_delete(empno){
 }
 </script>
 <body>
-
 	<form:form method="post" action="jspEmpWriteSave.do"
 		commandName="jspEmpVO">
-		<c:set var="rogbn" value="" />
-		<form:hidden path="crudgbn" value="${jspEmpVO.crudgbn}" />
+		<form:hidden path="empno" value="${jspEmpVO.empno}"/>
+		<form:hidden path="crudgbn" value="${jspEmpVO.crudgbn}"/>
 		<table align="center">
 			<caption style="font-size: 20px; font-wdith: bold;">
-				<spring:message code="jsp.emp" />
+				<spring:message code="jsp.emp" /> 
 			</caption>
+			<tr><td class="input_td" colspan="5">mode : <c:out value="${jspEmpVO.crudgbn}"/></td></tr>
 			<tr>
 				<th width="20%"><label for="empno"><spring:message
 							code="jsp.emp.empno" /></label></th>
-				<td width="80%" class="input_td"><form:input path="empno"
-						value="${jspEmpVO.empno}" />
-					<form:errors path="empno" /></td>
+				<td width="80%" class="input_td">
+				<c:if test="${jspEmpVO.crudgbn == 'insert'}">
+					<form:input path="empno" value="${jspEmpVO.empno}" />
+				</c:if>
+				<c:if test="${jspEmpVO.crudgbn == 'update'}">
+					${jspEmpVO.empno}
+				</c:if>
+				<form:errors path="empno" />
+				</td>
 			</tr>
 			<tr>
 				<th><label for="ename"><spring:message

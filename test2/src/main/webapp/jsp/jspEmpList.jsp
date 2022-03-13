@@ -37,7 +37,7 @@
 		<c:forEach var="list" items="${result}">
 		<tr>
 			<td>${listno}</td>
-			<td><a href="jspEmpWrite.do?empno=${list.empno}">${list.ename}</a></td>
+			<td><a href="jspEmpWrite.do?crudgbn=update&empno=${list.empno}">${list.ename}</a></td>
 			<td>${list.job}</td>
 			<td>${list.hiredate}</td>
 			<td>${list.deptno}</td>
