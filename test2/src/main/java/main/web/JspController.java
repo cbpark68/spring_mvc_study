@@ -2,8 +2,6 @@ package main.web;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,6 +17,7 @@ import main.service.JspDeptService;
 import main.service.JspDeptVO;
 import main.service.JspEmpService;
 import main.service.JspEmpVO;
+import main.service.JspMemberVO;
 
 @Controller
 public class JspController {
@@ -147,5 +146,16 @@ public class JspController {
 		} catch(ParseException e) {
 			return false;
 		}
+	}
+
+	@RequestMapping("/jspIndex.do")
+	public String jspIndex() throws Exception{
+		return "jsp/jspIndex";
+	}
+	
+	@RequestMapping("/jspMemberWrite.do")
+	public String jspMemberWrite(JspMemberVO jspMemberVO,ModelMap model) throws Exception{
+		model.addAttribute("jspMemberVO",jspMemberVO);
+		return "jsp/jspMemberWrite";
 	}
 }
