@@ -32,19 +32,26 @@
 					<table border="1" width="600px" align="center">
 						<tr>
 							<th>회원번호</th>
-							<td class="input_td"><form:input path="member_no" value="${member_no}" /></td>
+							<td class="input_td"><form:input path="member_no"
+									value="${member_no}" />
+								<form:errors path="member_no" /></td>
 						</tr>
 						<tr>
 							<th>회원ID</th>
-							<td class="input_td"><form:input path="member_id" value="${member_id}" /></td>
+							<td class="input_td"><form:input path="member_id"
+									value="${member_id}" />
+								<form:errors path="member_id" /></td>
 						</tr>
 						<tr>
 							<th>이름</th>
-							<td class="input_td"><form:input path="member_name" value="${member_name}" /></td>
+							<td class="input_td"><form:input path="member_name"
+									value="${member_name}" />
+								<form:errors path="member_name" /></td>
 						</tr>
 						<tr>
 							<th>등급</th>
 							<td class="input_td"><form:select path="member_grade">
+									<form:errors path="member_grade" />
 									<form:option value="특별회원" />
 									<form:option value="우수회원" />
 									<form:option value="일반회원" />
@@ -52,17 +59,25 @@
 						</tr>
 						<tr>
 							<th>취미</th>
-							<td class="input_td">
-							<form:radiobutton path="member_hobby" value="독서" label="독서" />
-							<form:radiobutton path="member_hobby" value="운동" label="운동" />
-							<form:radiobutton path="member_hobby" value="영화" label="영화" />
+							<td class="input_td"><form:radiobutton path="member_hobby"
+									value="독서" label="독서" /> <form:radiobutton path="member_hobby"
+									value="운동" label="운동" /> <form:radiobutton path="member_hobby"
+									value="영화" label="영화" /> <form:errors path="member_hobby" />
 							</td>
 						</tr>
 						<tr>
 							<th>등록일자</th>
-							<td class="input_td"><form:input path="member_date" value="${member_date}" /></td>
+							<td class="input_td"><form:input path="member_date"
+									value="${member_date}" />
+								<form:errors path="member_date" /></td>
 						</tr>
 					</table>
+					<br/>
+					<div style="text-align: center; width: 100%">
+						<button type="submit">등록</button>
+						&nbsp&nbsp
+						<button type="button">조회</button>
+					</div>
 				</form:form>
 			</div>
 		</section>

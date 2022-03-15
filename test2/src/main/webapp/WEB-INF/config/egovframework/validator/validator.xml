@@ -67,6 +67,23 @@
 				<arg0 key="jsp.emp.deptno" />
 			</field>
 		</form>
+		<form name="jspMemberVO">
+			<field property="member_no" depends="required,integer">
+				<arg0 key="jsp.member.member_no" />
+			</field>
+			<field property="member_id" depends="required">
+				<arg0 key="jsp.member.member_id" />
+			</field>
+			<field property="member_name" depends="required">
+				<arg0 key="jsp.member.member_name" />
+			</field>
+			<field property="member_grade" depends="required">
+				<arg0 key="jsp.member.member_grade" />
+			</field>
+			<field property="member_date" depends="required">
+				<arg0 key="jsp.member.member_date" />
+			</field>
+		</form>
 	</formset>
 
 </form-validation>

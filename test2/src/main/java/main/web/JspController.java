@@ -1,7 +1,5 @@
 package main.web;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,6 +29,9 @@ public class JspController {
 
 	@Resource(name = "jspEmpService")
 	private JspEmpService jspEmpService;
+
+	@Resource(name = "jspUtil")
+	private JspUtil jspUtil;
 
 	@RequestMapping("/jspDeptList.do")
 	public String jspDeptList(ModelMap model) throws Exception {
@@ -101,12 +102,12 @@ public class JspController {
 		String hdate = jspEmpVO.getHiredate();
 		beanValidator.validate(jspEmpVO, bindingResult);
 		if (cnt2 == 0) errors.rejectValue("deptno", "required", "등록되지 않은 부서번호입니다.");
-		if (! formatCheck(hdate)) errors.rejectValue("hiredate", "required", "날짜형식이 맞지 않습니다.");
+		if (! jspUtil.CheckDate(hdate)) errors.rejectValue("hiredate", "required", "날짜형식이 맞지 않습니다.");
 		if (bindingResult.hasErrors() ||
 				(crudgbn.contentEquals("insert") && cnt > 0 ) ||
 				(crudgbn.contentEquals("update") && cnt == 0) ||
 				cnt2 == 0 ||
-				! formatCheck(hdate)) {
+				! jspUtil.CheckDate(hdate)) {
 			model.addAttribute("jspEmpVO", jspEmpVO);
 			return "jsp/jspEmpWrite";
 		}
@@ -137,16 +138,6 @@ public class JspController {
 		cnt = jspEmpService.jspEmpDelete(jspEmpVO);
 		return "redirect:jspEmpList.do";
 	}
-	public static boolean formatCheck(String date) {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			sdf.setLenient(false);
-			sdf.parse(date);
-			return true;
-		} catch(ParseException e) {
-			return false;
-		}
-	}
 
 	@RequestMapping("/jspIndex.do")
 	public String jspIndex() throws Exception{
@@ -157,5 +148,20 @@ public class JspController {
 	public String jspMemberWrite(JspMemberVO jspMemberVO,ModelMap model) throws Exception{
 		model.addAttribute("jspMemberVO",jspMemberVO);
 		return "jsp/jspMemberWrite";
+	}
+	
+	@RequestMapping("/jspMemberWriteSave.do")
+	public String jspMemberWriteSave(JspMemberVO jspMemberVO,ModelMap model, BindingResult bindingResult, Errors errors) throws Exception{
+		beanValidator.validate(jspMemberVO, bindingResult);
+		String dateFormat = "true";
+		if (! jspUtil.CheckDate(jspMemberVO.getMember_date())) {
+			errors.rejectValue("member_date", "required", "날짜형식이 맞지 않습니다.");
+			dateFormat = "false";
+		}
+		if (bindingResult.hasErrors() || dateFormat.contentEquals("false")) {
+			model.addAttribute("jspMemberVO", jspMemberVO);
+			return "jsp/jspMemberWrite";
+		}
+		return "redirect:jspIndex.do";
 	}
 }
