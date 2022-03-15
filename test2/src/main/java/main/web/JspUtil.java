@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.stereotype.Component;
 
-public class JspUtil {
+public final class JspUtil {
 
 	public static boolean CheckDate(String date) {
 		try {
