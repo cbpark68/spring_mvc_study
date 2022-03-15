@@ -1,5 +1,6 @@
 package main.web;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import main.service.JspDeptService;
 import main.service.JspDeptVO;
 import main.service.JspEmpService;
 import main.service.JspEmpVO;
+import main.service.JspMemberService;
 import main.service.JspMemberVO;
 
 @Controller
@@ -29,6 +31,9 @@ public class JspController {
 
 	@Resource(name = "jspEmpService")
 	private JspEmpService jspEmpService;
+	
+	@Resource(name = "jspMemberService")
+	private JspMemberService jspMemberService;
 
 	@RequestMapping("/jspDeptList.do")
 	public String jspDeptList(ModelMap model) throws Exception {
@@ -143,6 +148,15 @@ public class JspController {
 	
 	@RequestMapping("/jspMemberWrite.do")
 	public String jspMemberWrite(JspMemberVO jspMemberVO,ModelMap model) throws Exception{
+		/*if(crudgbn.contentEquals("update")) {
+			jspMemberVO = jspMemberService.jspMemberInfo(jspMemberVO);
+		}else {*/
+			jspMemberVO.setCrudgbn("insert");
+			jspMemberVO.setMember_no(""+jspMemberService.jspMemberGetNo());
+			Calendar cal = Calendar.getInstance();
+			String rdate = cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE);
+			jspMemberVO.setMember_date(rdate);
+		//}
 		model.addAttribute("jspMemberVO",jspMemberVO);
 		return "jsp/jspMemberWrite";
 	}

@@ -23,30 +23,28 @@
 			<%@ include file="jspTopMenu.jsp"%>
 		</nav>
 		<section>
-			<div style="background-color: pink; text-align: center;">
-				<h2>친구등록</h2>
-			</div>
-			<div>
-				<form:form method="post" action="jspMemberWriteSave.do"
-					commandName="jspMemberVO">
+			<form:form method="post" action="jspMemberWriteSave.do"
+				commandName="jspMemberVO">
+				<div style="background-color: pink; text-align: center;">
+					<h2>친구등록 (${jspMemberVO.crudgbn})</h2>
+				</div>
+				<div>
+					<form:hidden path="crudgbn" value="${jspMemberVO.crudgbn}" />
 					<table border="1" width="600px" align="center">
 						<tr>
 							<th>회원번호</th>
 							<td class="input_td"><form:input path="member_no"
-									value="${member_no}" />
-								<form:errors path="member_no" /></td>
+									value="${jspMemberVO.member_no}" /> <form:errors path="member_no" /></td>
 						</tr>
 						<tr>
 							<th>회원ID</th>
 							<td class="input_td"><form:input path="member_id"
-									value="${member_id}" />
-								<form:errors path="member_id" /></td>
+									value="${jspMemberVO.member_id}" /> <form:errors path="member_id" /></td>
 						</tr>
 						<tr>
 							<th>이름</th>
 							<td class="input_td"><form:input path="member_name"
-									value="${member_name}" />
-								<form:errors path="member_name" /></td>
+									value="${jspMemberVO.member_name}" /> <form:errors path="member_name" /></td>
 						</tr>
 						<tr>
 							<th>등급</th>
@@ -68,18 +66,17 @@
 						<tr>
 							<th>등록일자</th>
 							<td class="input_td"><form:input path="member_date"
-									value="${member_date}" />
-								<form:errors path="member_date" /></td>
+									value="${jspMemberVO.member_date}" /> <form:errors path="member_date" /></td>
 						</tr>
 					</table>
-					<br/>
+					<br />
 					<div style="text-align: center; width: 100%">
 						<button type="submit">등록</button>
 						&nbsp&nbsp
 						<button type="button">조회</button>
 					</div>
-				</form:form>
-			</div>
+				</div>
+			</form:form>
 		</section>
 		<footer> 쿠팡주식회사 Copyright@2022 </footer>
 	</div>

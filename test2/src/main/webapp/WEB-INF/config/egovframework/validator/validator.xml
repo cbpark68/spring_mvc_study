@@ -68,8 +68,18 @@
 			</field>
 		</form>
 		<form name="jspMemberVO">
-			<field property="member_no" depends="required,integer">
+			<field property="member_no" depends="required,integer,intRange">
 				<arg0 key="jsp.member.member_no" />
+				<arg1 key="1000" />
+				<arg2 key="999999" />
+				<var>
+					<var-name>min</var-name>
+					<var-value>1000</var-value>
+				</var>
+				<var>
+					<var-name>max</var-name>
+					<var-value>999999</var-value>
+				</var>
 			</field>
 			<field property="member_id" depends="required">
 				<arg0 key="jsp.member.member_id" />

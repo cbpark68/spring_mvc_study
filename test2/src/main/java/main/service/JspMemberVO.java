@@ -1,12 +1,20 @@
 package main.service;
 
 public class JspMemberVO {
+	private String crudgbn;
 	private String member_no;
 	private String member_id;
 	private String member_name;
 	private String member_grade;
 	private String member_hobby;
 	private String member_date;
+
+	public String getCrudgbn() {
+		return crudgbn;
+	}
+	public void setCrudgbn(String crudgbn) {
+		this.crudgbn = crudgbn;
+	}
 	public String getMember_no() {
 		return member_no;
 	}
@@ -43,13 +51,12 @@ public class JspMemberVO {
 	public void setMember_date(String member_date) {
 		this.member_date = member_date;
 	}
+
 	@Override
 	public String toString() {
-		return "JspMemberVO [member_no=" + member_no + ", member_id=" + member_id + ", member_name=" + member_name
-				+ ", member_grade=" + member_grade + ", member_hobby=" + member_hobby + ", member_date=" + member_date
-				+ "]";
+		return "JspMemberVO [crudgbn=" + crudgbn + ", member_no=" + member_no + ", member_id=" + member_id
+				+ ", member_name=" + member_name + ", member_grade=" + member_grade + ", member_hobby=" + member_hobby
+				+ ", member_date=" + member_date + "]";
 	}
-
-	
 	
 }
