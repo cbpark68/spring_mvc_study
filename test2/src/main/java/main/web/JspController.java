@@ -30,9 +30,6 @@ public class JspController {
 	@Resource(name = "jspEmpService")
 	private JspEmpService jspEmpService;
 
-	@Resource(name = "jspUtil")
-	private JspUtil jspUtil;
-
 	@RequestMapping("/jspDeptList.do")
 	public String jspDeptList(ModelMap model) throws Exception {
 		List<?> list = jspDeptService.jspDeptList();
@@ -102,12 +99,12 @@ public class JspController {
 		String hdate = jspEmpVO.getHiredate();
 		beanValidator.validate(jspEmpVO, bindingResult);
 		if (cnt2 == 0) errors.rejectValue("deptno", "required", "등록되지 않은 부서번호입니다.");
-		if (! jspUtil.CheckDate(hdate)) errors.rejectValue("hiredate", "required", "날짜형식이 맞지 않습니다.");
+		if (! JspUtil.CheckDate(hdate)) errors.rejectValue("hiredate", "required", "날짜형식이 맞지 않습니다.");
 		if (bindingResult.hasErrors() ||
 				(crudgbn.contentEquals("insert") && cnt > 0 ) ||
 				(crudgbn.contentEquals("update") && cnt == 0) ||
 				cnt2 == 0 ||
-				! jspUtil.CheckDate(hdate)) {
+				! JspUtil.CheckDate(hdate)) {
 			model.addAttribute("jspEmpVO", jspEmpVO);
 			return "jsp/jspEmpWrite";
 		}
@@ -154,7 +151,7 @@ public class JspController {
 	public String jspMemberWriteSave(JspMemberVO jspMemberVO,ModelMap model, BindingResult bindingResult, Errors errors) throws Exception{
 		beanValidator.validate(jspMemberVO, bindingResult);
 		String dateFormat = "true";
-		if (! jspUtil.CheckDate(jspMemberVO.getMember_date())) {
+		if (! JspUtil.CheckDate(jspMemberVO.getMember_date())) {
 			errors.rejectValue("member_date", "required", "날짜형식이 맞지 않습니다.");
 			dateFormat = "false";
 		}
