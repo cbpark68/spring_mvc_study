@@ -9,4 +9,5 @@ public interface JspMemberService {
 	public int jspMemberDelete(JspMemberVO jspMemberVO);
 	public List<?> jspMemberList(JspMemberVO jspMemberVO);
 	public JspMemberVO jspMemberInfo(JspMemberVO jspMemberVO);
+	public int jspMemberNoCheck(JspMemberVO jspMemberVO);
 }

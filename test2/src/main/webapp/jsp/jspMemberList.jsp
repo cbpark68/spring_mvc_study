@@ -38,7 +38,7 @@
 					</tr>	
 					<c:forEach var="list" items="${list}">
 					<tr>
- 						<td><a href="jspMemberWrite.do?crudgbn=update&memberNo=${list.memberNo}" style="color:blue" >${list.memberNo}</a></td>
+ 						<td><a href="jspMemberWrite.do?crudgbn=update&member_no=${list.memberNo}" style="color:blue" >${list.memberNo}</a></td>
 						<td>${list.memberId}</td>
 						<td>${list.memberName}</td>
 						<td>${list.memberGrade}</td>

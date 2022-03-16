@@ -51,5 +51,12 @@ public class JspMemberVO {
 	public void setMember_date(String member_date) {
 		this.member_date = member_date;
 	}
+	@Override
+	public String toString() {
+		return "JspMemberVO [crudgbn=" + crudgbn + ", member_no=" + member_no + ", member_id=" + member_id
+				+ ", member_name=" + member_name + ", member_grade=" + member_grade + ", member_hobby=" + member_hobby
+				+ ", member_date=" + member_date + "]";
+	}
 
+	
 }

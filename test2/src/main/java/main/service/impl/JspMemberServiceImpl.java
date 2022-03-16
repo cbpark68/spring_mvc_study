@@ -46,4 +46,9 @@ public class JspMemberServiceImpl extends EgovAbstractServiceImpl implements Jsp
 		return  jspMemberDAO.jspMemberInfo(jspMemberVO);
 	}
 
+	@Override
+	public int jspMemberNoCheck(JspMemberVO jspMemberVO) {
+		return jspMemberDAO.jspMemberNoCheck(jspMemberVO);
+	}
+
 }

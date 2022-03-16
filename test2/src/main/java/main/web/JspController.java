@@ -148,22 +148,32 @@ public class JspController {
 	
 	@RequestMapping("/jspMemberWrite.do")
 	public String jspMemberWrite(JspMemberVO jspMemberVO,ModelMap model) throws Exception{
-		/*if(crudgbn.contentEquals("update")) {
-			jspMemberVO = jspMemberService.jspMemberInfo(jspMemberVO);
-		}else {*/
+		System.out.println(jspMemberVO.toString());
+		String crudgbn = jspMemberVO.getCrudgbn();
+		if(crudgbn == null || crudgbn.contentEquals("insert")) {
 			jspMemberVO.setCrudgbn("insert");
 			jspMemberVO.setMember_no(""+jspMemberService.jspMemberGetNo());
 			Calendar cal = Calendar.getInstance();
 			String rdate = cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE);
 			jspMemberVO.setMember_date(rdate);
-		//}
+		}else {
+			jspMemberVO = jspMemberService.jspMemberInfo(jspMemberVO);
+			jspMemberVO.setCrudgbn("update");
+		}
 		model.addAttribute("jspMemberVO",jspMemberVO);
 		return "jsp/jspMemberWrite";
 	}
 	
 	@RequestMapping("/jspMemberWriteSave.do")
 	public String jspMemberWriteSave(JspMemberVO jspMemberVO,ModelMap model, BindingResult bindingResult, Errors errors) throws Exception{
+		System.out.println(jspMemberVO.toString());
 		String crudgbn = jspMemberVO.getCrudgbn();
+		int	cnt = jspMemberService.jspMemberNoCheck(jspMemberVO);
+		if (crudgbn.contentEquals("insert")) {
+			if (cnt > 0) errors.rejectValue("member_no", "duplicate", "이미 등록된 회원번호입니다.");
+		}else {
+			if (cnt == 0) errors.rejectValue("member_no", "required", "등록되지 않은 회원번호입니다.");
+		}
 		beanValidator.validate(jspMemberVO, bindingResult);
 		String dateFormat = "true";
 		if (! JspUtil.CheckDate(jspMemberVO.getMember_date())) {
@@ -176,6 +186,8 @@ public class JspController {
 		}
 		if(crudgbn.contentEquals("insert")) {
 			String result = jspMemberService.jspMemberInsert(jspMemberVO);
+		}else {
+			int cnt2 = jspMemberService.jspMemberUpdate(jspMemberVO);
 		}
 		return "redirect:jspIndex.do";
 	}

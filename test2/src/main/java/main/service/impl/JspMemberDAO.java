@@ -34,4 +34,8 @@ public class JspMemberDAO extends EgovAbstractDAOMysql{
 		return (String) insert("jspMemberInsert",jspMemberVO);
 	}
 
+	public int jspMemberNoCheck(JspMemberVO jspMemberVO) {
+		return (int) select("jspMemberNoCheck",jspMemberVO);
+	}
+
 }

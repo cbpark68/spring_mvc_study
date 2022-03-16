@@ -30,11 +30,19 @@
 				</div>
 				<div>
 					<form:hidden path="crudgbn" value="${jspMemberVO.crudgbn}" />
+					<c:set var="crudgbn" value="${jspMemberVO.crudgbn}" />
 					<table border="1" width="600px" align="center">
 						<tr>
 							<th>회원번호</th>
-							<td class="input_td"><form:input path="member_no"
-									value="${jspMemberVO.member_no}" /> <form:errors path="member_no" /></td>
+							<td class="input_td">
+							<c:if test="${crudgbn == 'insert'}">
+								<form:input path="member_no" value="${jspMemberVO.member_no}" /> 
+							</c:if>							
+							<c:if test="${crudgbn == 'update'}">
+								<form:hidden path="member_no" value="${jspMemberVO.member_no}" /> 
+								${jspMemberVO.member_no}
+							</c:if>
+							<form:errors path="member_no" /></td>
 						</tr>
 						<tr>
 							<th>회원ID</th>

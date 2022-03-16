@@ -99,14 +99,6 @@
 	order by member_no desc
 	</select>
 	
-<!-- 	<select id="jspMemberInfo" resultClass="JspMemberVO">
-	select
-			member_no, member_id, member_name, member_grade, member_hobby, member_date	
-	from member_tbl		
-	where member_no = #member_no#
-	</select>"
-	
-	
 	<update id="jspMemberUpdate">
 		update member_tbl set
 		member_id     = #member_id#,
@@ -114,15 +106,24 @@
 		member_grade  = #member_grade#,
 		member_hobby  = #member_hobby#,
 		member_date	  = #member_date#
-		wehre
+		where
 		member_no     = #member_no#
 	</update>
 	
+	<select id="jspMemberInfo" resultClass="jspMemberVO">
+	select member_no, member_id, member_name, member_grade, member_hobby, member_date
+	from member_tbl
+	where member_no = #member_no#
+	</select>
+	
 	<delete id="jspMemberDelete">
 	delete from member_tbl
-		wehre
+		where
 		member_no     = #member_no#
 	</delete>
- -->
+	
+	<select id="jspMemberNoCheck" resultClass="java.lang.Integer">
+		select count(*) cnt from member_tbl where member_no = #member_no#
+	</select>
 </sqlMap>
 
