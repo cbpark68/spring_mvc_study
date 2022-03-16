@@ -81,5 +81,48 @@
 	<select id="jspMemberGetNo" resultClass="java.lang.Integer">
 		select ifnull(max(member_no),1000)+1 member_no from member_tbl
 	</select>
+	
+	<insert id="jspMemberInsert">
+		insert into member_tbl ( member_no, member_id, member_name, member_grade, member_hobby, member_date)
+		values( #member_no#, #member_id#, #member_name#, #member_grade#, #member_hobby#, #member_date#)
+	</insert>
+
+	<select id="jspMemberList" resultClass="egovMap">
+	select
+		member_no,
+		member_id,
+		member_name,
+		if(member_grade='A','특별회원',if(member_grade='B','우수회원','일반회원')) member_grade ,
+		member_hobby,
+		date_format(member_date,'%Y.%m.%d') member_date
+	from member_tbl
+	order by member_no desc
+	</select>
+	
+<!-- 	<select id="jspMemberInfo" resultClass="JspMemberVO">
+	select
+			member_no, member_id, member_name, member_grade, member_hobby, member_date	
+	from member_tbl		
+	where member_no = #member_no#
+	</select>"
+	
+	
+	<update id="jspMemberUpdate">
+		update member_tbl set
+		member_id     = #member_id#,
+		member_name   = #member_name#,
+		member_grade  = #member_grade#,
+		member_hobby  = #member_hobby#,
+		member_date	  = #member_date#
+		wehre
+		member_no     = #member_no#
+	</update>
+	
+	<delete id="jspMemberDelete">
+	delete from member_tbl
+		wehre
+		member_no     = #member_no#
+	</delete>
+ -->
 </sqlMap>
 

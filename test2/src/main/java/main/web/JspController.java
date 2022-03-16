@@ -163,6 +163,7 @@ public class JspController {
 	
 	@RequestMapping("/jspMemberWriteSave.do")
 	public String jspMemberWriteSave(JspMemberVO jspMemberVO,ModelMap model, BindingResult bindingResult, Errors errors) throws Exception{
+		String crudgbn = jspMemberVO.getCrudgbn();
 		beanValidator.validate(jspMemberVO, bindingResult);
 		String dateFormat = "true";
 		if (! JspUtil.CheckDate(jspMemberVO.getMember_date())) {
@@ -173,6 +174,16 @@ public class JspController {
 			model.addAttribute("jspMemberVO", jspMemberVO);
 			return "jsp/jspMemberWrite";
 		}
+		if(crudgbn.contentEquals("insert")) {
+			String result = jspMemberService.jspMemberInsert(jspMemberVO);
+		}
 		return "redirect:jspIndex.do";
+	}
+	
+	@RequestMapping("/jspMemberList.do")
+	public String jspMemberList(JspMemberVO jspMemberVO, ModelMap model) throws Exception{
+		List<?> list = jspMemberService.jspMemberList(jspMemberVO);
+		model.addAttribute("list",list);
+		return "jsp/jspMemberList";
 	}
 }

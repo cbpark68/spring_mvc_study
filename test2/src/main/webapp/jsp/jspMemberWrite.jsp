@@ -50,17 +50,18 @@
 							<th>등급</th>
 							<td class="input_td"><form:select path="member_grade">
 									<form:errors path="member_grade" />
-									<form:option value="특별회원" />
-									<form:option value="우수회원" />
-									<form:option value="일반회원" />
+									<form:option value="A" label="특별회원" />
+									<form:option value="B" label="우수회원" />
+									<form:option value="C" label="일반회원" />
 								</form:select></td>
 						</tr>
 						<tr>
 							<th>취미</th>
-							<td class="input_td"><form:radiobutton path="member_hobby"
-									value="독서" label="독서" /> <form:radiobutton path="member_hobby"
-									value="운동" label="운동" /> <form:radiobutton path="member_hobby"
-									value="영화" label="영화" /> <form:errors path="member_hobby" />
+							<td class="input_td">
+							<form:checkbox path="member_hobby" value="독서" label="독서" />
+							<form:checkbox path="member_hobby" value="운동" label="운동" />
+							<form:checkbox path="member_hobby" value="영화" label="영화" />
+							<form:errors path="member_hobby" />
 							</td>
 						</tr>
 						<tr>

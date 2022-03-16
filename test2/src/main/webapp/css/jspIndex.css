@@ -52,3 +52,7 @@ td{
 .input_td{
 	text-align:left;
 }
+.alink {
+	color:#000000;
+	text-decoration:none;
+}

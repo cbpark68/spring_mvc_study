@@ -52,11 +52,4 @@ public class JspMemberVO {
 		this.member_date = member_date;
 	}
 
-	@Override
-	public String toString() {
-		return "JspMemberVO [crudgbn=" + crudgbn + ", member_no=" + member_no + ", member_id=" + member_id
-				+ ", member_name=" + member_name + ", member_grade=" + member_grade + ", member_hobby=" + member_hobby
-				+ ", member_date=" + member_date + "]";
-	}
-	
 }
