@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
+import main.service.JspBoardVO;
 import main.service.JspDeptService;
 import main.service.JspDeptVO;
 import main.service.JspEmpService;
@@ -209,5 +210,11 @@ public class JspController {
 	@RequestMapping("/jspMain.do")
 	public String jspMain() throws Exception{
 		return "jsp/jspMain";
+	}
+
+	@RequestMapping("/jspBoardWrite.do")
+	public String jspBoardWrite(JspBoardVO jspBoardVO,ModelMap model) throws Exception{
+		model.addAttribute("jspBoardVO",jspBoardVO);
+		return "jsp/jspBoardWrite";
 	}
 }

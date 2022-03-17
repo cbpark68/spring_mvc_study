@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <title>jspMain</title>
 </head>
-<link type="text/css" rel="stylesheet" href="<c:url value='/css/jspMain2.css'/>" />
+<link type="text/css" rel="stylesheet" href="<c:url value='/css/jspMain.css'/>" />
 <body>
 	<div id="wapper">
 		<header> <%@ include file="jspMainHeader.jsp"%> </header>

@@ -7,6 +7,6 @@
 <title></title>
 </head>
 <body>
-<h3>표준 레이아웃</h3>
+<h3>JSP를 이용한 게시판</h3>
 </body>
 </html>

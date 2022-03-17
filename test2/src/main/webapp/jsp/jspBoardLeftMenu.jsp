@@ -7,6 +7,12 @@
 <title></title>
 </head>
 <body>
-<h3>표준 레이아웃</h3>
+	<ul>
+		<li>매뉴1</li>
+		<li>매뉴2</li>
+		<li>매뉴3</li>
+		<li>매뉴4</li>
+		<li>매뉴5</li>
+	</ul>
 </body>
 </html>

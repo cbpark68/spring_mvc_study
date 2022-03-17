@@ -7,6 +7,6 @@
 <title></title>
 </head>
 <body>
-<h3>표준 레이아웃</h3>
+<h5>Coupang Copyright@2022</h5>
 </body>
 </html>
