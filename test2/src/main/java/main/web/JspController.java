@@ -198,4 +198,12 @@ public class JspController {
 		model.addAttribute("list",list);
 		return "jsp/jspMemberList";
 	}
+	
+	@RequestMapping("/jspFriendList.do")
+	public String jspFriendList(JspMemberVO jspMemberVO, ModelMap model) throws Exception{
+		List<?> list = jspMemberService.jspFriendList(jspMemberVO);
+		model.addAttribute("list",list);
+		System.out.println("friend="+list);
+		return "jsp/jspFriendList";
+	}
 }

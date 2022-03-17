@@ -125,5 +125,11 @@
 	<select id="jspMemberNoCheck" resultClass="java.lang.Integer">
 		select count(*) cnt from member_tbl where member_no = #member_no#
 	</select>
+	
+	<select id="jspFriendList" resultClass="egovMap">
+		select a.req_member_no member_no, b.member_name, a.req_date member_date
+		from friend_tbl a
+		left join member_tbl b on b.member_no = a.req_member_no
+	</select>
 </sqlMap>
 

@@ -38,4 +38,8 @@ public class JspMemberDAO extends EgovAbstractDAOMysql{
 		return (int) select("jspMemberNoCheck",jspMemberVO);
 	}
 
+	public List<?> jspFriendList(JspMemberVO jspMemberVO) {
+		return list("jspFriendList", jspMemberVO);
+	}
+
 }

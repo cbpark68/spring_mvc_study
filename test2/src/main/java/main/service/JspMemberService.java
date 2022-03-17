@@ -10,4 +10,5 @@ public interface JspMemberService {
 	public List<?> jspMemberList(JspMemberVO jspMemberVO);
 	public JspMemberVO jspMemberInfo(JspMemberVO jspMemberVO);
 	public int jspMemberNoCheck(JspMemberVO jspMemberVO);
+	public List<?> jspFriendList(JspMemberVO jspMemberVO);
 }
