@@ -19,7 +19,7 @@
 <h1>친구관리</h1>
 </header>
 <nav>
-<%@ include file="jspTopMenu.jsp" %>
+<%@ include file="jspIndexTopMenu.jsp" %>
 </nav>
 <section>
 <div style="background-color:pink;text-align:center;"><h2>친구관리 프로그램</h2></div>

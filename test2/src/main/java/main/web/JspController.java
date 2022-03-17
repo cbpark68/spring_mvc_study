@@ -203,7 +203,11 @@ public class JspController {
 	public String jspFriendList(JspMemberVO jspMemberVO, ModelMap model) throws Exception{
 		List<?> list = jspMemberService.jspFriendList(jspMemberVO);
 		model.addAttribute("list",list);
-		System.out.println("friend="+list);
 		return "jsp/jspFriendList";
+	}
+	
+	@RequestMapping("/jspMain.do")
+	public String jspMain() throws Exception{
+		return "jsp/jspMain";
 	}
 }
