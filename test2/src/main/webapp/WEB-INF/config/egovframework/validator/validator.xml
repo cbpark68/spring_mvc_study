@@ -94,6 +94,43 @@
 				<arg0 key="jsp.member.member_date" />
 			</field>
 		</form>
+		<form name="jspBoardVO">
+			<field property="title" depends="required,maxlength">
+				<arg0 key="jsp.board.title" />
+				<arg1 key="30" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>30</var-value>
+				</var>
+			</field>
+			<field property="pass" depends="required,maxlength">
+				<arg0 key="jsp.board.pass" />
+				<arg1 key="20" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="name" depends="required,maxlength">
+				<arg0 key="jsp.board.name" />
+				<arg1 key="20" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="content" depends="required,maxlength">
+				<arg0 key="jsp.board.content" />
+				<arg1 key="2000" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2000</var-value>
+				</var>
+			</field>
+<!-- 			<field property="rdate" depends="required">
+				<arg0 key="jsp.board.rdate"/>
+			</field>
+ -->		</form>
 	</formset>
 
 </form-validation>

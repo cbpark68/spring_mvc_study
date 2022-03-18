@@ -17,50 +17,50 @@
 <body>
 	<div id="wapper">
 		<header>
-			<%@ include file="jspBoardHeader.jsp"%>
+			<c:import url="jspBoardHeader.jsp"/>
 		</header>
 		<nav>
-			<%@ include file="jspBoardTopMenu.jsp"%>
+			<c:import url="jspBoardTopMenu.jsp"/>
 		</nav>
 		<section>
 			<form:form method="post" action="jspBoardWriteSave.do"
 				commandName="jspBoardVO">
-				<table style="width:600px;">
-					<caption>게시물 작성</caption>
-					<colgroup>
-						<col width="30%" />
-						<col width="*" />
-					</colgroup>
+				<table style="width:100%;text-align:center;">
+					<caption>게시물작성</caption>
 					<form:hidden path="unq" value="${jspBoardVO.unq}" />
 					<tr>
-						<th>제목</th>
-						<td style="text-align:left;"><form:input path="title" />
+						<th style="width:15%;">제목</th>
+						<td style="width:*;text-align:left;"><form:input path="title" style="width:300px;" />
 							<form:errors path="title" /></td>
 					</tr>
 					<tr>
 						<th>암호</th>
-						<td style="text-align:left;"><form:input path="pass" />
+						<td style="text-align:left;"><form:password path="pass" style="width:100px;" />
 							<form:errors path="pass" /></td>
 					</tr>
 					<tr>
 						<th>이름</th>
-						<td style="text-align:left;"><form:input path="name" />
+						<td style="text-align:left;"><form:input path="name" style="width:100px;" />
 							<form:errors path="name" /></td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td style="text-align:left;"><form:textarea path="content"
-								style="margin-top:3px;width:500px;height:100px;" />
+								style="margin-top:3px;width:400px;height:100px;" /><br/>
 							<form:errors path="content" /></td>
 					</tr>
 				</table>
+				<div style="text-align:center;margin-top:10px;float:bottom;">
+					<button type="submit">저장</button>	
+					<button type="reset">취소</button>
+				</div>
 			</form:form>
 		</section>
 		<aside>
-			<%@ include file="jspBoardLeftMenu.jsp"%>
+			<c:import url="jspBoardLeftMenu.jsp"/>
 		</aside>
 		<footer>
-			<%@ include file="jspBoardFooter.jsp"%>
+			<c:import url="jspBoardFooter.jsp"/>
 		</footer>
 	</div>
 </body>

@@ -7,6 +7,7 @@
 	<typeAlias alias="jspDeptVO" type="main.service.JspDeptVO"/>
 	<typeAlias alias="jspEmpVO" type="main.service.JspEmpVO"/>
 	<typeAlias alias="jspMemberVO" type="main.service.JspMemberVO"/>
+	<typeAlias alias="jspBoardVO" type="main.service.JspBoardVO"/>
 
 	<select id="jspDeptList" resultClass="egovMap">
 		select deptno,dname,loc from dept order by deptno	
@@ -131,5 +132,10 @@
 		from friend_tbl a
 		left join member_tbl b on b.member_no = a.req_member_no
 	</select>
+	
+	<insert id="jspBoardInsert">
+		insert into board (title,pass,name,content)	
+		values (#title#,#pass#,#name#,#content#)
+	</insert>
 </sqlMap>
 

@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
+import main.service.JspBoardService;
 import main.service.JspBoardVO;
 import main.service.JspDeptService;
 import main.service.JspDeptVO;
@@ -32,9 +33,12 @@ public class JspController {
 
 	@Resource(name = "jspEmpService")
 	private JspEmpService jspEmpService;
-	
+
 	@Resource(name = "jspMemberService")
 	private JspMemberService jspMemberService;
+
+	@Resource(name = "jspBoardService")
+	private JspBoardService jspBoardService;
 
 	@RequestMapping("/jspDeptList.do")
 	public String jspDeptList(ModelMap model) throws Exception {
@@ -72,20 +76,20 @@ public class JspController {
 	}
 
 	@RequestMapping("/jspEmpWrite.do")
-	public String jspEmpWrite(JspEmpVO jspEmpVO,ModelMap model) throws Exception {
+	public String jspEmpWrite(JspEmpVO jspEmpVO, ModelMap model) throws Exception {
 		String crudgbn = jspEmpVO.getCrudgbn();
 		int cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
-		if(crudgbn == null || crudgbn.contentEquals("insert") || cnt == 0) {
+		if (crudgbn == null || crudgbn.contentEquals("insert") || cnt == 0) {
 			jspEmpVO.setCrudgbn("insert");
 			int empno = jspEmpService.jspEmpGetEmpno();
-			jspEmpVO.setEmpno(""+empno);
-		}else {
+			jspEmpVO.setEmpno("" + empno);
+		} else {
 			jspEmpVO = jspEmpService.jspEmpInfo(jspEmpVO);
 			jspEmpVO.setCrudgbn("update");
 		}
 		List<?> deptList = jspDeptService.jspDeptList();
-		model.addAttribute("jspEmpVO",jspEmpVO);
-		model.addAttribute("deptList",deptList);
+		model.addAttribute("jspEmpVO", jspEmpVO);
+		model.addAttribute("deptList", deptList);
 		return "jsp/jspEmpWrite";
 	}
 
@@ -93,47 +97,48 @@ public class JspController {
 	public String jspEmpWriteSave(JspEmpVO jspEmpVO, BindingResult bindingResult, ModelMap model, Errors errors)
 			throws Exception {
 		List<?> deptList = jspDeptService.jspDeptList();
-		model.addAttribute("deptList",deptList);
-		int	cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
+		model.addAttribute("deptList", deptList);
+		int cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
 		String crudgbn = jspEmpVO.getCrudgbn();
 		if (crudgbn.contentEquals("insert")) {
-			if (cnt > 0) errors.rejectValue("empno", "duplicate", "이미 등록된 사원번호입니다.");
-		}else {
-			if (cnt == 0) errors.rejectValue("empno", "required", "등록되지 않은 사원번호입니다.");
+			if (cnt > 0)
+				errors.rejectValue("empno", "duplicate", "이미 등록된 사원번호입니다.");
+		} else {
+			if (cnt == 0)
+				errors.rejectValue("empno", "required", "등록되지 않은 사원번호입니다.");
 		}
 		int cnt2 = jspEmpService.jspEmpDeptnoCheck(jspEmpVO);
 		String hdate = jspEmpVO.getHiredate();
 		beanValidator.validate(jspEmpVO, bindingResult);
-		if (cnt2 == 0) errors.rejectValue("deptno", "required", "등록되지 않은 부서번호입니다.");
-		if (! JspUtil.CheckDate(hdate)) errors.rejectValue("hiredate", "required", "날짜형식이 맞지 않습니다.");
-		if (bindingResult.hasErrors() ||
-				(crudgbn.contentEquals("insert") && cnt > 0 ) ||
-				(crudgbn.contentEquals("update") && cnt == 0) ||
-				cnt2 == 0 ||
-				! JspUtil.CheckDate(hdate)) {
+		if (cnt2 == 0)
+			errors.rejectValue("deptno", "required", "등록되지 않은 부서번호입니다.");
+		if (!JspUtil.CheckDate(hdate))
+			errors.rejectValue("hiredate", "required", "날짜형식이 맞지 않습니다.");
+		if (bindingResult.hasErrors() || (crudgbn.contentEquals("insert") && cnt > 0)
+				|| (crudgbn.contentEquals("update") && cnt == 0) || cnt2 == 0 || !JspUtil.CheckDate(hdate)) {
 			model.addAttribute("jspEmpVO", jspEmpVO);
 			return "jsp/jspEmpWrite";
 		}
-		if(crudgbn.contentEquals("insert")) {
+		if (crudgbn.contentEquals("insert")) {
 			String result1 = jspEmpService.jspEmpInsert(jspEmpVO);
-		}else {
+		} else {
 			int result2 = jspEmpService.jspEmpUpdate(jspEmpVO);
 		}
 		return "redirect:jspEmpList.do";
 	}
 
 	@RequestMapping("/jspEmpList.do")
-	public String jspEmpList(JspEmpVO pvo,ModelMap model) throws Exception{
+	public String jspEmpList(JspEmpVO pvo, ModelMap model) throws Exception {
 		List<?> list = jspEmpService.jspEmpList(pvo);
 		int cnt = jspEmpService.jspEmpCount();
-		model.addAttribute("result",list);
-		model.addAttribute("totcnt",cnt);
+		model.addAttribute("result", list);
+		model.addAttribute("totcnt", cnt);
 		return "jsp/jspEmpList";
 	}
 
 	@RequestMapping("/jspEmpDelete.do")
-	public String jspEmpDelete(JspEmpVO jspEmpVO, Errors errors) throws Exception{
-		int	cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
+	public String jspEmpDelete(JspEmpVO jspEmpVO, Errors errors) throws Exception {
+		int cnt = jspEmpService.jspEmpIdCheck(jspEmpVO);
 		if (cnt == 0) {
 			errors.rejectValue("empno", "required", "등록되지 않은 사원번호입니다.");
 			return "jsp/jspEmpWrite";
@@ -143,41 +148,42 @@ public class JspController {
 	}
 
 	@RequestMapping("/jspIndex.do")
-	public String jspIndex() throws Exception{
+	public String jspIndex() throws Exception {
 		return "jsp/jspIndex";
 	}
-	
+
 	@RequestMapping("/jspMemberWrite.do")
-	public String jspMemberWrite(JspMemberVO jspMemberVO,ModelMap model) throws Exception{
-		System.out.println(jspMemberVO.toString());
+	public String jspMemberWrite(JspMemberVO jspMemberVO, ModelMap model) throws Exception {
 		String crudgbn = jspMemberVO.getCrudgbn();
-		if(crudgbn == null || crudgbn.contentEquals("insert")) {
+		if (crudgbn == null || crudgbn.contentEquals("insert")) {
 			jspMemberVO.setCrudgbn("insert");
-			jspMemberVO.setMember_no(""+jspMemberService.jspMemberGetNo());
+			jspMemberVO.setMember_no("" + jspMemberService.jspMemberGetNo());
 			Calendar cal = Calendar.getInstance();
-			String rdate = cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE);
+			String rdate = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DATE);
 			jspMemberVO.setMember_date(rdate);
-		}else {
+		} else {
 			jspMemberVO = jspMemberService.jspMemberInfo(jspMemberVO);
 			jspMemberVO.setCrudgbn("update");
 		}
-		model.addAttribute("jspMemberVO",jspMemberVO);
+		model.addAttribute("jspMemberVO", jspMemberVO);
 		return "jsp/jspMemberWrite";
 	}
-	
+
 	@RequestMapping("/jspMemberWriteSave.do")
-	public String jspMemberWriteSave(JspMemberVO jspMemberVO,ModelMap model, BindingResult bindingResult, Errors errors) throws Exception{
-		System.out.println(jspMemberVO.toString());
+	public String jspMemberWriteSave(JspMemberVO jspMemberVO, ModelMap model, BindingResult bindingResult,
+			Errors errors) throws Exception {
 		String crudgbn = jspMemberVO.getCrudgbn();
-		int	cnt = jspMemberService.jspMemberNoCheck(jspMemberVO);
+		int cnt = jspMemberService.jspMemberNoCheck(jspMemberVO);
 		if (crudgbn.contentEquals("insert")) {
-			if (cnt > 0) errors.rejectValue("member_no", "duplicate", "이미 등록된 회원번호입니다.");
-		}else {
-			if (cnt == 0) errors.rejectValue("member_no", "required", "등록되지 않은 회원번호입니다.");
+			if (cnt > 0)
+				errors.rejectValue("member_no", "duplicate", "이미 등록된 회원번호입니다.");
+		} else {
+			if (cnt == 0)
+				errors.rejectValue("member_no", "required", "등록되지 않은 회원번호입니다.");
 		}
 		beanValidator.validate(jspMemberVO, bindingResult);
 		String dateFormat = "true";
-		if (! JspUtil.CheckDate(jspMemberVO.getMember_date())) {
+		if (!JspUtil.CheckDate(jspMemberVO.getMember_date())) {
 			errors.rejectValue("member_date", "required", "날짜형식이 맞지 않습니다.");
 			dateFormat = "false";
 		}
@@ -185,36 +191,54 @@ public class JspController {
 			model.addAttribute("jspMemberVO", jspMemberVO);
 			return "jsp/jspMemberWrite";
 		}
-		if(crudgbn.contentEquals("insert")) {
+		if (crudgbn.contentEquals("insert")) {
 			String result = jspMemberService.jspMemberInsert(jspMemberVO);
-		}else {
+		} else {
 			int cnt2 = jspMemberService.jspMemberUpdate(jspMemberVO);
 		}
 		return "redirect:jspIndex.do";
 	}
-	
+
 	@RequestMapping("/jspMemberList.do")
-	public String jspMemberList(JspMemberVO jspMemberVO, ModelMap model) throws Exception{
+	public String jspMemberList(JspMemberVO jspMemberVO, ModelMap model) throws Exception {
 		List<?> list = jspMemberService.jspMemberList(jspMemberVO);
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		return "jsp/jspMemberList";
 	}
-	
+
 	@RequestMapping("/jspFriendList.do")
-	public String jspFriendList(JspMemberVO jspMemberVO, ModelMap model) throws Exception{
+	public String jspFriendList(JspMemberVO jspMemberVO, ModelMap model) throws Exception {
 		List<?> list = jspMemberService.jspFriendList(jspMemberVO);
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		return "jsp/jspFriendList";
 	}
-	
+
 	@RequestMapping("/jspMain.do")
-	public String jspMain() throws Exception{
+	public String jspMain() throws Exception {
 		return "jsp/jspMain";
 	}
 
+	@RequestMapping("/jspBoard.do")
+	public String jspBoard() throws Exception {
+		return "jsp/jspBoard";
+	}
+
 	@RequestMapping("/jspBoardWrite.do")
-	public String jspBoardWrite(JspBoardVO jspBoardVO,ModelMap model) throws Exception{
-		model.addAttribute("jspBoardVO",jspBoardVO);
+	public String jspBoardWrite(JspBoardVO jspBoardVO, ModelMap model) throws Exception {
+		jspBoardVO.setCrudgbn("insert");
+		model.addAttribute("jspBoardVO", jspBoardVO);
 		return "jsp/jspBoardWrite";
+	}
+
+	@RequestMapping("/jspBoardWriteSave.do")
+	public String jspBoarWriteSave(JspBoardVO jspBoardVO, ModelMap model, BindingResult bindingResult)
+			throws Exception {
+		beanValidator.validate(jspBoardVO, bindingResult);
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("jspBoardVO", jspBoardVO);
+			return "jsp/jspBoardWrite";
+		}
+		String result = jspBoardService.jspBoardInsert(jspBoardVO);
+		return "redirect:jspBoardList.do";
 	}
 }

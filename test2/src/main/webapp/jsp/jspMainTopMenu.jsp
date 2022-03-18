@@ -10,7 +10,7 @@
 	<div style="width: 100%; float: right;">
 		<ul>
 			<li class="topmenu"><a href="jspMain.do">홈</a></li>
-			<li class="topmenu"><a href="jspBoardList.do">게시판</a></li>
+			<li class="topmenu"><a href="#">게시판</a></li>
 			<li class="topmenu"><a href="#">회원가입</a></li>
 		</ul>
 	</div>

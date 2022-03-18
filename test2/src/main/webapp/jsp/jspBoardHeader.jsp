@@ -7,6 +7,6 @@
 <title></title>
 </head>
 <body>
-<h3>JSP를 이용한 게시판</h3>
+<h3>C/S 게시판</h3>
 </body>
 </html>
