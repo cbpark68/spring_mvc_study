@@ -164,5 +164,9 @@
 	<update id="jspBoardHits">
 		update board set hits = hits + 1 where unq = #unq#	
 	</update>
+	
+	<delete id="jspBoardDelete">
+		delete from board where unq = #unq#	
+	</delete>
 </sqlMap>
 

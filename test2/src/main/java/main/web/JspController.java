@@ -239,15 +239,24 @@ public class JspController {
 	public String jspBoarWriteSave(JspBoardVO jspBoardVO, ModelMap model, BindingResult bindingResult, Errors errors)
 			throws Exception {
 		String crudgbn = jspBoardVO.getCrudgbn();
-		if (crudgbn.contentEquals("update")) {
+		if (!(crudgbn.contentEquals("insert")||crudgbn.contentEquals("update")||crudgbn.contentEquals("delete"))) {
+			return "redirect:jspBoard.do";
+		}
+		if (crudgbn.contentEquals("update")||crudgbn.contentEquals("delete")) {
+			String newpass = jspBoardVO.getPass();
 			JspBoardVO vo = jspBoardService.jspBoardSelect(jspBoardVO);
-			if(! jspBoardVO.getPass().contentEquals(vo.getPass()))
+			String oldpass = vo.getPass();
+			if(! oldpass.contentEquals(newpass))
 				errors.rejectValue("pass", "required", "비밀번호가 일치하지 않습니다.");
 		}
 		beanValidator.validate(jspBoardVO, bindingResult);
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("jspBoardVO", jspBoardVO);
 			return "jsp/jspBoardWrite";
+		}
+		if (crudgbn.contentEquals("delete")){
+			jspBoardService.jspBoardDelete(jspBoardVO);
+			return "redirect:jspBoardList.do";
 		}
 		if (crudgbn.contentEquals("insert")) {
 			String result = jspBoardService.jspBoardInsert(jspBoardVO);

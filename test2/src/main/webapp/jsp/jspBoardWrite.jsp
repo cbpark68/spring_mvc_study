@@ -14,6 +14,18 @@
 </head>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value='/css/jspBoard.css'/>" />
+<script>
+function fn_submit(){
+	document.getElementById("jspBoardVO").submit();
+}
+function fn_delete(){
+	var unq = document.getElementById("unq").value;
+	if(confirm(unq+"번 게시물을 삭제하겠습니까?")){
+		document.getElementById("crudgbn").value = "delete";
+		document.getElementById("jspBoardVO").submit();
+	}
+}
+</script>
 <body>
 	<div id="wapper">
 		<header>
@@ -52,9 +64,10 @@
 					</tr>
 				</table>
 				<div style="text-align:center;margin-top:10px;float:bottom;">
-					<button type="submit">저장</button>	
+					<button type="button" onclick="fn_submit();return false;">저장</button>	
 					<button type="reset">취소</button>
 					<button type="button" onclick="location='jspBoardList.do'">게시판</button>
+					<button type="button" onclick="fn_delete();return false;">삭제</button>
 				</div>
 			</form:form>
 		</section>
