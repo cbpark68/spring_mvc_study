@@ -25,9 +25,10 @@
 		<section>
 			<form:form method="post" action="jspBoardWriteSave.do"
 				commandName="jspBoardVO">
+ 				<form:hidden path="crudgbn" value="${jspBoardVO.crudgbn}" />
+				<form:hidden path="unq" value="${jspBoardVO.unq}" />
 				<table style="width:100%;text-align:center;">
-					<caption>게시물작성</caption>
-					<form:hidden path="unq" value="${jspBoardVO.unq}" />
+					<caption>게시물작성(${jspBoardVO.crudgbn})</caption>
 					<tr>
 						<th style="width:15%;">제목</th>
 						<td style="width:*;text-align:left;"><form:input path="title" style="width:300px;" />
@@ -53,6 +54,7 @@
 				<div style="text-align:center;margin-top:10px;float:bottom;">
 					<button type="submit">저장</button>	
 					<button type="reset">취소</button>
+					<button type="button" onclick="location='jspBoardList.do'">게시판</button>
 				</div>
 			</form:form>
 		</section>

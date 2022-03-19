@@ -225,26 +225,43 @@ public class JspController {
 
 	@RequestMapping("/jspBoardWrite.do")
 	public String jspBoardWrite(JspBoardVO jspBoardVO, ModelMap model) throws Exception {
-		jspBoardVO.setCrudgbn("insert");
+		String crudgbn = jspBoardVO.getCrudgbn();
+		if (crudgbn.contentEquals("update")) {
+			jspBoardService.jspBoardHits(jspBoardVO);
+			jspBoardVO = jspBoardService.jspBoardSelect(jspBoardVO);
+			jspBoardVO.setCrudgbn("update");
+		}
 		model.addAttribute("jspBoardVO", jspBoardVO);
 		return "jsp/jspBoardWrite";
 	}
 
 	@RequestMapping("/jspBoardWriteSave.do")
-	public String jspBoarWriteSave(JspBoardVO jspBoardVO, ModelMap model, BindingResult bindingResult)
+	public String jspBoarWriteSave(JspBoardVO jspBoardVO, ModelMap model, BindingResult bindingResult, Errors errors)
 			throws Exception {
+		String crudgbn = jspBoardVO.getCrudgbn();
+		if (crudgbn.contentEquals("update")) {
+			JspBoardVO vo = jspBoardService.jspBoardSelect(jspBoardVO);
+			if(! jspBoardVO.getPass().contentEquals(vo.getPass()))
+				errors.rejectValue("pass", "required", "비밀번호가 일치하지 않습니다.");
+		}
 		beanValidator.validate(jspBoardVO, bindingResult);
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("jspBoardVO", jspBoardVO);
 			return "jsp/jspBoardWrite";
 		}
-		String result = jspBoardService.jspBoardInsert(jspBoardVO);
+		if (crudgbn.contentEquals("insert")) {
+			String result = jspBoardService.jspBoardInsert(jspBoardVO);
+		} else {
+				int cnt2 = jspBoardService.jspBoardUpdate(jspBoardVO);
+		}
 		return "redirect:jspBoardList.do";
 	}
 	
 	@RequestMapping("/jspBoardList.do")
 	public String jspBoardList(JspBoardVO jspBoardVO,ModelMap model) throws Exception{
 		List<?> list = jspBoardService.jspBoardList(jspBoardVO);
+		int totcnt = jspBoardService.jspBoardTotCnt();
+		model.addAttribute("totcnt",totcnt);
 		model.addAttribute("list",list);
 		return "jsp/jspBoardList";
 	}

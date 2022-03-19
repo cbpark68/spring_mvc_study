@@ -8,4 +8,6 @@ public interface JspBoardService {
 	public JspBoardVO jspBoardSelect(JspBoardVO jspBoardVO);
 	public int jspBoardUpdate(JspBoardVO jspBoardVO);
 	public int jspBoardDelete(JspBoardVO jspBoardVO);
+	public int jspBoardTotCnt();
+	public int jspBoardHits(JspBoardVO jspBoardVO);
 }

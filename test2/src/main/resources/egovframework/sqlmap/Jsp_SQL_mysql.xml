@@ -143,5 +143,26 @@
 		from board
 		order by unq desc	
 	</select>
+	
+	<select id="jspBoardTotCnt" resultClass="java.lang.Integer">
+		select count(*) totcnt from board	
+	</select>
+	
+	<update id="jspBoardUpdate">
+		update board set
+		title     = #title#,
+		name      = #name#,
+		content   = #content#,
+		rdate     = now()
+		where unq = #unq#	
+	</update>
+	
+	<select id="jspBoardSelect" resultClass="jspBoardVO">
+		select unq,title,name,pass,hits,content,date_format(rdate,'%Y-%m-%d') rdate from board where unq = #unq#	
+	</select>
+	
+	<update id="jspBoardHits">
+		update board set hits = hits + 1 where unq = #unq#	
+	</update>
 </sqlMap>
 

@@ -30,4 +30,12 @@ public class JspBoardDAO extends EgovAbstractDAOMysql{
 		return delete("jspBoardDelete",jspBoardVO);
 	}
 
+	public int jspBoardTotCnt() {
+		return (int) select("jspBoardTotCnt");
+	}
+
+	public int jspBoardHits(JspBoardVO jspBoardVO) {
+		return (int) update("jspBoardHits", jspBoardVO);
+	}
+
 }

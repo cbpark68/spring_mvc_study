@@ -41,4 +41,14 @@ public class JspBoardServiceImpl extends EgovAbstractServiceImpl implements JspB
 		return jspBoardDAO.jspBoardDelete(jspBoardVO);
 	}
 
+	@Override
+	public int jspBoardTotCnt() {
+		return jspBoardDAO.jspBoardTotCnt();
+	}
+
+	@Override
+	public int jspBoardHits(JspBoardVO jspBoardVO) {
+		return jspBoardDAO.jspBoardHits(jspBoardVO);
+	}
+
 }

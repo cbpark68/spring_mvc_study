@@ -10,7 +10,7 @@
 		<ul>
 			<li class="topmenu"><a href="jspBoard.do">홈</a></li>
 			<li class="topmenu"><a href="jspBoardList.do">게시판</a></li>
-			<li class="topmenu"><a href="jspBoardWrite.do">글쓰기</a></li>
+			<li class="topmenu"><a href="jspBoardWrite.do?crudgbn=insert">글쓰기</a></li>
 		</ul>
 	</div>
 </body>

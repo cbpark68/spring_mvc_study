@@ -63,7 +63,7 @@ public class JspBoardVO {
 		return "JspBoardVO [crudgbn=" + crudgbn + ", unq=" + unq + ", title=" + title + ", pass=" + pass + ", name="
 				+ name + ", content=" + content + ", hits=" + hits + ", rdate=" + rdate + "]";
 	}
-	
+
 	
 	
 }
