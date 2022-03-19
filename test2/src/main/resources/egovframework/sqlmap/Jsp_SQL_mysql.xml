@@ -137,5 +137,11 @@
 		insert into board (title,pass,name,content)	
 		values (#title#,#pass#,#name#,#content#)
 	</insert>
+	
+	<select id="jspBoardList" resultClass="egovMap">
+		select unq,title,name,hits,date_format(rdate,'%Y-%m-%d') rdate
+		from board
+		order by unq desc	
+	</select>
 </sqlMap>
 

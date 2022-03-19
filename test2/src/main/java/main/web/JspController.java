@@ -241,4 +241,11 @@ public class JspController {
 		String result = jspBoardService.jspBoardInsert(jspBoardVO);
 		return "redirect:jspBoardList.do";
 	}
+	
+	@RequestMapping("/jspBoardList.do")
+	public String jspBoardList(JspBoardVO jspBoardVO,ModelMap model) throws Exception{
+		List<?> list = jspBoardService.jspBoardList(jspBoardVO);
+		model.addAttribute("list",list);
+		return "jsp/jspBoardList";
+	}
 }

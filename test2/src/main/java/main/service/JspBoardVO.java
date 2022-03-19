@@ -2,23 +2,24 @@ package main.service;
 
 public class JspBoardVO {
 	private String crudgbn;
-	private int unq;
+	private String unq;
 	private String title;
 	private String pass;
 	private String name;
 	private String content;
 	private int hits;
 	private String rdate;
+	
 	public String getCrudgbn() {
 		return crudgbn;
 	}
 	public void setCrudgbn(String crudgbn) {
 		this.crudgbn = crudgbn;
 	}
-	public int getUnq() {
+	public String getUnq() {
 		return unq;
 	}
-	public void setUnq(int unq) {
+	public void setUnq(String unq) {
 		this.unq = unq;
 	}
 	public String getTitle() {
