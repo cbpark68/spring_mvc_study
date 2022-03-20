@@ -1,7 +1,7 @@
 package main.service;
 
 public class JspBoardVO {
-	private String crudgbn;
+	private String crudgbn = "insert";
 	private String unq;
 	private String title;
 	private String pass;
@@ -13,7 +13,11 @@ public class JspBoardVO {
 	public String getCrudgbn() {
 		return crudgbn;
 	}
+
 	public void setCrudgbn(String crudgbn) {
+		if(!(crudgbn.contentEquals("update")||crudgbn.contentEquals("delete"))) {
+			crudgbn = "insert";
+		}
 		this.crudgbn = crudgbn;
 	}
 	public String getUnq() {

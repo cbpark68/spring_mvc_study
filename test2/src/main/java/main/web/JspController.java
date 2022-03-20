@@ -229,7 +229,7 @@ public class JspController {
 		if (crudgbn.contentEquals("update")) {
 			jspBoardService.jspBoardHits(jspBoardVO);
 			jspBoardVO = jspBoardService.jspBoardSelect(jspBoardVO);
-			jspBoardVO.setCrudgbn("update");
+			jspBoardVO.setCrudgbn("update"); //반드시 세팅해줘야 한다.
 		}
 		model.addAttribute("jspBoardVO", jspBoardVO);
 		return "jsp/jspBoardWrite";
@@ -239,9 +239,6 @@ public class JspController {
 	public String jspBoarWriteSave(JspBoardVO jspBoardVO, ModelMap model, BindingResult bindingResult, Errors errors)
 			throws Exception {
 		String crudgbn = jspBoardVO.getCrudgbn();
-		if (!(crudgbn.contentEquals("insert")||crudgbn.contentEquals("update")||crudgbn.contentEquals("delete"))) {
-			return "redirect:jspBoard.do";
-		}
 		if (crudgbn.contentEquals("update")||crudgbn.contentEquals("delete")) {
 			String newpass = jspBoardVO.getPass();
 			JspBoardVO vo = jspBoardService.jspBoardSelect(jspBoardVO);
@@ -254,14 +251,12 @@ public class JspController {
 			model.addAttribute("jspBoardVO", jspBoardVO);
 			return "jsp/jspBoardWrite";
 		}
-		if (crudgbn.contentEquals("delete")){
-			jspBoardService.jspBoardDelete(jspBoardVO);
-			return "redirect:jspBoardList.do";
-		}
 		if (crudgbn.contentEquals("insert")) {
-			String result = jspBoardService.jspBoardInsert(jspBoardVO);
+			jspBoardService.jspBoardInsert(jspBoardVO);
+		}else if (crudgbn.contentEquals("update")) {
+			jspBoardService.jspBoardUpdate(jspBoardVO);
 		} else {
-				int cnt2 = jspBoardService.jspBoardUpdate(jspBoardVO);
+			jspBoardService.jspBoardDelete(jspBoardVO);
 		}
 		return "redirect:jspBoardList.do";
 	}
