@@ -263,9 +263,18 @@ public class JspController {
 	
 	@RequestMapping("/jspBoardList.do")
 	public String jspBoardList(JspBoardVO jspBoardVO,ModelMap model) throws Exception{
+		int totrow = jspBoardService.jspBoardTotCnt();
+		jspBoardVO.setTotrow(totrow); //totrow를 먼저 주입해야 lastpgno를 받아온다.
+		//lastPgno가 먼저 확정되어야 하므로 아래 비교는 VO의 getReqpgno에서는 할수 없다. 
+		if(jspBoardVO.getReqpgno() >= jspBoardVO.getLastpgno()) {
+			//요청페이지가 마지막페이지로 변경된다.
+			jspBoardVO.setReqpgno(jspBoardVO.getLastpgno());
+		}
 		List<?> list = jspBoardService.jspBoardList(jspBoardVO);
-		int totcnt = jspBoardService.jspBoardTotCnt();
-		model.addAttribute("totcnt",totcnt);
+		//요청페이지가 원래페이지일수도 있고 마지막페이지일수도 있으므로 다시 가져와야 한다.
+		model.addAttribute("reqpgno",jspBoardVO.getReqpgno());
+		model.addAttribute("lastpgno",jspBoardVO.getLastpgno());
+		model.addAttribute("totrow",totrow);
 		model.addAttribute("list",list);
 		return "jsp/jspBoardList";
 	}

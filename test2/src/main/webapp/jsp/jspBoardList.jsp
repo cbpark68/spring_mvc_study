@@ -27,7 +27,7 @@
 				<table style="width:100%;text-align:center;">
 					<caption>
 					<div>게시물조회</div>
-					<div style="margin-left:10px;float:left;font-size:12px;font-wegith:normal;">총건수 : ${totcnt}</div>
+					<div style="margin-left:10px;float:left;font-size:12px;font-wegith:normal;">총건수 : ${totrow}</div>
 					<div style="margin-right:10px;float:right;">
 						<button type="button" onclick="location='jspBoardWrite.do?crudgbn=insert'">글쓰기</button>	
 					</div>
@@ -53,6 +53,12 @@
 					</c:forEach>
 					</tbody>
 				</table>
+				<div style="text-align:center;margin-top:10px;float:bottom;">
+					<button type="button" onclick="location='jspBoardList.do?reqpgno=${1}'">처음</button>	
+					<button type="button" onclick="location='jspBoardList.do?reqpgno=${reqpgno-1}'">이전</button>	
+					<button type="button" onclick="location='jspBoardList.do?reqpgno=${reqpgno+1}'">다음</button>	
+					<button type="button" onclick="location='jspBoardList.do?reqpgno=${lastpgno}'">마지막</button>	
+				</div>
 				</div>
 		</section>
 		<aside>

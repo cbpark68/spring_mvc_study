@@ -142,6 +142,7 @@
 		select unq,title,name,hits,date_format(rdate,'%Y-%m-%d') rdate
 		from board
 		order by unq desc	
+		limit #startrow#,#pgrow#
 	</select>
 	
 	<select id="jspBoardTotCnt" resultClass="java.lang.Integer">

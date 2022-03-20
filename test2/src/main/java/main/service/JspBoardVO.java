@@ -7,19 +7,41 @@ public class JspBoardVO {
 	private String pass;
 	private String name;
 	private String content;
-	private int hits;
+	private int hits = 0;
 	private String rdate;
+	private int reqpgno = 1;
+	private int startrow = 0;
+	private int pgrow = 5;
+	private int lastpgno = 0;
+	private int totrow = 0;
 	
 	public String getCrudgbn() {
 		return crudgbn;
 	}
-
+	//insert update delete만 가능
 	public void setCrudgbn(String crudgbn) {
 		if(!(crudgbn.contentEquals("update")||crudgbn.contentEquals("delete"))) {
 			crudgbn = "insert";
 		}
 		this.crudgbn = crudgbn;
 	}
+	//페이지가 1보다 작으면 1, reqpgno는 먼저 세팅되어야 한다.
+	public int getReqpgno() {
+		if(reqpgno < 1) reqpgno = 1;
+		return reqpgno;
+	}
+	//조회시 가져올 테이블의 row번호, reqpgno는 먼저 세팅되어야 한다.
+	public int getStartrow() {
+		startrow = (reqpgno-1)*pgrow;
+		return startrow;
+	}
+	//마지막 페이지 번호, pgrow는 내부에 세팅되어 있지만 totrow는 외부에서 받아야 한다.
+	public int getLastpgno() {
+		lastpgno = (int)Math.ceil((double)totrow/pgrow);
+		return lastpgno;
+	}
+
+
 	public String getUnq() {
 		return unq;
 	}
@@ -62,12 +84,43 @@ public class JspBoardVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	@Override
-	public String toString() {
-		return "JspBoardVO [crudgbn=" + crudgbn + ", unq=" + unq + ", title=" + title + ", pass=" + pass + ", name="
-				+ name + ", content=" + content + ", hits=" + hits + ", rdate=" + rdate + "]";
+
+
+	public void setReqpgno(int reqpgno) {
+		this.reqpgno = reqpgno;
+	}
+
+
+	public void setStartrow(int startrow) {
+		this.startrow = startrow;
+	}
+
+	public int getPgrow() {
+		return pgrow;
+	}
+
+	public void setPgrow(int pgrow) {
+		this.pgrow = pgrow;
+	}
+
+	public void setLastpgno(int lastpg) {
+		this.lastpgno = lastpg;
 	}
 
 	
-	
+	public int getTotrow() {
+		return totrow;
+	}
+
+	public void setTotrow(int totrow) {
+		this.totrow = totrow;
+	}
+
+	@Override
+	public String toString() {
+		return "JspBoardVO [crudgbn=" + crudgbn + ", unq=" + unq + ", title=" + title + ", pass=" + pass + ", name="
+				+ name + ", content=" + content + ", hits=" + hits + ", rdate=" + rdate + ", reqpgno=" + reqpgno
+				+ ", startrow=" + startrow + ", pgrow=" + pgrow + ", lastpg=" + lastpgno + ", totrow=" + totrow + "]";
+	}
+
 }
