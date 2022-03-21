@@ -51,4 +51,9 @@ public class JspBoardServiceImpl extends EgovAbstractServiceImpl implements JspB
 		return jspBoardDAO.jspBoardHits(jspBoardVO);
 	}
 
+	@Override
+	public int jspBoardGid() {
+		return jspBoardDAO.jspBoardGid();
+	}
+
 }

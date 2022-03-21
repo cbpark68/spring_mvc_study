@@ -252,6 +252,7 @@ public class JspController {
 			return "jsp/jspBoardWrite";
 		}
 		if (crudgbn.contentEquals("insert")) {
+			jspBoardVO.setGid(jspBoardService.jspBoardGid());
 			jspBoardService.jspBoardInsert(jspBoardVO);
 		}else if (crudgbn.contentEquals("update")) {
 			jspBoardService.jspBoardUpdate(jspBoardVO);

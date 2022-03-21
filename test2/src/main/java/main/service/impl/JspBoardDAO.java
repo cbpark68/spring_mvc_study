@@ -38,4 +38,8 @@ public class JspBoardDAO extends EgovAbstractDAOMysql{
 		return (int) update("jspBoardHits", jspBoardVO);
 	}
 
+	public int jspBoardGid() {
+		return (int) select("jspBoardGid");
+	}
+
 }

@@ -14,6 +14,8 @@ public class JspBoardVO {
 	private int pgrow = 5;
 	private int lastpgno = 0;
 	private int totrow = 0;
+	private int gid = 0;
+	private String thread = "a";
 	
 	public String getCrudgbn() {
 		return crudgbn;
@@ -116,11 +118,25 @@ public class JspBoardVO {
 		this.totrow = totrow;
 	}
 
+	
+	public int getGid() {
+		return gid;
+	}
+	public void setGid(int gid) {
+		this.gid = gid;
+	}
+	public String getThread() {
+		return thread;
+	}
+	public void setThread(String thread) {
+		this.thread = thread;
+	}
 	@Override
 	public String toString() {
 		return "JspBoardVO [crudgbn=" + crudgbn + ", unq=" + unq + ", title=" + title + ", pass=" + pass + ", name="
 				+ name + ", content=" + content + ", hits=" + hits + ", rdate=" + rdate + ", reqpgno=" + reqpgno
-				+ ", startrow=" + startrow + ", pgrow=" + pgrow + ", lastpg=" + lastpgno + ", totrow=" + totrow + "]";
+				+ ", startrow=" + startrow + ", pgrow=" + pgrow + ", lastpgno=" + lastpgno + ", totrow=" + totrow
+				+ ", gid=" + gid + ", thread=" + thread + "]";
 	}
 
 }

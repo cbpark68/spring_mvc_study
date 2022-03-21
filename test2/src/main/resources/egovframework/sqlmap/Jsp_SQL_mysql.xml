@@ -134,8 +134,8 @@
 	</select>
 	
 	<insert id="jspBoardInsert">
-		insert into board (title,pass,name,content)	
-		values (#title#,#pass#,#name#,#content#)
+		insert into board (title,pass,name,content,gid,thread)	
+		values (#title#,#pass#,#name#,#content#,#gid#,#thread#)
 	</insert>
 	
 	<select id="jspBoardList" resultClass="egovMap">
@@ -169,5 +169,9 @@
 	<delete id="jspBoardDelete">
 		delete from board where unq = #unq#	
 	</delete>
+	
+	<select id="jspBoardGid" resultClass="java.lang.Integer">
+		select ifnull(max(gid),0)+1 from board	
+	</select>
 </sqlMap>
 
