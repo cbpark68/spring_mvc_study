@@ -281,7 +281,14 @@ public class JspController {
 		}else if (crudgbn.contentEquals("update")) {
 			jspBoardService.jspBoardUpdate(jspBoardVO);
 		}else if (crudgbn.contentEquals("delete")) {
-			jspBoardService.jspBoardDelete(jspBoardVO);
+			String lthread = jspBoardService.jspBoardLthread(jspBoardVO);
+			if(lthread == null) {
+				jspBoardService.jspBoardDelete(jspBoardVO);
+			}else {
+				jspBoardVO.setTitle("작성자가 삭제함");
+				jspBoardVO.setContent("작성자가 삭제함");
+				jspBoardService.jspBoardUpdate(jspBoardVO);
+			}
 		}
 		return "redirect:jspBoardList.do";
 	}

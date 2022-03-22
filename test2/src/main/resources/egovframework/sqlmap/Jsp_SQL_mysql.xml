@@ -139,7 +139,7 @@
 	</insert>
 	
 	<select id="jspBoardList" resultClass="egovMap">
-		select unq,title,name,hits,date_format(rdate,'%Y-%m-%d') rdate,gid,thread
+		select unq,title,name,hits,date_format(rdate,'%Y-%m-%d') rdate,gid,thread,length(thread)-1 threadlen
 		from board
 		order by gid desc, thread asc
 		limit #startrow#,#pgrow#

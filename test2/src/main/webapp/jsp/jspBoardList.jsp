@@ -14,6 +14,11 @@
 </head>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value='/css/jspBoard.css'/>" />
+<script>
+function fn_title(){
+document.write("____");
+}
+</script>
 <body>
 	<div id="wapper">
 		<header>
@@ -45,7 +50,15 @@
 					<c:forEach var="list" items="${list}">
 						<tr>
 							<td>${list.unq}</td>	
-							<td style="text-align:left;"><a href="jspBoardWrite.do?crudgbn=update&unq=${list.unq}">${list.title}</a></td>	
+							<td style="text-align:left;">
+							<c:forEach var="i" begin="1" end="${list.threadlen}">
+								&nbsp;&nbsp;
+								<c:if test="${i == list.threadlen}">[RE]</c:if>
+							</c:forEach>
+							<a href="jspBoardWrite.do?crudgbn=update&unq=${list.unq}">
+							${list.title}
+							</a>
+							</td>	
 							<td>${list.name}</td>	
 							<td>${list.hits}</td>	
 							<td>${list.rdate}</td>	

@@ -17,6 +17,7 @@ public class JspBoardVO {
 	private int gid = 0;
 	private String thread = "a";
 	private String mode="root";
+	private int threadlen = 0;
 	
 	public String getCrudgbn() {
 		return crudgbn;
@@ -140,6 +141,12 @@ public class JspBoardVO {
 		if(!(mode.contentEquals("branch")))
 			mode = "root";
 		this.mode = mode;
+	}
+	public int getThreadlen() {
+		return threadlen;
+	}
+	public void setThreadlen(int threadlen) {
+		this.threadlen = threadlen;
 	}
 	@Override
 	public String toString() {
