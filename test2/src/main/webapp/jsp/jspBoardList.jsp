@@ -45,7 +45,7 @@
 					<c:forEach var="list" items="${list}">
 						<tr>
 							<td>${list.unq}</td>	
-							<td><a href="jspBoardWrite.do?crudgbn=update&unq=${list.unq}">${list.title}</a></td>	
+							<td style="text-align:left;"><a href="jspBoardWrite.do?crudgbn=update&unq=${list.unq}">${list.title}</a></td>	
 							<td>${list.name}</td>	
 							<td>${list.hits}</td>	
 							<td>${list.rdate}</td>	

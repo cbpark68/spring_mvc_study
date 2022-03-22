@@ -42,4 +42,8 @@ public class JspBoardDAO extends EgovAbstractDAOMysql{
 		return (int) select("jspBoardGid");
 	}
 
+	public String jspBoardLthread(JspBoardVO jspBoardVO) {
+		return (String) select("jspBoardLthread", jspBoardVO);
+	}
+
 }

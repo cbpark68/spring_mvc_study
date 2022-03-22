@@ -13,9 +13,27 @@ public final class JspUtil {
 			sdf.setLenient(false);
 			sdf.parse(date);
 			return true;
-		} catch(ParseException e) {
+		} catch (ParseException e) {
 			return false;
 		}
+	}
+
+	public static String left(String str, int length) {
+		String leftStr = null;
+		if (str.length() < length) {
+			length = str.length();
+		}
+		leftStr = str.substring(0, length);
+		return leftStr;
+	}
+
+	public static String right(String str, int length) {
+		String rightStr = null;
+		if (str.length() < length) {
+			length = str.length();
+		}
+		rightStr = str.substring(str.length() - length);
+		return rightStr;
 	}
 
 }

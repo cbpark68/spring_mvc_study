@@ -139,9 +139,9 @@
 	</insert>
 	
 	<select id="jspBoardList" resultClass="egovMap">
-		select unq,title,name,hits,date_format(rdate,'%Y-%m-%d') rdate
+		select unq,title,name,hits,date_format(rdate,'%Y-%m-%d') rdate,gid,thread
 		from board
-		order by unq desc	
+		order by gid desc, thread asc
 		limit #startrow#,#pgrow#
 	</select>
 	
@@ -159,7 +159,7 @@
 	</update>
 	
 	<select id="jspBoardSelect" resultClass="jspBoardVO">
-		select unq,title,name,pass,hits,content,date_format(rdate,'%Y-%m-%d') rdate from board where unq = #unq#	
+		select unq,title,name,pass,hits,content,date_format(rdate,'%Y-%m-%d') rdate,gid,thread from board where unq = #unq#	
 	</select>
 	
 	<update id="jspBoardHits">
@@ -172,6 +172,10 @@
 	
 	<select id="jspBoardGid" resultClass="java.lang.Integer">
 		select ifnull(max(gid),0)+1 from board	
+	</select>
+	
+	<select id="jspBoardLthread" resultClass="java.lang.String">
+		select right(max(thread),1) lthread from board where gid=#gid# and thread like concat(#thread#,'_')
 	</select>
 </sqlMap>
 

@@ -25,6 +25,9 @@ function fn_delete(){
 		document.getElementById("jspBoardVO").submit();
 	}
 }
+function fn_reply(){
+	location="jspBoardWrite.do?crudgbn=insert&mode=branch&unq=${jspBoardVO.unq}";
+}
 </script>
 <body>
 	<div id="wapper">
@@ -38,9 +41,12 @@ function fn_delete(){
 			<form:form method="post" action="jspBoardWriteSave.do"
 				commandName="jspBoardVO">
  				<form:hidden path="crudgbn" value="${jspBoardVO.crudgbn}" />
+ 				<form:hidden path="mode" value="${jspBoardVO.mode}" />
+ 				<form:hidden path="gid" value="${jspBoardVO.gid}" />
+ 				<form:hidden path="thread" value="${jspBoardVO.thread}" />
 				<form:hidden path="unq" value="${jspBoardVO.unq}" />
 				<table style="width:100%;text-align:center;">
-					<caption>게시물작성(${jspBoardVO.crudgbn})</caption>
+					<caption>게시물작성(${jspBoardVO.crudgbn} ${jspBoardVO.mode})</caption>
 					<tr>
 						<th style="width:15%;">제목</th>
 						<td style="width:*;text-align:left;"><form:input path="title" style="width:300px;" />
@@ -66,6 +72,7 @@ function fn_delete(){
 				<div style="text-align:center;margin-top:10px;float:bottom;">
 					<button type="button" onclick="fn_submit();return false;">저장</button>	
 					<button type="reset">취소</button>
+					<button type="button" onclick="fn_reply();return false;">댓글</button>	
 					<button type="button" onclick="location='jspBoardList.do'">게시판</button>
 					<button type="button" onclick="fn_delete();return false;">삭제</button>
 				</div>

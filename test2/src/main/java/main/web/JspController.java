@@ -225,12 +225,19 @@ public class JspController {
 
 	@RequestMapping("/jspBoardWrite.do")
 	public String jspBoardWrite(JspBoardVO jspBoardVO, ModelMap model) throws Exception {
-		String crudgbn = jspBoardVO.getCrudgbn();
-		if (crudgbn.contentEquals("update")) {
+		if (jspBoardVO.getCrudgbn().contentEquals("update")) {
 			jspBoardService.jspBoardHits(jspBoardVO);
 			jspBoardVO = jspBoardService.jspBoardSelect(jspBoardVO);
 			jspBoardVO.setCrudgbn("update"); //반드시 세팅해줘야 한다.
 		}
+		if(jspBoardVO.getMode().contentEquals("branch")) {
+			JspBoardVO vo = jspBoardService.jspBoardSelect(jspBoardVO);
+			jspBoardVO.setGid(vo.getGid());
+			jspBoardVO.setThread(vo.getThread());
+			jspBoardVO.setTitle("Re:"+vo.getTitle());
+			jspBoardVO.setContent("Re:"+vo.getContent());
+		}
+		System.out.println(jspBoardVO.toString());
 		model.addAttribute("jspBoardVO", jspBoardVO);
 		return "jsp/jspBoardWrite";
 	}
@@ -239,6 +246,7 @@ public class JspController {
 	public String jspBoarWriteSave(JspBoardVO jspBoardVO, ModelMap model, BindingResult bindingResult, Errors errors)
 			throws Exception {
 		String crudgbn = jspBoardVO.getCrudgbn();
+		String mode = jspBoardVO.getMode();
 		if (crudgbn.contentEquals("update")||crudgbn.contentEquals("delete")) {
 			String newpass = jspBoardVO.getPass();
 			JspBoardVO vo = jspBoardService.jspBoardSelect(jspBoardVO);
@@ -251,12 +259,28 @@ public class JspController {
 			model.addAttribute("jspBoardVO", jspBoardVO);
 			return "jsp/jspBoardWrite";
 		}
+		int gid = jspBoardVO.getGid();
+		String thread = jspBoardVO.getThread();
 		if (crudgbn.contentEquals("insert")) {
-			jspBoardVO.setGid(jspBoardService.jspBoardGid());
+			if(mode.contentEquals("root")) {
+				gid = jspBoardService.jspBoardGid();
+				thread = "a";
+			}else if(mode.contentEquals("branch")){
+				String lthread = jspBoardService.jspBoardLthread(jspBoardVO);
+				if(lthread == null) {
+					thread = thread+"a";
+				}else {
+					char cthread = lthread.charAt(0);
+					cthread++;
+					thread = thread + cthread;
+				}
+			}
+			jspBoardVO.setGid(gid);
+			jspBoardVO.setThread(thread);
 			jspBoardService.jspBoardInsert(jspBoardVO);
 		}else if (crudgbn.contentEquals("update")) {
 			jspBoardService.jspBoardUpdate(jspBoardVO);
-		} else {
+		}else if (crudgbn.contentEquals("delete")) {
 			jspBoardService.jspBoardDelete(jspBoardVO);
 		}
 		return "redirect:jspBoardList.do";

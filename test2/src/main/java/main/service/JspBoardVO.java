@@ -11,20 +11,20 @@ public class JspBoardVO {
 	private String rdate;
 	private int reqpgno = 1;
 	private int startrow = 0;
-	private int pgrow = 5;
+	private int pgrow = 10;
 	private int lastpgno = 0;
 	private int totrow = 0;
 	private int gid = 0;
 	private String thread = "a";
+	private String mode="root";
 	
 	public String getCrudgbn() {
 		return crudgbn;
 	}
 	//insert update delete만 가능
 	public void setCrudgbn(String crudgbn) {
-		if(!(crudgbn.contentEquals("update")||crudgbn.contentEquals("delete"))) {
+		if(!(crudgbn.contentEquals("update")||crudgbn.contentEquals("delete"))) 
 			crudgbn = "insert";
-		}
 		this.crudgbn = crudgbn;
 	}
 	//페이지가 1보다 작으면 1, reqpgno는 먼저 세팅되어야 한다.
@@ -131,12 +131,23 @@ public class JspBoardVO {
 	public void setThread(String thread) {
 		this.thread = thread;
 	}
+	
+	
+	public String getMode() {
+		return mode;
+	}
+	public void setMode(String mode) {
+		if(!(mode.contentEquals("branch")))
+			mode = "root";
+		this.mode = mode;
+	}
 	@Override
 	public String toString() {
 		return "JspBoardVO [crudgbn=" + crudgbn + ", unq=" + unq + ", title=" + title + ", pass=" + pass + ", name="
 				+ name + ", content=" + content + ", hits=" + hits + ", rdate=" + rdate + ", reqpgno=" + reqpgno
 				+ ", startrow=" + startrow + ", pgrow=" + pgrow + ", lastpgno=" + lastpgno + ", totrow=" + totrow
-				+ ", gid=" + gid + ", thread=" + thread + "]";
+				+ ", gid=" + gid + ", thread=" + thread + ", mode=" + mode + "]";
 	}
 
+	
 }

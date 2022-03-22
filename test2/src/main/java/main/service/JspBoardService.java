@@ -11,4 +11,5 @@ public interface JspBoardService {
 	public int jspBoardTotCnt();
 	public int jspBoardHits(JspBoardVO jspBoardVO);
 	public int jspBoardGid();
+	public String jspBoardLthread(JspBoardVO jspBoardVO);
 }
