@@ -20,6 +20,7 @@ import main.service.JspEmpService;
 import main.service.JspEmpVO;
 import main.service.JspMemberService;
 import main.service.JspMemberVO;
+import main.service.JspMemberVO2;
 
 @Controller
 public class JspController {
@@ -309,5 +310,11 @@ public class JspController {
 		model.addAttribute("totrow",totrow);
 		model.addAttribute("list",list);
 		return "jsp/jspBoardList";
+	}
+	
+	@RequestMapping("/jspMemberWrite2.do")
+	public String jspMemberWrite2(JspMemberVO2 jspMemberVO2,ModelMap model) throws Exception{
+		model.addAttribute("jspMemberVO2",jspMemberVO2);
+		return "jsp/jspMemberWrite2";
 	}
 }

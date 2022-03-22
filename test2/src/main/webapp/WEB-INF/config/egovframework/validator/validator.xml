@@ -127,10 +127,18 @@
 					<var-value>2000</var-value>
 				</var>
 			</field>
-<!-- 			<field property="rdate" depends="required">
-				<arg0 key="jsp.board.rdate"/>
+		</form>
+		<form name="jspMemberVO2">
+			<field property="userid" depends="required">
+				<arg0 key="jsp.member2.userid" />
 			</field>
- -->		</form>
+			<field property="pass" depends="required">
+				<arg0 key="jsp.member2.pass" />
+			</field>
+			<field property="name" depends="required">
+				<arg0 key="jsp.member2.name" />
+			</field>
+		</form>
 	</formset>
 
 </form-validation>
