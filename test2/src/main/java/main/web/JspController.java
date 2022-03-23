@@ -317,4 +317,14 @@ public class JspController {
 		model.addAttribute("jspMemberVO2",jspMemberVO2);
 		return "jsp/jspMemberWrite2";
 	}
+	
+	@RequestMapping("/jspMemberWriteSave2.do")
+	public String jspMemberWriteSave2(JspMemberVO2 jspMemberVO2, ModelMap model, BindingResult bindingResult, Errors errors) throws Exception{
+		beanValidator.validate(jspMemberVO2, bindingResult);
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("jspMemberVO2", jspMemberVO2);
+			return "jsp/jspMemberWrite2";
+		}
+		return "redirect:jspBoard.do";
+	}
 }

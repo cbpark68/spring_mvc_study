@@ -138,6 +138,12 @@
 			<field property="name" depends="required">
 				<arg0 key="jsp.member2.name" />
 			</field>
+			<field property="birthday" depends="required">
+				<arg0 key="jsp.member2.birthday" />
+			</field>
+			<field property="gender" depends="required">
+				<arg0 key="jsp.member2.gender" />
+			</field>
 		</form>
 	</formset>
 

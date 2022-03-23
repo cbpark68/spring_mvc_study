@@ -23,7 +23,7 @@
 			<c:import url="jspBoardTopMenu.jsp"/>
 		</nav>
 		<section>
-			<form:form method="post" action="#"
+			<form:form method="post" action="jspMemberWriteSave2.do"
 				commandName="jspMemberVO2">
 				<table style="width:100%;text-align:center;">
 					<caption>회원등록</caption>
@@ -42,9 +42,36 @@
 						<td style="text-align:left;"><form:input path="name" style="width:100px;" />
 							<form:errors path="name" /></td>
 					</tr>
+					<tr>
+						<th>생일</th>
+						<td style="text-align:left;"><form:input path="birthday" style="width:100px;" />
+							<form:errors path="birthday" /></td>
+					</tr>
+					<tr>
+						<th>성별</th>
+						<td style="text-align:left;">
+							<form:radiobutton path="gender" value="M" label="남자" />
+							<form:radiobutton path="gender" value="F" label="여자" />
+							<form:errors path="gender" /></td>
+					</tr>
+					<tr>
+						<th>연락처</th>
+						<td style="text-align:left;"><form:input path="mobile" style="width:100px;" />
+							<form:errors path="mobile" /></td>
+					</tr>
+					<tr>
+						<th>우편번호</th>
+						<td style="text-align:left;"><form:input path="zipcode" style="width:50px;" />
+							<form:errors path="zipcode" /></td>
+					</tr>
+					<tr>
+						<th>주소</th>
+						<td style="text-align:left;"><form:input path="addr" style="width:400px;" />
+							<form:errors path="addr" /></td>
+					</tr>
 				</table>
 				<div style="text-align:center;margin-top:10px;float:bottom;">
-					<button type="button">저장</button>	
+					<button type="submit">저장</button>	
 					<button type="reset">취소</button>
 				</div>
 			</form:form>
