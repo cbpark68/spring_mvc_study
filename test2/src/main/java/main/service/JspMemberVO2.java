@@ -65,6 +65,12 @@ public class JspMemberVO2 {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	@Override
+	public String toString() {
+		return "JspMemberVO2 [userid=" + userid + ", pass=" + pass + ", name=" + name + ", birthday=" + birthday
+				+ ", gender=" + gender + ", mobile=" + mobile + ", zipcode=" + zipcode + ", addr=" + addr + ", rdate="
+				+ rdate + "]";
+	}
 	
 	
 }

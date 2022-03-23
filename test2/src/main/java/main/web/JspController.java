@@ -1,6 +1,7 @@
 package main.web;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +11,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import main.service.JspBoardService;
@@ -326,5 +329,14 @@ public class JspController {
 			return "jsp/jspMemberWrite2";
 		}
 		return "redirect:jspBoard.do";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/jspMemberIdChk.do")
+	RequestResult<JspMemberVO2> jspMemberIdChk(JspMemberVO2 jspMemberVO2,ModelMap model) throws Exception{
+		JspMemberVO2 vo = new JspMemberVO2();
+		vo.setUserid("cbpark68");
+		System.out.println(vo.toString());
+		return RequestResult.success(vo);
 	}
 }
