@@ -340,7 +340,6 @@ public class JspController {
 		return "redirect:jspBoard.do";
 	}
 
-	@ResponseBody
 	@RequestMapping("/jspMemberIdChk.do")
 	public ModelAndView jspMemberIdChk(JspMemberVO2 jspMemberVO2) throws Exception {
 		int cnt = jspMemberService2.jspMemberIdCheck2(jspMemberVO2.getUserid());
