@@ -23,17 +23,22 @@
 			changeMonth : true,
 			changeYear : true
 		});
-
+		
 		$("#btn_idchk").click(function() {
+			var userid = document.getElementById("userid").value;
 			$.ajax({
 				url : "jspMemberIdChk.do",
-				data : "userid=chpark68",
+				data : "userid="+userid,
 				type : "POST",
-				success : function(data) {
-					alert(data)
+				datatype : "json",
+				success : function(obj) {
+					$.each(obj,function(index,item){
+						var result=item["idchk"];
+						alert(result);
+					});
 				},
 				error : function() {
-					alert("에러")
+					alert("오류가 발생했습니다.")
 				}
 			});
 		});

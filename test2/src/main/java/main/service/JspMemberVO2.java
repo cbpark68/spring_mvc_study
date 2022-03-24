@@ -10,6 +10,7 @@ public class JspMemberVO2 {
 	private String zipcode;
 	private String addr;
 	private String rdate;
+	private String idchk;
 
 	public String getUserid() {
 		return userid;
@@ -65,12 +66,19 @@ public class JspMemberVO2 {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	public String getIdchk() {
+		return idchk;
+	}
+	public void setIdchk(String idchk) {
+		this.idchk = idchk;
+	}
 	@Override
 	public String toString() {
 		return "JspMemberVO2 [userid=" + userid + ", pass=" + pass + ", name=" + name + ", birthday=" + birthday
 				+ ", gender=" + gender + ", mobile=" + mobile + ", zipcode=" + zipcode + ", addr=" + addr + ", rdate="
-				+ rdate + "]";
+				+ rdate + ", idchk=" + idchk + "]";
 	}
+
 	
 	
 }

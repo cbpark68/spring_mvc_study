@@ -177,5 +177,9 @@
 	<select id="jspBoardLthread" resultClass="java.lang.String">
 		select right(max(thread),1) lthread from board where gid=#gid# and thread like concat(#thread#,'_')
 	</select>
+	
+	<select id="jspMemberIdChk2" resultClass="java.lang.Integer">
+		select count(*) cnt from memberinfo2 where userid = #userid#	
+	</select>
 </sqlMap>
 

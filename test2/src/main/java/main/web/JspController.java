@@ -3,6 +3,7 @@ package main.web;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -11,8 +12,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 import main.service.JspBoardService;
@@ -22,6 +23,7 @@ import main.service.JspDeptVO;
 import main.service.JspEmpService;
 import main.service.JspEmpVO;
 import main.service.JspMemberService;
+import main.service.JspMemberService2;
 import main.service.JspMemberVO;
 import main.service.JspMemberVO2;
 
@@ -43,6 +45,9 @@ public class JspController {
 
 	@Resource(name = "jspBoardService")
 	private JspBoardService jspBoardService;
+	
+	@Resource(name = "jspMemberService2")
+	private JspMemberService2 jspMemberService2;
 
 	@RequestMapping("/jspDeptList.do")
 	public String jspDeptList(ModelMap model) throws Exception {
@@ -232,14 +237,14 @@ public class JspController {
 		if (jspBoardVO.getCrudgbn().contentEquals("update")) {
 			jspBoardService.jspBoardHits(jspBoardVO);
 			jspBoardVO = jspBoardService.jspBoardSelect(jspBoardVO);
-			jspBoardVO.setCrudgbn("update"); //반드시 세팅해줘야 한다.
+			jspBoardVO.setCrudgbn("update"); // 반드시 세팅해줘야 한다.
 		}
-		if(jspBoardVO.getMode().contentEquals("branch")) {
+		if (jspBoardVO.getMode().contentEquals("branch")) {
 			JspBoardVO vo = jspBoardService.jspBoardSelect(jspBoardVO);
 			jspBoardVO.setGid(vo.getGid());
 			jspBoardVO.setThread(vo.getThread());
-			jspBoardVO.setTitle("Re:"+vo.getTitle());
-			jspBoardVO.setContent("Re:"+vo.getContent());
+			jspBoardVO.setTitle("Re:" + vo.getTitle());
+			jspBoardVO.setContent("Re:" + vo.getContent());
 		}
 		System.out.println(jspBoardVO.toString());
 		model.addAttribute("jspBoardVO", jspBoardVO);
@@ -251,11 +256,11 @@ public class JspController {
 			throws Exception {
 		String crudgbn = jspBoardVO.getCrudgbn();
 		String mode = jspBoardVO.getMode();
-		if (crudgbn.contentEquals("update")||crudgbn.contentEquals("delete")) {
+		if (crudgbn.contentEquals("update") || crudgbn.contentEquals("delete")) {
 			String newpass = jspBoardVO.getPass();
 			JspBoardVO vo = jspBoardService.jspBoardSelect(jspBoardVO);
 			String oldpass = vo.getPass();
-			if(! oldpass.contentEquals(newpass))
+			if (!oldpass.contentEquals(newpass))
 				errors.rejectValue("pass", "required", "비밀번호가 일치하지 않습니다.");
 		}
 		beanValidator.validate(jspBoardVO, bindingResult);
@@ -266,14 +271,14 @@ public class JspController {
 		int gid = jspBoardVO.getGid();
 		String thread = jspBoardVO.getThread();
 		if (crudgbn.contentEquals("insert")) {
-			if(mode.contentEquals("root")) {
+			if (mode.contentEquals("root")) {
 				gid = jspBoardService.jspBoardGid();
 				thread = "a";
-			}else if(mode.contentEquals("branch")){
+			} else if (mode.contentEquals("branch")) {
 				String lthread = jspBoardService.jspBoardLthread(jspBoardVO);
-				if(lthread == null) {
-					thread = thread+"a";
-				}else {
+				if (lthread == null) {
+					thread = thread + "a";
+				} else {
 					char cthread = lthread.charAt(0);
 					cthread++;
 					thread = thread + cthread;
@@ -282,13 +287,13 @@ public class JspController {
 			jspBoardVO.setGid(gid);
 			jspBoardVO.setThread(thread);
 			jspBoardService.jspBoardInsert(jspBoardVO);
-		}else if (crudgbn.contentEquals("update")) {
+		} else if (crudgbn.contentEquals("update")) {
 			jspBoardService.jspBoardUpdate(jspBoardVO);
-		}else if (crudgbn.contentEquals("delete")) {
+		} else if (crudgbn.contentEquals("delete")) {
 			String lthread = jspBoardService.jspBoardLthread(jspBoardVO);
-			if(lthread == null) {
+			if (lthread == null) {
 				jspBoardService.jspBoardDelete(jspBoardVO);
-			}else {
+			} else {
 				jspBoardVO.setTitle("작성자가 삭제함");
 				jspBoardVO.setContent("작성자가 삭제함");
 				jspBoardService.jspBoardUpdate(jspBoardVO);
@@ -296,47 +301,55 @@ public class JspController {
 		}
 		return "redirect:jspBoardList.do";
 	}
-	
+
 	@RequestMapping("/jspBoardList.do")
-	public String jspBoardList(JspBoardVO jspBoardVO,ModelMap model) throws Exception{
+	public String jspBoardList(JspBoardVO jspBoardVO, ModelMap model) throws Exception {
 		int totrow = jspBoardService.jspBoardTotCnt();
-		jspBoardVO.setTotrow(totrow); //totrow를 먼저 주입해야 lastpgno를 받아온다.
-		//lastPgno가 먼저 확정되어야 하므로 아래 비교는 VO의 getReqpgno에서는 할수 없다. 
-		if(jspBoardVO.getReqpgno() >= jspBoardVO.getLastpgno()) {
-			//요청페이지가 마지막페이지로 변경된다.
+		jspBoardVO.setTotrow(totrow); // totrow를 먼저 주입해야 lastpgno를 받아온다.
+		// lastPgno가 먼저 확정되어야 하므로 아래 비교는 VO의 getReqpgno에서는 할수 없다.
+		if (jspBoardVO.getReqpgno() >= jspBoardVO.getLastpgno()) {
+			// 요청페이지가 마지막페이지로 변경된다.
 			jspBoardVO.setReqpgno(jspBoardVO.getLastpgno());
 		}
 		List<?> list = jspBoardService.jspBoardList(jspBoardVO);
-		//요청페이지가 원래페이지일수도 있고 마지막페이지일수도 있으므로 다시 가져와야 한다.
-		model.addAttribute("reqpgno",jspBoardVO.getReqpgno());
-		model.addAttribute("lastpgno",jspBoardVO.getLastpgno());
-		model.addAttribute("totrow",totrow);
-		model.addAttribute("list",list);
+		// 요청페이지가 원래페이지일수도 있고 마지막페이지일수도 있으므로 다시 가져와야 한다.
+		model.addAttribute("reqpgno", jspBoardVO.getReqpgno());
+		model.addAttribute("lastpgno", jspBoardVO.getLastpgno());
+		model.addAttribute("totrow", totrow);
+		model.addAttribute("list", list);
 		return "jsp/jspBoardList";
 	}
-	
+
 	@RequestMapping("/jspMemberWrite2.do")
-	public String jspMemberWrite2(JspMemberVO2 jspMemberVO2,ModelMap model) throws Exception{
-		model.addAttribute("jspMemberVO2",jspMemberVO2);
+	public String jspMemberWrite2(JspMemberVO2 jspMemberVO2, ModelMap model) throws Exception {
+		model.addAttribute("jspMemberVO2", jspMemberVO2);
 		return "jsp/jspMemberWrite2";
 	}
-	
+
 	@RequestMapping("/jspMemberWriteSave2.do")
-	public String jspMemberWriteSave2(JspMemberVO2 jspMemberVO2, ModelMap model, BindingResult bindingResult, Errors errors) throws Exception{
+	public String jspMemberWriteSave2(JspMemberVO2 jspMemberVO2, ModelMap model, BindingResult bindingResult,
+			Errors errors) throws Exception {
+		int cnt = jspMemberService2.jspMemberIdCheck2(jspMemberVO2.getUserid());
+		if (cnt > 0)
+			errors.rejectValue("userid", "duplicate", "이미 등록된 사용자ID입니다.");
 		beanValidator.validate(jspMemberVO2, bindingResult);
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() || cnt > 0) {
 			model.addAttribute("jspMemberVO2", jspMemberVO2);
 			return "jsp/jspMemberWrite2";
 		}
 		return "redirect:jspBoard.do";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/jspMemberIdChk.do")
-	RequestResult<JspMemberVO2> jspMemberIdChk(JspMemberVO2 jspMemberVO2,ModelMap model) throws Exception{
-		JspMemberVO2 vo = new JspMemberVO2();
-		vo.setUserid("cbpark68");
-		System.out.println(vo.toString());
-		return RequestResult.success(vo);
+	public ModelAndView jspMemberIdChk(JspMemberVO2 jspMemberVO2) throws Exception {
+		int cnt = jspMemberService2.jspMemberIdCheck2(jspMemberVO2.getUserid());
+		if(cnt == 0) {
+			jspMemberVO2.setIdchk( "사용할 수 있는 아이디입니다.");
+		}else {
+			jspMemberVO2.setIdchk("사용할 수 없는 아이디입니다.\n다른아이디를 입력하세요.");
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		return new ModelAndView("jsonView",map);
 	}
 }
