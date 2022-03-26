@@ -181,5 +181,10 @@
 	<select id="jspMemberIdChk2" resultClass="java.lang.Integer">
 		select count(*) cnt from memberinfo2 where userid = #userid#	
 	</select>
+	
+	<insert id="jspMemberInsert2">
+		insert into memberinfo2( userid, pass, name, birthday, gender, mobile, zipcode, addr, rdate)
+		values ( #userid#, #pass#, #name#, #birthday#, #gender#, #mobile#, #zipcode#, #addr#, now())
+	</insert>
 </sqlMap>
 

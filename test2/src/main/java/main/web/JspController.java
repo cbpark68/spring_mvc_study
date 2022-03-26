@@ -337,6 +337,7 @@ public class JspController {
 			model.addAttribute("jspMemberVO2", jspMemberVO2);
 			return "jsp/jspMemberWrite2";
 		}
+		jspMemberService2.jspMemberInsert2(jspMemberVO2);
 		return "redirect:jspBoard.do";
 	}
 
