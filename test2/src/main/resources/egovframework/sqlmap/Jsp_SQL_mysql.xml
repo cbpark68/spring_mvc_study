@@ -186,5 +186,10 @@
 		insert into memberinfo2( userid, pass, name, birthday, gender, mobile, zipcode, addr, rdate)
 		values ( #userid#, #pass#, #name#, #birthday#, #gender#, #mobile#, #zipcode#, #addr#, now())
 	</insert>
+	
+	<select id="jspPostSearch" resultClass="egovMap">
+	select a1 postno,trim(concat(a2,' ',a3,' ',a4,' ',a5,' ',ifnull(a6,''),' ',ifnull(a7,''),' ',ifnull(a8,''))) addr 
+	from post where a4 like concat('%',#dong#,'%') or a5 like concat('%',#dong#,'%');
+	</select>
 </sqlMap>
 

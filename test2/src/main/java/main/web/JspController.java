@@ -352,4 +352,17 @@ public class JspController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		return new ModelAndView("jsonView",map);
 	}
+	
+	@RequestMapping("/jspPost.do")
+	public String jspPost(JspMemberVO2 jspMemberVO2,ModelMap model) throws Exception{
+		return "jsp/jspPost";
+	}
+	
+	@RequestMapping("/jspPostSearch.do")
+	public ModelAndView jspPostSearch(String dong) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<?> list = jspMemberService2.jspPostSearch(dong);
+		map.put("list", list);
+		return new ModelAndView("jsonView",map);
+	}
 }
