@@ -337,6 +337,7 @@ public class JspController {
 			model.addAttribute("jspMemberVO2", jspMemberVO2);
 			return "jsp/jspMemberWrite2";
 		}
+		jspMemberService2.jspMemberInsert2(jspMemberVO2);
 		return "redirect:jspBoard.do";
 	}
 
@@ -349,6 +350,19 @@ public class JspController {
 			jspMemberVO2.setIdchk("사용할 수 없는 아이디입니다.\n다른아이디를 입력하세요.");
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
+		return new ModelAndView("jsonView",map);
+	}
+	
+	@RequestMapping("/jspPost.do")
+	public String jspPost(JspMemberVO2 jspMemberVO2,ModelMap model) throws Exception{
+		return "jsp/jspPost";
+	}
+	
+	@RequestMapping("/jspPostSearch.do")
+	public ModelAndView jspPostSearch(String dong) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<?> list = jspMemberService2.jspPostSearch(dong);
+		map.put("list", list);
 		return new ModelAndView("jsonView",map);
 	}
 }

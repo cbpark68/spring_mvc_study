@@ -23,7 +23,10 @@
 			changeMonth : true,
 			changeYear : true
 		});
-		
+	
+		$("#btn_zipcode").click(function(){
+			window.open("jspPost.do","post","width=500,height=300");
+		});
 		$("#btn_idchk").click(function() {
 			var userid = document.getElementById("userid").value;
 			$.ajax({
@@ -46,9 +49,6 @@
 </script>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value='/css/jspBoard.css'/>" />
-<script>
-	
-</script>
 <body>
 	<div id="wapper">
 		<header>
@@ -99,7 +99,7 @@
 						<th>우편번호</th>
 						<td style="text-align: left;"><form:input path="zipcode"
 								style="width:50px;" />
-							<button type="button">우편번호</button> <br /> <form:errors
+							<button type="button" id="btn_zipcode">우편번호</button> <br /> <form:errors
 								path="zipcode" /> <form:input path="addr" style="width:400px;" />
 							<form:errors path="addr" /></td>
 					</tr>
