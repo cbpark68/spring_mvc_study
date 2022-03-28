@@ -25,7 +25,9 @@
 		});
 	
 		$("#btn_zipcode").click(function(){
-			window.open("jspPost.do","post","width=500,height=300");
+			var w = window.screen.width/2 - 250;
+			var h = window.screen.height/2 - 150;
+			window.open("jspPost.do","post","width=500,height=300,left="+w+",top="+h);
 		});
 		$("#btn_idchk").click(function() {
 			var userid = document.getElementById("userid").value;
@@ -49,7 +51,7 @@
 </script>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value='/css/jspBoard.css'/>" />
-<body>
+<body onload="document.getElementById('userid').focus();">
 	<div id="wapper">
 		<header>
 			<c:import url="jspBoardHeader.jsp" />
