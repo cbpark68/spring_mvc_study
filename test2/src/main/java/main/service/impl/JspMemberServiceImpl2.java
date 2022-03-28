@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import main.service.JspMemberService2;
 import main.service.JspMemberVO2;
+import main.service.JspMemberVO3;
 
 @Service("jspMemberService2")
 public class JspMemberServiceImpl2 extends EgovAbstractServiceImpl implements JspMemberService2{
@@ -29,6 +30,11 @@ public class JspMemberServiceImpl2 extends EgovAbstractServiceImpl implements Js
 	@Override
 	public List<?> jspPostSearch(String dong) {
 		return jspMemberDAO2.jspPostSearch(dong);
+	}
+
+	@Override
+	public int jspMemberLogin2(JspMemberVO3 jspMemberVO3) {
+		return jspMemberDAO2.jspMemberLogin2(jspMemberVO3);
 	}
 
 }

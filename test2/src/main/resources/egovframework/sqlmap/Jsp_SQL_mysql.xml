@@ -191,5 +191,9 @@
 	select a1 postno,trim(concat(a2,' ',a3,' ',a4,' ',a5,' ',ifnull(a6,''),' ',ifnull(a7,''),' ',ifnull(a8,''))) addr 
 	from post where a4 like concat('%',#dong#,'%') or a5 like concat('%',#dong#,'%');
 	</select>
+	
+	<select id="jspMemberLogin2" resultClass="java.lang.Integer">
+		select count(*) cnt from memberinfo2 where userid = #userid# and pass = #pass#	
+	</select>
 </sqlMap>
 

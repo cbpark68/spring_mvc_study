@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -26,6 +27,7 @@ import main.service.JspMemberService;
 import main.service.JspMemberService2;
 import main.service.JspMemberVO;
 import main.service.JspMemberVO2;
+import main.service.JspMemberVO3;
 
 @Controller
 public class JspController {
@@ -364,5 +366,27 @@ public class JspController {
 		List<?> list = jspMemberService2.jspPostSearch(dong);
 		map.put("list", list);
 		return new ModelAndView("jsonView",map);
+	}
+
+	@RequestMapping("/jspMemberLogin2.do")
+	public String jspMemberLogin2(JspMemberVO3 jspMemberVO3, ModelMap model) throws Exception {
+		model.addAttribute("jspMemberVO3", jspMemberVO3);
+		return "jsp/jspMemberLogin2";
+	}
+
+	@RequestMapping("/jspMemberLoginProc2.do")
+	public String jspMemberLoginProc2(JspMemberVO3 jspMemberVO3, ModelMap model, BindingResult bindingResult,
+			Errors errors, HttpServletRequest request) throws Exception {
+		int cnt = jspMemberService2.jspMemberLogin2(jspMemberVO3);
+		if (cnt == 0)
+			errors.rejectValue("userid", "required", "로그인할 수 없습니다.");
+		beanValidator.validate(jspMemberVO3, bindingResult);
+		if (bindingResult.hasErrors()|| cnt == 0) {
+			model.addAttribute("jspMemberVO3", jspMemberVO3);
+			return "jsp/jspMemberLogin2";
+		}
+		HttpSession session = request.getSession(true);
+		session.setAttribute("SESSION-KEY", jspMemberVO3.getUserid());
+		return "redirect:jspBoard.do";
 	}
 }

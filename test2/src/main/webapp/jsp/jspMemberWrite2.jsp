@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>jspMemberWrite2</title>
 </head>
 <link rel="stylesheet" href="<c:url value='/css/jquery-ui.css'/>" />
 <link rel="stylesheet" href="<c:url value='/css/style.css'/>" />

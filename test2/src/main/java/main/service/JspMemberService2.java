@@ -6,4 +6,5 @@ public interface JspMemberService2 {
 	public int jspMemberIdCheck2(String userid);
 	public String jspMemberInsert2(JspMemberVO2 jspMemberVO2);
 	public List<?> jspPostSearch(String dong);
+	public int jspMemberLogin2(JspMemberVO3 jspMemberVO3);
 }
