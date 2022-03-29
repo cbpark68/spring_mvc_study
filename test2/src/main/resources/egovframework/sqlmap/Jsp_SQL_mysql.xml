@@ -7,6 +7,7 @@
 	<typeAlias alias="jspDeptVO" type="main.service.JspDeptVO"/>
 	<typeAlias alias="jspEmpVO" type="main.service.JspEmpVO"/>
 	<typeAlias alias="jspMemberVO" type="main.service.JspMemberVO"/>
+	<typeAlias alias="jspMemberVO2" type="main.service.JspMemberVO2"/>
 	<typeAlias alias="jspBoardVO" type="main.service.JspBoardVO"/>
 
 	<select id="jspDeptList" resultClass="egovMap">
@@ -194,6 +195,12 @@
 	
 	<select id="jspMemberLogin2" resultClass="java.lang.Integer">
 		select count(*) cnt from memberinfo2 where userid = #userid# and pass = #pass#	
+	</select>
+	
+	<select id="jspMemberSelect2" resultClass="jspMemberVO2">
+		select userid, pass, name, birthday, gender, mobile, zipcode, addr, rdate
+		from memberinfo2
+		where userid = #userid#
 	</select>
 </sqlMap>
 

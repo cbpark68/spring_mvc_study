@@ -11,6 +11,7 @@ public class JspMemberVO2 {
 	private String addr;
 	private String rdate;
 	private String idchk;
+	private String crudgbn = "insert";
 
 	public String getUserid() {
 		return userid;
@@ -72,13 +73,21 @@ public class JspMemberVO2 {
 	public void setIdchk(String idchk) {
 		this.idchk = idchk;
 	}
+	public String getCrudgbn() {
+		return crudgbn;
+	}
+	//insert update delete만 가능
+	public void setCrudgbn(String crudgbn) {
+		if(!(crudgbn.contentEquals("update"))) 
+			crudgbn = "insert";
+		this.crudgbn = crudgbn;
+	}
 	@Override
 	public String toString() {
 		return "JspMemberVO2 [userid=" + userid + ", pass=" + pass + ", name=" + name + ", birthday=" + birthday
 				+ ", gender=" + gender + ", mobile=" + mobile + ", zipcode=" + zipcode + ", addr=" + addr + ", rdate="
-				+ rdate + ", idchk=" + idchk + "]";
+				+ rdate + ", idchk=" + idchk + ", crudgbn=" + crudgbn + "]";
 	}
-
 	
 	
 }

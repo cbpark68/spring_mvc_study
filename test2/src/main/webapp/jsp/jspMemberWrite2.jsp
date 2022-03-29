@@ -62,14 +62,24 @@
 		<section>
 			<form:form method="post" action="jspMemberWriteSave2.do"
 				commandName="jspMemberVO2">
+				<form:hidden path="crudgbn"/>
+				<form:hidden path="userid"/>
+				<c:set var="crudgbn" value="${jspMemberVO2.crudgbn}"/>
 				<table style="width: 100%; text-align: center;">
-					<caption>회원등록</caption>
+					<caption>회원등록${crudgbn}</caption>
 					<tr>
 						<th style="width: 15%;">사용자ID</th>
-						<td style="width: *; text-align: left;"><form:input
+						<td style="width: *; text-align: left;">
+						<c:if test="${crudgbn == 'insert'}">
+						<form:input
 								path="userid" style="width:100px;" />
 							<button type="button" id="btn_idchk">중복확인</button> <form:errors
-								path="userid" /></td>
+								path="userid" />
+						</c:if>
+						<c:if test="${crudgbn == 'update'}">
+							${jspMemberVO2.userid}	
+						</c:if>
+						</td>
 					</tr>
 					<tr>
 						<th>암호</th>

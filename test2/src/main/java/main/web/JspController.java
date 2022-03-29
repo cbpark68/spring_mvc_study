@@ -324,6 +324,10 @@ public class JspController {
 
 	@RequestMapping("/jspMemberWrite2.do")
 	public String jspMemberWrite2(JspMemberVO2 jspMemberVO2, ModelMap model) throws Exception {
+		if(jspMemberVO2.getCrudgbn().contentEquals("update")) {
+			jspMemberVO2 = jspMemberService2.jspMemberSelect2(jspMemberVO2);
+			jspMemberVO2.setCrudgbn("update");
+		}
 		model.addAttribute("jspMemberVO2", jspMemberVO2);
 		return "jsp/jspMemberWrite2";
 	}
@@ -331,15 +335,26 @@ public class JspController {
 	@RequestMapping("/jspMemberWriteSave2.do")
 	public String jspMemberWriteSave2(JspMemberVO2 jspMemberVO2, ModelMap model, BindingResult bindingResult,
 			Errors errors) throws Exception {
+		System.out.println(jspMemberVO2.toString());
+		String errgbn = "no";
+		String crudgbn = jspMemberVO2.getCrudgbn();
 		int cnt = jspMemberService2.jspMemberIdCheck2(jspMemberVO2.getUserid());
-		if (cnt > 0)
+		if (crudgbn.contentEquals("insert") && cnt > 0) {
 			errors.rejectValue("userid", "duplicate", "이미 등록된 사용자ID입니다.");
+			errgbn = "yes";
+		}
+		if (crudgbn.contentEquals("update") && cnt == 0) {
+			errors.rejectValue("pass", "required", "확인비밀번호가 일치하지 않습니다.");
+			errgbn = "yes";
+		}
 		beanValidator.validate(jspMemberVO2, bindingResult);
-		if (bindingResult.hasErrors() || cnt > 0) {
+		if (bindingResult.hasErrors() || errgbn.contentEquals("yes")) {
 			model.addAttribute("jspMemberVO2", jspMemberVO2);
 			return "jsp/jspMemberWrite2";
 		}
-		jspMemberService2.jspMemberInsert2(jspMemberVO2);
+		if(crudgbn.contentEquals("insert")) {
+			jspMemberService2.jspMemberInsert2(jspMemberVO2);
+		}
 		return "redirect:jspBoard.do";
 	}
 
