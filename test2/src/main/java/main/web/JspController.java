@@ -386,7 +386,16 @@ public class JspController {
 			return "jsp/jspMemberLogin2";
 		}
 		HttpSession session = request.getSession(true);
-		session.setAttribute("SESSION-KEY", jspMemberVO3.getUserid());
+		session.setAttribute("jspMemberVO3", jspMemberVO3);
+		session.setMaxInactiveInterval(60);
 		return "redirect:jspBoard.do";
 	}
+
+	@RequestMapping("/jspMemberLogout2.do")
+	public String jspMemberLogout2(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession(true);
+		session.invalidate();
+		return "redirect:jspBoard.do";
+	}
+
 }
