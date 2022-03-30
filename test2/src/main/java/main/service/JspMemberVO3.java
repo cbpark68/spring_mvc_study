@@ -4,6 +4,13 @@ public class JspMemberVO3 {
 	private String userid;
 	private String pass;
 
+	public JspMemberVO3() {}
+
+	public JspMemberVO3(String userid,String pass){
+		this.userid = userid;
+		this.pass = pass;
+	}
+
 	public String getUserid() {
 		return userid;
 	}

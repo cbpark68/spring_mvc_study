@@ -31,4 +31,8 @@ public class JspMemberDAO2 extends EgovAbstractDAOMysql{
 		return (JspMemberVO2) select("jspMemberSelect2",jspMemberVO2);
 	}
 
+	public int jspMemberUpdate2(JspMemberVO2 jspMemberVO2) {
+		return (int) update("jspMemberUpdate2",jspMemberVO2);
+	}
+
 }

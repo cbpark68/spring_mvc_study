@@ -202,5 +202,18 @@
 		from memberinfo2
 		where userid = #userid#
 	</select>
+
+	<update id="jspMemberUpdate2">
+		update memberinfo2 set 
+			name      =  #name#,
+			birthday  =  #birthday#,
+			gender    =  #gender#,
+			mobile    =  #mobile#,
+			zipcode   =  #zipcode#,
+			addr      =  #addr#,
+			rdate     =  #rdate#
+		where 
+			userid    =  #userid#
+	</update>
 </sqlMap>
 

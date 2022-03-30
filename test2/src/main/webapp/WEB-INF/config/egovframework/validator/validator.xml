@@ -4,7 +4,6 @@
     "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
 
 <form-validation>
-
 	<formset>
 		<form name="sampleVO">
 			<field property="name" depends="required">
@@ -234,6 +233,31 @@
 				</var>
 			</field>
 		</form>
+		<form name="jspMemberVO4">
+			<field property="bpass" depends="required,maxlength">
+				<arg0 key="jsp.member2.pass" />
+				<arg1 key="20" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="pass" depends="required,maxlength">
+				<arg0 key="jsp.member2.pass" />
+				<arg1 key="20" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="apass" depends="required,maxlength">
+				<arg0 key="jsp.member2.pass" />
+				<arg1 key="20" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+		</form>
 	</formset>
-
 </form-validation>

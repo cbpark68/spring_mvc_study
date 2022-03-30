@@ -23,7 +23,12 @@
 			changeMonth : true,
 			changeYear : true
 		});
-	
+		$("#btn_pass").click(function(){
+			var w = window.screen.width/2 - 250;
+			var h = window.screen.height/2 - 150;
+			var userid = document.getElementById("userid").value;
+			window.open("jspMemberPass2.do?userid="+userid,"pass","width=500,height=300,left="+w+",top="+h);
+		});
 		$("#btn_zipcode").click(function(){
 			var w = window.screen.width/2 - 250;
 			var h = window.screen.height/2 - 150;
@@ -63,7 +68,6 @@
 			<form:form method="post" action="jspMemberWriteSave2.do"
 				commandName="jspMemberVO2">
 				<form:hidden path="crudgbn"/>
-				<form:hidden path="userid"/>
 				<c:set var="crudgbn" value="${jspMemberVO2.crudgbn}"/>
 				<table style="width: 100%; text-align: center;">
 					<caption>회원등록${crudgbn}</caption>
@@ -77,6 +81,7 @@
 								path="userid" />
 						</c:if>
 						<c:if test="${crudgbn == 'update'}">
+							<form:hidden path="userid"/>
 							${jspMemberVO2.userid}	
 						</c:if>
 						</td>
@@ -84,7 +89,12 @@
 					<tr>
 						<th>암호</th>
 						<td style="text-align: left;"><form:password path="pass"
-								style="width:100px;" /> <form:errors path="pass" /></td>
+								style="width:100px;" /> 
+							<c:if test="${crudgbn == 'update'}">
+								<button type="button" id="btn_pass">비밀번호변경</button>
+							</c:if>
+							<form:errors path="pass" />
+						</td>
 					</tr>
 					<tr>
 						<th>이름</th>

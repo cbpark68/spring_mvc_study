@@ -42,4 +42,9 @@ public class JspMemberServiceImpl2 extends EgovAbstractServiceImpl implements Js
 		return jspMemberDAO2.jspMemberSelect2(jspMemberVO2);
 	}
 
+	@Override
+	public int jspMemberUpdate2(JspMemberVO2 jspMemberVO2) {
+		return jspMemberDAO2.jspMemberUpdate2(jspMemberVO2);
+	}
+
 }
