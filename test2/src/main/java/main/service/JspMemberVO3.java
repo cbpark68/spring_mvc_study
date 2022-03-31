@@ -3,6 +3,7 @@ package main.service;
 public class JspMemberVO3 {
 	private String userid;
 	private String pass;
+	private boolean saveChk = false;
 
 	public JspMemberVO3() {}
 
@@ -23,5 +24,18 @@ public class JspMemberVO3 {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+	public boolean getSaveChk() {
+		return saveChk;
+	}
+
+	public void setSaveChk(boolean saveChk) {
+		this.saveChk = saveChk;
+	}
+
+	@Override
+	public String toString() {
+		return "JspMemberVO3 [userid=" + userid + ", pass=" + pass + ", saveChk=" + saveChk + "]";
+	}
+
 	
 }
