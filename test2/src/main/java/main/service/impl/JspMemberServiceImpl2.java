@@ -10,6 +10,7 @@ import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import main.service.JspMemberService2;
 import main.service.JspMemberVO2;
 import main.service.JspMemberVO3;
+import main.service.JspMemberVO4;
 
 @Service("jspMemberService2")
 public class JspMemberServiceImpl2 extends EgovAbstractServiceImpl implements JspMemberService2{
@@ -45,6 +46,11 @@ public class JspMemberServiceImpl2 extends EgovAbstractServiceImpl implements Js
 	@Override
 	public int jspMemberUpdate2(JspMemberVO2 jspMemberVO2) {
 		return jspMemberDAO2.jspMemberUpdate2(jspMemberVO2);
+	}
+
+	@Override
+	public int jspMemberUpdatePass2(JspMemberVO4 jspMemberVO4) {
+		return jspMemberDAO2.jspMemberUpdatePass2(jspMemberVO4);
 	}
 
 }

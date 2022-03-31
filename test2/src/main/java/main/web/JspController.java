@@ -440,7 +440,6 @@ public class JspController {
 		JspMemberVO2 vo = new JspMemberVO2();
 		if(!(bpass == null || bpass.contentEquals(""))) {
 			vo.setUserid(userid);
-			System.out.println(vo.toString());
 			vo = jspMemberService2.jspMemberSelect2(vo);
 			String opass = vo.getPass();
 			if(! bpass.contentEquals(opass)) {
@@ -460,6 +459,14 @@ public class JspController {
 		if (result.hasErrors() || errgbn.contentEquals("yes")) {
 			model.addAttribute("jspMemberVO4", jspMemberVO4);
 			return "jsp/jspMemberPass2";
+		}
+		int cnt = jspMemberService2.jspMemberUpdatePass2(jspMemberVO4);
+		if(cnt == 1) {
+			model.addAttribute("msg", "비밀번호를 변경했습니다.");
+			model.addAttribute("rslt", "success" );
+		}else {
+			model.addAttribute("msg", "비밀번호를 변경하지 못했습니다.");
+			model.addAttribute("rslt", "fail" );
 		}
 		return "jsp/jspMemberPass2";
 	}

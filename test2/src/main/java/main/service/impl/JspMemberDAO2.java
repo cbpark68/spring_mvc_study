@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import egovframework.example.sample.service.impl.EgovAbstractDAOMysql;
 import main.service.JspMemberVO2;
 import main.service.JspMemberVO3;
+import main.service.JspMemberVO4;
 
 @Repository("jspMemberDAO2")
 public class JspMemberDAO2 extends EgovAbstractDAOMysql{
@@ -33,6 +34,10 @@ public class JspMemberDAO2 extends EgovAbstractDAOMysql{
 
 	public int jspMemberUpdate2(JspMemberVO2 jspMemberVO2) {
 		return (int) update("jspMemberUpdate2",jspMemberVO2);
+	}
+
+	public int jspMemberUpdatePass2(JspMemberVO4 jspMemberVO4) {
+		return (int) update("jspMemberUpdatePass2",jspMemberVO4);
 	}
 
 }

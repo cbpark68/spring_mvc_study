@@ -215,5 +215,9 @@
 		where 
 			userid    =  #userid#
 	</update>
+	
+	<update id="jspMemberUpdatePass2">
+		update memberinfo2	set pass = #pass# where userid=#userid#
+	</update>
 </sqlMap>
 

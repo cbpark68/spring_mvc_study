@@ -9,4 +9,5 @@ public interface JspMemberService2 {
 	public int jspMemberLogin2(JspMemberVO3 jspMemberVO3);
 	public JspMemberVO2 jspMemberSelect2(JspMemberVO2 jspMemberVO2);
 	public int jspMemberUpdate2(JspMemberVO2 jspMemberVO2);
+	public int jspMemberUpdatePass2(JspMemberVO4 jspMemberVO4);
 }

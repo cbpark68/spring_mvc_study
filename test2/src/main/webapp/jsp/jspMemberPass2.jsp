@@ -14,6 +14,9 @@
 <script type="text/javascript">
 function fn_submit(){
 	document.getElementById("jspMemberVO4").submit();
+	//if(confirm("창을 닫을까요?")){
+	//	window.open("about:blank","_self").close();	
+	//}
 }
 function fn_onload(){
 	document.getElementById('bpass').focus();
@@ -22,11 +25,17 @@ function fn_onload(){
 <link type="text/css" rel="stylesheet"
 	href="<c:url value='/css/jspBoard.css'/>" />
 <body onload="fn_onload();">
+	<c:if test="${rslt == 'success' }">
+		<script>
+		alert("${msg}");
+		self.close();
+		</script>
+	</c:if>
 	<form:form method="post" action="jspMemberPassProc2.do"
 		commandName="jspMemberVO4">
 		<form:hidden path="userid" />
 		<table style="width: 100%; text-align: center;">
-			<caption>비밀번호 변경${hasError}</caption>
+			<caption>비밀번호 변경${result}</caption>
 			<tr>
 				<th style="width: 30%;">현재 비밀번호</th>
 				<td style="width: *; text-align: left;"><form:password
