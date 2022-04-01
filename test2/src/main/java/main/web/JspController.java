@@ -411,7 +411,7 @@ public class JspController {
 			return "jsp/jspMemberLogin2";
 		}
 		HttpSession session = request.getSession(true);
-		session.setAttribute("jspMemberVO3", jspMemberVO3);
+		session.setAttribute("userid", jspMemberVO3.getUserid());
 		session.setMaxInactiveInterval(60);
 		return "redirect:jspBoard.do";
 	}

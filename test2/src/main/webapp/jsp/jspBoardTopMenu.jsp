@@ -15,13 +15,13 @@
 			<li class="topmenu"><a href="jspBoard.do">홈</a></li>
 			<li class="topmenu"><a href="jspBoardList.do">게시판</a></li>
 			<li class="topmenu"><a href="jspBoardWrite.do?crudgbn=insert">글쓰기</a></li>
-			<c:if test="${empty jspMemberVO3}">
+			<c:if test="${empty userid}">
 				<li class="topmenu"><a href="jspMemberWrite2.do?crudgbn=insert">회원가입</a></li>
 				<li class="topmenu"><a href="jspMemberLogin2.do">로그인</a></li>
 			</c:if>
-			<c:if test="${! empty jspMemberVO3}">
-				<li class="topmenu"><a href="jspMemberWrite2.do?crudgbn=update&userid=${jspMemberVO3.userid}">회원정보</a></li>
-				<li class="topmenu"><a href="jspMemberLogout2.do">${jspMemberVO3.userid}님 로그아웃</a></li>
+			<c:if test="${! empty userid}">
+				<li class="topmenu"><a href="jspMemberWrite2.do?crudgbn=update&userid=${userid}">회원정보</a></li>
+				<li class="topmenu"><a href="jspMemberLogout2.do">${userid}님 로그아웃</a></li>
 			</c:if>
 		</ul>
 	</div>
