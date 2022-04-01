@@ -29,6 +29,7 @@ import main.service.JspMemberVO;
 import main.service.JspMemberVO2;
 import main.service.JspMemberVO3;
 import main.service.JspMemberVO4;
+import main.service.JspPlanVO;
 
 @Controller
 public class JspController {
@@ -48,7 +49,7 @@ public class JspController {
 
 	@Resource(name = "jspBoardService")
 	private JspBoardService jspBoardService;
-	
+
 	@Resource(name = "jspMemberService2")
 	private JspMemberService2 jspMemberService2;
 
@@ -325,7 +326,7 @@ public class JspController {
 
 	@RequestMapping("/jspMemberWrite2.do")
 	public String jspMemberWrite2(JspMemberVO2 jspMemberVO2, ModelMap model) throws Exception {
-		if(jspMemberVO2.getCrudgbn().contentEquals("update")) {
+		if (jspMemberVO2.getCrudgbn().contentEquals("update")) {
 			jspMemberVO2 = jspMemberService2.jspMemberSelect2(jspMemberVO2);
 			jspMemberVO2.setCrudgbn("update");
 		}
@@ -342,15 +343,15 @@ public class JspController {
 		String pass = jspMemberVO2.getPass();
 		if (crudgbn.contentEquals("insert")) {
 			int cnt = jspMemberService2.jspMemberIdCheck2(userid);
-			if(cnt > 0){
+			if (cnt > 0) {
 				errors.rejectValue("userid", "duplicate", "이미 등록된 사용자ID입니다.");
 				errgbn = "yes";
 			}
 		}
 		if (crudgbn.contentEquals("update")) {
-			JspMemberVO3 vo = new JspMemberVO3(userid,pass);
+			JspMemberVO3 vo = new JspMemberVO3(userid, pass);
 			int cnt = jspMemberService2.jspMemberLogin2(vo);
-			if(cnt == 0){
+			if (cnt == 0) {
 				errors.rejectValue("pass", "required", "확인비밀번호가 일치하지 않습니다.");
 				errgbn = "yes";
 			}
@@ -360,9 +361,9 @@ public class JspController {
 			model.addAttribute("jspMemberVO2", jspMemberVO2);
 			return "jsp/jspMemberWrite2";
 		}
-		if(crudgbn.contentEquals("insert")) {
+		if (crudgbn.contentEquals("insert")) {
 			jspMemberService2.jspMemberInsert2(jspMemberVO2);
-		}else{
+		} else {
 			jspMemberService2.jspMemberUpdate2(jspMemberVO2);
 		}
 		return "redirect:jspBoard.do";
@@ -371,26 +372,26 @@ public class JspController {
 	@RequestMapping("/jspMemberIdChk.do")
 	public ModelAndView jspMemberIdChk(JspMemberVO2 jspMemberVO2) throws Exception {
 		int cnt = jspMemberService2.jspMemberIdCheck2(jspMemberVO2.getUserid());
-		if(cnt == 0) {
-			jspMemberVO2.setIdchk( "사용할 수 있는 아이디입니다.");
-		}else {
+		if (cnt == 0) {
+			jspMemberVO2.setIdchk("사용할 수 있는 아이디입니다.");
+		} else {
 			jspMemberVO2.setIdchk("사용할 수 없는 아이디입니다.\n다른아이디를 입력하세요.");
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
-		return new ModelAndView("jsonView",map);
+		return new ModelAndView("jsonView", map);
 	}
-	
+
 	@RequestMapping("/jspPost.do")
-	public String jspPost(JspMemberVO2 jspMemberVO2,ModelMap model) throws Exception{
+	public String jspPost(JspMemberVO2 jspMemberVO2, ModelMap model) throws Exception {
 		return "jsp/jspPost";
 	}
-	
+
 	@RequestMapping("/jspPostSearch.do")
-	public ModelAndView jspPostSearch(String dong) throws Exception{
+	public ModelAndView jspPostSearch(String dong) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<?> list = jspMemberService2.jspPostSearch(dong);
 		map.put("list", list);
-		return new ModelAndView("jsonView",map);
+		return new ModelAndView("jsonView", map);
 	}
 
 	@RequestMapping("/jspMemberLogin2.do")
@@ -406,13 +407,13 @@ public class JspController {
 		if (cnt == 0)
 			errors.rejectValue("userid", "required", "로그인할 수 없습니다.");
 		beanValidator.validate(jspMemberVO3, bindingResult);
-		if (bindingResult.hasErrors()|| cnt == 0) {
+		if (bindingResult.hasErrors() || cnt == 0) {
 			model.addAttribute("jspMemberVO3", jspMemberVO3);
 			return "jsp/jspMemberLogin2";
 		}
 		HttpSession session = request.getSession(true);
-		session.setAttribute("jspMemberVO3", jspMemberVO3);
-		session.setMaxInactiveInterval(60);
+		session.setAttribute("userid", jspMemberVO3.getUserid());
+		session.setMaxInactiveInterval(3600);
 		return "redirect:jspBoard.do";
 	}
 
@@ -422,38 +423,38 @@ public class JspController {
 		session.invalidate();
 		return "redirect:jspBoard.do";
 	}
-	
+
 	@RequestMapping("/jspMemberPass2.do")
-	public String jspMemberPass2(JspMemberVO4 jspMemberVO4,ModelMap model) throws Exception{
-		model.addAttribute("jspMemberVO4",jspMemberVO4);
+	public String jspMemberPass2(JspMemberVO4 jspMemberVO4, ModelMap model) throws Exception {
+		model.addAttribute("jspMemberVO4", jspMemberVO4);
 		return "jsp/jspMemberPass2";
 	}
-	
+
 	@RequestMapping("/jspMemberPassProc2.do")
-	public String jspMemberPassProc2(JspMemberVO4 jspMemberVO4,ModelMap model,
-			BindingResult result,Errors errors) throws Exception{
+	public String jspMemberPassProc2(JspMemberVO4 jspMemberVO4, ModelMap model, BindingResult result, Errors errors)
+			throws Exception {
 		String errgbn = "no";
 		String userid = jspMemberVO4.getUserid();
 		String bpass = jspMemberVO4.getBpass();
 		String pass = jspMemberVO4.getPass();
 		String apass = jspMemberVO4.getApass();
 		JspMemberVO2 vo = new JspMemberVO2();
-		if(!(bpass == null || bpass.contentEquals(""))) {
+		if (!(bpass == null || bpass.contentEquals(""))) {
 			vo.setUserid(userid);
 			vo = jspMemberService2.jspMemberSelect2(vo);
 			String opass = vo.getPass();
-			if(! bpass.contentEquals(opass)) {
-					errors.rejectValue("bpass", "required", "기존 비밀번호와 일치하지 않습니다.");
-					errgbn = "yes";
+			if (!bpass.contentEquals(opass)) {
+				errors.rejectValue("bpass", "required", "기존 비밀번호와 일치하지 않습니다.");
+				errgbn = "yes";
 			}
 		}
-		if(pass.contentEquals(bpass)) {
-				errors.rejectValue("pass", "required", "기존 비밀번호와 동일합니다.");
-				errgbn = "yes";
+		if (pass.contentEquals(bpass)) {
+			errors.rejectValue("pass", "required", "기존 비밀번호와 동일합니다.");
+			errgbn = "yes";
 		}
-		if(! pass.contentEquals(apass)) {
-				errors.rejectValue("apass", "required", "새 비밀번호와 일치하지 않습니다.");
-				errgbn = "yes";
+		if (!pass.contentEquals(apass)) {
+			errors.rejectValue("apass", "required", "새 비밀번호와 일치하지 않습니다.");
+			errgbn = "yes";
 		}
 		beanValidator.validate(jspMemberVO4, result);
 		if (result.hasErrors() || errgbn.contentEquals("yes")) {
@@ -461,13 +462,72 @@ public class JspController {
 			return "jsp/jspMemberPass2";
 		}
 		int cnt = jspMemberService2.jspMemberUpdatePass2(jspMemberVO4);
-		if(cnt == 1) {
+		if (cnt == 1) {
 			model.addAttribute("msg", "비밀번호를 변경했습니다.");
-			model.addAttribute("rslt", "success" );
-		}else {
+			model.addAttribute("rslt", "success");
+		} else {
 			model.addAttribute("msg", "비밀번호를 변경하지 못했습니다.");
-			model.addAttribute("rslt", "fail" );
+			model.addAttribute("rslt", "fail");
 		}
 		return "jsp/jspMemberPass2";
 	}
+
+	@RequestMapping("/jspPlanList.do")
+	public String jspPlanList(String year, String month, ModelMap model) throws Exception {
+		int y, m, sysy;
+		Calendar cal = Calendar.getInstance();
+		sysy = cal.get(Calendar.YEAR);
+		if (year == null || month == null) {
+			y = cal.get(Calendar.YEAR);
+			m = cal.get(Calendar.MONTH);
+		} else {
+			y = Integer.parseInt(year);
+			m = Integer.parseInt(month) - 1;
+		}
+		cal.set(y, m, 1);
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+		int lastday = cal.getActualMaximum(Calendar.DATE);
+		model.addAttribute("y", y);
+		model.addAttribute("m", m);
+		if (m == 0) {
+			model.addAttribute("by", y - 1);
+			model.addAttribute("bm", 12);
+		} else {
+			model.addAttribute("by", y);
+			model.addAttribute("bm", m);
+		}
+		if (m == 11) {
+			model.addAttribute("ny", y + 1);
+			model.addAttribute("nm", 1);
+		} else {
+			model.addAttribute("ny", y);
+			model.addAttribute("nm", m + 2);
+		}
+		model.addAttribute("dayOfWeek", dayOfWeek);
+		model.addAttribute("lastday", lastday);
+		model.addAttribute("sysy", sysy);
+		return "jsp/jspPlanList";
+	}
+
+	@RequestMapping("/jspPlanWrite.do")
+	public String jspPlanWrite(JspPlanVO jspPlanVO, ModelMap model,HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession(true);
+		jspPlanVO.setUserid((String)session.getAttribute("userid"));
+		model.addAttribute("jspPlanVO",jspPlanVO);
+		return "jsp/jspPlanWrite";
+	}
+
+	@RequestMapping("/jspPlanWriteSave.do")
+	public String jspPlanWriteSave(JspPlanVO jspPlanVO,ModelMap model,BindingResult result, Errors errors) throws Exception{
+		String errgbn = "no";
+		beanValidator.validate(jspPlanVO, result);
+		if (result.hasErrors() || errgbn.contentEquals("yes")) {
+			model.addAttribute("jspPlanVO", jspPlanVO);
+			return "jsp/jspPlanWrite";
+		}
+		model.addAttribute("msg", "일정을 저장했습니다.");
+		model.addAttribute("rslt","success");
+		return "jsp/jspPlanWrite";
+	}
+
 }

@@ -82,3 +82,12 @@ table{
 	margin: 7px;
 	float:left;
 }
+.cal table{
+	width:100%;
+}
+.cal table caption {
+	font-size:30px;
+	font-weight:bold;
+	margin:5px;
+	text-align:center;
+}
