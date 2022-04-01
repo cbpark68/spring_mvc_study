@@ -20,10 +20,7 @@
 				<li class="topmenu"><a href="jspMemberLogin2.do">로그인</a></li>
 			</c:if>
 			<c:if test="${! empty userid}">
-<<<<<<< HEAD
 				<li class="topmenu"><a href="jspPlanList.do">일정관리</a></li>
-=======
->>>>>>> d0de6f8fe542ebb6afe2ad22d7b77475c1d22837
 				<li class="topmenu"><a href="jspMemberWrite2.do?crudgbn=update&userid=${userid}">회원정보</a></li>
 				<li class="topmenu"><a href="jspMemberLogout2.do">${userid}님 로그아웃</a></li>
 			</c:if>

@@ -413,11 +413,8 @@ public class JspController {
 		}
 		HttpSession session = request.getSession(true);
 		session.setAttribute("userid", jspMemberVO3.getUserid());
-<<<<<<< HEAD
 		session.setMaxInactiveInterval(3600);
-=======
-		session.setMaxInactiveInterval(60);
->>>>>>> d0de6f8fe542ebb6afe2ad22d7b77475c1d22837
+		
 		return "redirect:jspBoard.do";
 	}
 
