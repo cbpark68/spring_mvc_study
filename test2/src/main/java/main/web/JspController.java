@@ -29,6 +29,7 @@ import main.service.JspMemberVO;
 import main.service.JspMemberVO2;
 import main.service.JspMemberVO3;
 import main.service.JspMemberVO4;
+import main.service.JspPlanService;
 import main.service.JspPlanVO;
 
 @Controller
@@ -52,6 +53,10 @@ public class JspController {
 
 	@Resource(name = "jspMemberService2")
 	private JspMemberService2 jspMemberService2;
+
+	@Resource(name = "jspPlanService")
+	private JspPlanService jspPlanService;
+
 
 	@RequestMapping("/jspDeptList.do")
 	public String jspDeptList(ModelMap model) throws Exception {
@@ -412,7 +417,7 @@ public class JspController {
 			return "jsp/jspMemberLogin2";
 		}
 		HttpSession session = request.getSession(true);
-		session.setAttribute("userid", jspMemberVO3.getUserid());
+		session.setAttribute("ssuserid", jspMemberVO3.getUserid());
 		session.setMaxInactiveInterval(3600);
 		
 		return "redirect:jspBoard.do";
@@ -511,24 +516,25 @@ public class JspController {
 	}
 
 	@RequestMapping("/jspPlanWrite.do")
-	public String jspPlanWrite(JspPlanVO jspPlanVO, ModelMap model,HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession(true);
-		jspPlanVO.setUserid((String)session.getAttribute("userid"));
+	public String jspPlanWrite(JspPlanVO jspPlanVO, ModelMap model) throws Exception {
 		model.addAttribute("jspPlanVO",jspPlanVO);
 		return "jsp/jspPlanWrite";
 	}
 
 	@RequestMapping("/jspPlanWriteSave.do")
 	public String jspPlanWriteSave(JspPlanVO jspPlanVO,ModelMap model,BindingResult result, Errors errors) throws Exception{
+		String crudgbn = jspPlanVO.getCrudgbn();
 		String errgbn = "no";
 		beanValidator.validate(jspPlanVO, result);
 		if (result.hasErrors() || errgbn.contentEquals("yes")) {
 			model.addAttribute("jspPlanVO", jspPlanVO);
 			return "jsp/jspPlanWrite";
 		}
+		if(crudgbn.contentEquals("insert")) {
+			jspPlanService.jspPlanInsert(jspPlanVO);
+		}
 		model.addAttribute("msg", "일정을 저장했습니다.");
 		model.addAttribute("rslt","success");
 		return "jsp/jspPlanWrite";
 	}
-
 }

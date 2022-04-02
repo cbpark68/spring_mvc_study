@@ -4,11 +4,22 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class JspPlanVO {
+	String crudgbn = "insert";
 	private int unq;
 	private String userid;
 	private String pdate;
 	private String title;
 	private String content;
+
+	public String getCrudgbn() {
+		return crudgbn;
+	}
+	//insert update delete만 가능
+	public void setCrudgbn(String crudgbn) {
+		if(!(crudgbn.contentEquals("update"))) 
+			crudgbn = "insert";
+		this.crudgbn = crudgbn;
+	}
 
 	public int getUnq() {
 		return unq;

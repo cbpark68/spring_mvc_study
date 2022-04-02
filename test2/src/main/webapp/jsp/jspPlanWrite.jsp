@@ -31,7 +31,7 @@
 		});
 	});
 	function fn_onload(){
-		document.getElementById("pdate").focus();
+		document.getElementById("title").focus();
 	}
 </script>
 <link type="text/css" rel="stylesheet"

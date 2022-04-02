@@ -219,5 +219,10 @@
 	<update id="jspMemberUpdatePass2">
 		update memberinfo2	set pass = #pass# where userid=#userid#
 	</update>
+	
+	<insert id="jspPlanInsert">
+		insert into plan (pdate,userid,title,content) 	
+		value (#pdate#,#userid#,#title#,#content#) 	
+	</insert>
 </sqlMap>
 

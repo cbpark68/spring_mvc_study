@@ -18,7 +18,7 @@
 		var he = 400;
 		var cw = window.screen.width / 2 - wi/2;
 		var ch = window.screen.height / 2 - he;
-		window.open("jspPlanWrite.do","planWrite",
+		window.open("jspPlanWrite.do?crudgbn=insert&userid=${ssuserid}","planWrite",
 				"width="+wi+",height="+he+",left=" + cw + ",top=" + ch);
 	}
 </script>
@@ -62,9 +62,11 @@
 						</select>
 						<button type="submit">조회</button>
 					</div>
+					<c:if test="${! empty ssuserid}">
 					<div style="float: right; padding: 5px;">
 						<button type="button" onclick="fn_planwrite();">일정등록</button>
 					</div>
+					</c:if>
 				</form>
 				<table>
 					<caption>
