@@ -38,15 +38,17 @@
 	href="<c:url value='/css/jspBoard.css'/>" />
 <body onload="fn_onload();">
 	<form:form method="post" action="jspPlanWriteSave.do" commandName="jspPlanVO">
+	<form:hidden path="unq"/>
+	<form:hidden path="crudgbn"/>
 	<c:if test="${rslt == 'success' }">
 		<script>
-		opener.parent.location="jspPlanList.do";
+		opener.parent.location="jspPlanList.do?userid=${ssuserid}";
 		//alert("${msg}");
 		self.close();
 		</script>
 	</c:if>
 		<table style="width: 100%; text-align: center;">
-			<caption>일정등록</caption>
+			<caption>일정등록${crudgbn}</caption>
 			<tr>
 				<th style="width: 15%;">사용자ID</th>
 				<td style="width: *; text-align: left;"><form:hidden

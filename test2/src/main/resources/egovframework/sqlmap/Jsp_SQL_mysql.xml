@@ -9,6 +9,7 @@
 	<typeAlias alias="jspMemberVO" type="main.service.JspMemberVO"/>
 	<typeAlias alias="jspMemberVO2" type="main.service.JspMemberVO2"/>
 	<typeAlias alias="jspBoardVO" type="main.service.JspBoardVO"/>
+	<typeAlias alias="jspPlanVO" type="main.service.JspPlanVO"/>
 
 	<select id="jspDeptList" resultClass="egovMap">
 		select deptno,dname,loc from dept order by deptno	
@@ -224,5 +225,23 @@
 		insert into plan (pdate,userid,title,content) 	
 		value (#pdate#,#userid#,#title#,#content#) 	
 	</insert>
+	
+	<select id="jspPlanList" resultClass="egovMap">
+		select	unq,userid,pdate,title,content
+		from plan where userid = #userid# and pdate like concat(#ym#,'%')
+	</select>
+	
+	<select id="jspPlanSelect" resultClass="jspPlanVO">
+		select	unq,userid,pdate,title,content
+		from plan where userid = #userid# and pdate = #pdate# 
+	</select>
+	
+	<update id="jspPlanUpdate">
+		update plan set	
+			title   = #title#,
+			content = #content#
+		where
+			unq     = #unq#
+	</update>
 </sqlMap>
 

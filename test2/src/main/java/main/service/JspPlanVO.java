@@ -10,6 +10,7 @@ public class JspPlanVO {
 	private String pdate;
 	private String title;
 	private String content;
+	private String ym;
 
 	public String getCrudgbn() {
 		return crudgbn;
@@ -64,12 +65,16 @@ public class JspPlanVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
+	public String getYm() {
+		return ym;
+	}
+	public void setYm(String ym) {
+		this.ym = ym;
+	}
 	@Override
 	public String toString() {
-		return "jspPlanVO [unq=" + unq + ", userid=" + userid + ", pdate=" + pdate + ", title=" + title + ", content="
-				+ content + "]";
+		return "JspPlanVO [crudgbn=" + crudgbn + ", unq=" + unq + ", userid=" + userid + ", pdate=" + pdate + ", title="
+				+ title + ", content=" + content + ", ym=" + ym + "]";
 	}
-
 	
 }

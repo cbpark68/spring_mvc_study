@@ -1,5 +1,7 @@
 package main.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,21 @@ public class JspPlanServiceImpl extends EgovAbstractServiceImpl implements JspPl
 	@Override
 	public String jspPlanInsert(JspPlanVO vo) {
 		return jspPlanDAO.jspPlanInsert(vo);
+	}
+
+	@Override
+	public List<?> jspPlanList(JspPlanVO vo) {
+		return jspPlanDAO.jspPlanList(vo);
+	}
+
+	@Override
+	public JspPlanVO jspPlanSelect(JspPlanVO vo) {
+		return jspPlanDAO.jspPlanSelect(vo);
+	}
+
+	@Override
+	public int jspPlanUpdate(JspPlanVO vo) {
+		return jspPlanDAO.jspPlanUpdate(vo);
 	}
 
 }

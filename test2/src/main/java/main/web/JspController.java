@@ -31,6 +31,7 @@ import main.service.JspMemberVO3;
 import main.service.JspMemberVO4;
 import main.service.JspPlanService;
 import main.service.JspPlanVO;
+import main.service.impl.JspPlanDAO;
 
 @Controller
 public class JspController {
@@ -479,8 +480,9 @@ public class JspController {
 	}
 
 	@RequestMapping("/jspPlanList.do")
-	public String jspPlanList(String year, String month, ModelMap model) throws Exception {
+	public String jspPlanList(String year, String month, String userid,ModelMap model) throws Exception {
 		int y, m, sysy;
+		String ym;
 		Calendar cal = Calendar.getInstance();
 		sysy = cal.get(Calendar.YEAR);
 		if (year == null || month == null) {
@@ -490,6 +492,7 @@ public class JspController {
 			y = Integer.parseInt(year);
 			m = Integer.parseInt(month) - 1;
 		}
+		ym = y+"-"+String.format("%02d", (m+1));
 		cal.set(y, m, 1);
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 		int lastday = cal.getActualMaximum(Calendar.DATE);
@@ -512,11 +515,22 @@ public class JspController {
 		model.addAttribute("dayOfWeek", dayOfWeek);
 		model.addAttribute("lastday", lastday);
 		model.addAttribute("sysy", sysy);
+		if(userid != null) {
+			JspPlanVO vo = new JspPlanVO();
+			vo.setUserid(userid);
+			vo.setYm(ym);
+			List<?> userlist = jspPlanService.jspPlanList(vo);
+			model.addAttribute("userlist", userlist);
+		}
 		return "jsp/jspPlanList";
 	}
 
 	@RequestMapping("/jspPlanWrite.do")
 	public String jspPlanWrite(JspPlanVO jspPlanVO, ModelMap model) throws Exception {
+		if (jspPlanVO.getCrudgbn().contentEquals("update")) {
+			jspPlanVO = jspPlanService.jspPlanSelect(jspPlanVO);
+			jspPlanVO.setCrudgbn("update");
+		}
 		model.addAttribute("jspPlanVO",jspPlanVO);
 		return "jsp/jspPlanWrite";
 	}
@@ -532,6 +546,8 @@ public class JspController {
 		}
 		if(crudgbn.contentEquals("insert")) {
 			jspPlanService.jspPlanInsert(jspPlanVO);
+		}else {
+			jspPlanService.jspPlanUpdate(jspPlanVO);
 		}
 		model.addAttribute("msg", "일정을 저장했습니다.");
 		model.addAttribute("rslt","success");

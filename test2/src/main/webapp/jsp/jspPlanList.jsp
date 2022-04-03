@@ -13,12 +13,19 @@
 <title>jspPlanList</title>
 </head>
 <script>
-	function fn_planwrite() {
+	function fn_planwrite(crud,pdte) {
 		var wi = 400;
 		var he = 400;
 		var cw = window.screen.width / 2 - wi/2;
 		var ch = window.screen.height / 2 - he;
-		window.open("jspPlanWrite.do?crudgbn=insert&userid=${ssuserid}","planWrite",
+		if(pdte == null){
+			let today = new Date();   
+			let year = today.getFullYear();
+			let month = today.getMonth() + 1;
+			let date = today.getDate();
+			pdte = year+"-"+month+"-"+date;
+		}
+		window.open("jspPlanWrite.do?crudgbn="+crud+"&userid=${ssuserid}&pdate="+pdte,"planWrite",
 				"width="+wi+",height="+he+",left=" + cw + ",top=" + ch);
 	}
 </script>
@@ -64,17 +71,17 @@
 					</div>
 					<c:if test="${! empty ssuserid}">
 					<div style="float: right; padding: 5px;">
-						<button type="button" onclick="fn_planwrite();">일정등록</button>
+						<button type="button" onclick="fn_planwrite('insert');">일정등록</button>
 					</div>
 					</c:if>
 				</form>
 				<table>
 					<caption>
 						<button type="button"
-							onclick="location='jspPlanList.do?year=${by}&month=${bm}'">이전</button>
+							onclick="location='jspPlanList.do?year=${by}&month=${bm}&userid=${ssuserid}'">이전</button>
 						${y}년${m+1}월
 						<button type="button"
-							onclick="location='jspPlanList.do?year=${ny}&month=${nm}'">다음</button>
+							onclick="location='jspPlanList.do?year=${ny}&month=${nm}&userid=${ssuserid}'">다음</button>
 					</caption>
 					<tr>
 						<th>일</th>
@@ -103,12 +110,33 @@
 							<c:if test="${cnt2 == 1}">
 								<c:set var="color" value="red" />
 							</c:if>
-							<td style="color:${color}">${d}</td>
+							<td style="color:${color};height:60px;vertical-align:top;">
+								<c:if test="${m+1 < 10}">
+									<c:set var="cm" value="0${m+1}"/>
+								</c:if>
+								<c:if test="${m+1 >= 10}">
+									<c:set var="cm" value="${m+1}"/>
+								</c:if>
+								<c:if test="${d < 10}">
+									<c:set var="cd" value="0${d}"/>
+								</c:if>
+								<c:if test="${d >= 10}">
+									<c:set var="cd" value="${d}"/>
+								</c:if>
+								<c:set var="ymd" value="${y}-${cm}-${cd}"/>
+								${d}
+  								<c:forEach var="i" items="${userlist}">
+									<c:if test="${i.pdate == ymd}">
+										<br/>
+										<button type="button" onclick="fn_planwrite('update','+${ymd}+');">일정</button>
+									</c:if>
+								</c:forEach>
+							</td>
 							<c:if test="${cnt % 7  == 0}">
 								<c:set var="cnt2" value="0" />
-					</tr>
-					<tr>
-						</c:if>
+								</tr>
+								<tr>
+							</c:if>
 						</c:forEach>
 						<c:if test="${cnt2 > 0 }">
 							<c:forEach var="j" begin="1" end="${7 - cnt2}" step="1">
