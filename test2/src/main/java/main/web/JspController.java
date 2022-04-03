@@ -553,4 +553,10 @@ public class JspController {
 		model.addAttribute("rslt","success");
 		return "jsp/jspPlanWrite";
 	}
+	
+	@RequestMapping("/jspPlanDelete.do")
+	public String jspPlanDelete(JspPlanVO jspPlanVO,ModelMap model) throws Exception{
+		jspPlanService.jspPlanDelete(jspPlanVO);
+		return "";
+	}
 }

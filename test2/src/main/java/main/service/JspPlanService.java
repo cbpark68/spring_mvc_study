@@ -7,4 +7,5 @@ public interface JspPlanService {
 	List<?> jspPlanList(JspPlanVO vo);
 	JspPlanVO jspPlanSelect(JspPlanVO vo);
 	int jspPlanUpdate(JspPlanVO vo);
+	int jspPlanDelete(JspPlanVO vo);
 }

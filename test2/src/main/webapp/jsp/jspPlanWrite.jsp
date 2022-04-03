@@ -29,6 +29,13 @@
 		$("#btn_close").click(function() {
 			self.close();
 		});
+		$("#btn_delete").click(function(){
+			if(confirm("삭제하겠습니까?")){
+				location="jspPlanDelete.do?userid=${jspPlanVO.userid}&unq=${jspPlanVO.unq}";
+				opener.parent.location="jspPlanList.do?userid=${ssuserid}";
+				self.close();
+			}
+		})
 	});
 	function fn_onload(){
 		document.getElementById("title").focus();
@@ -40,6 +47,8 @@
 	<form:form method="post" action="jspPlanWriteSave.do" commandName="jspPlanVO">
 	<form:hidden path="unq"/>
 	<form:hidden path="crudgbn"/>
+	<c:set var="unq" value="${jspPlanVO.unq}"/>
+	<c:set var="crud" value="${jspPlanVO.crudgbn}"/>
 	<c:if test="${rslt == 'success' }">
 		<script>
 		opener.parent.location="jspPlanList.do?userid=${ssuserid}";
@@ -73,6 +82,9 @@
 		</table>
 		<div style="text-align: center; margin-top: 10px; float: bottom;">
 			<button type="button" id="btn_submit">저장</button>
+			<c:if test="${crud == 'update'}">
+				<button type="button" id="btn_delete">삭제</button>
+			</c:if>
 			<button type="button" id="btn_close">닫기</button>
 		</div>
 	</form:form>

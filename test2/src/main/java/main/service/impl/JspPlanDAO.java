@@ -26,5 +26,9 @@ public class JspPlanDAO extends EgovAbstractDAOMysql{
 		return update("jspPlanUpdate",vo);
 	}
 
+	public int jspPlanDelete(JspPlanVO vo) {
+		return delete("jspPlanDelete",vo);
+	}
+
 
 }

@@ -238,10 +238,15 @@
 	
 	<update id="jspPlanUpdate">
 		update plan set	
+			pdate   = #pdate#,
 			title   = #title#,
 			content = #content#
 		where
 			unq     = #unq#
 	</update>
+	
+	<delete id="jspPlanDelete">
+		delete from plan where unq = #unq#
+	</delete>
 </sqlMap>
 

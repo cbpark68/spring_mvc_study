@@ -35,4 +35,9 @@ public class JspPlanServiceImpl extends EgovAbstractServiceImpl implements JspPl
 		return jspPlanDAO.jspPlanUpdate(vo);
 	}
 
+	@Override
+	public int jspPlanDelete(JspPlanVO vo) {
+		return jspPlanDAO.jspPlanDelete(vo);
+	}
+
 }
