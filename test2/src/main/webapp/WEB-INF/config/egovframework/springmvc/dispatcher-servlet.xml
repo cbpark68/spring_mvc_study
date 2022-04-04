@@ -72,6 +72,7 @@
 	<!-- /For Pagination Tag -->
 	<mvc:view-controller path="/cmmn/validator.do"
 		view-name="cmmn/validator" />
+	<!-- Ajax Json -->
 	<bean id="beanNameResolver"
 		class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		p:order="0" />
